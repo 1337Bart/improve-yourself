@@ -374,3 +374,15 @@ internal/repository/mock
 .python-version
 
 data/*
+
+.env
+bin/*
+/bin
+bin
+
+/tmp
+/cmd/temp/*
+/cmd/temp
+cmd/temp/*
+cmd/temp/
+cmd/temp*
