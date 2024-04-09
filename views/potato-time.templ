@@ -1,0 +1,25 @@
+package views
+
+templ PotatoTime() {
+    @template() {
+    <div class="flex justify-center items-center">
+        <form class="flex flex-col justify-center items-center gap-5 py-5"
+            hx-post="/potato-time"
+            hx-target="#feedback"
+            hx-indicator="#indicator"
+        >
+            <label class="input input-bordered flex items-center gap-2 w-full">
+              Subtract potato time from productivity pool
+              <input type="text" class="grow" name="potato" placeholder="potato time [min]" />
+            </label>
+            <button type="submit" class="btn">Add time</button>
+              <div id="indicator" class="htmx-indicator">
+                  <div class="flex justify-center items-center w-full">
+                      <span class="loading loading-spinner loading-lg text-primary h-20 w-20"></span>
+                  </div>
+              </div>
+              <div id="feedback"></div>
+        </form>
+    </div>
+    }
+}

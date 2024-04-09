@@ -1,0 +1,16 @@
+package views
+
+import "strconv"
+
+templ TotalTimes(data TotalTimeData) {
+    @template() {
+    <div class="flex flex-col justify-center items-center gap-10 py-5">
+        <div class="text-center mb-5">
+            <h2 class="text-lg font-bold">Total times Times</h2>
+            <p>Productivity time added since start: <span id="total-productivity-counter">{strconv.Itoa(data.Productivity)}</span> min</p>
+            <p>Potato time taken out since start: <span id="total-potato-counter">{strconv.Itoa(data.Potato)}</span> min</p>
+        </div>
+        <div id="feedback"></div>
+    </div>
+    }
+}

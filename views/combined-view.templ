@@ -1,0 +1,40 @@
+package views
+
+import "strconv"
+
+templ CombinedView(data TimeData) {
+    @template() {
+    <div class="flex flex-col justify-center items-center gap-10 py-5">
+        <div class="text-center mb-5">
+            <h2 class="text-lg font-bold">Current Times</h2>
+            <p>Amassed time pool: <span id="productivity-time-counter">{strconv.Itoa(data.TimePool)}</span> min</p>
+        </div>
+        <form class="flex flex-col justify-center items-center gap-5"
+              hx-post="/productivity-time"
+              hx-target="#feedback"
+              hx-indicator="#indicator">
+            <label class="input input-bordered flex items-center gap-2 w-full">
+                Add productivity time
+                <input type="text" class="grow" name="productivity" placeholder="productivity time [min]" />
+            </label>
+            <button type="submit" class="btn">Add time</button>
+        </form>
+        <form class="flex flex-col justify-center items-center gap-5"
+              hx-post="/potato-time"
+              hx-target="#feedback"
+              hx-indicator="#indicator">
+            <label class="input input-bordered flex items-center gap-2 w-full">
+                Subtract potato time from productivity pool
+                <input type="text" class="grow" name="potato" placeholder="potato time [min]" />
+            </label>
+            <button type="submit" class="btn">Subtract time</button>
+        </form>
+        <div id="indicator" class="htmx-indicator">
+            <div class="flex justify-center items-center w-full">
+                <span class="loading loading-spinner loading-lg text-primary h-20 w-20"></span>
+            </div>
+        </div>
+        <div id="feedback"></div>
+    </div>
+    }
+}
