@@ -1,28 +1,25 @@
 services:
-  mongo:
-    image: mongo:4.2.14
-    restart: always
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5432:5432"
     volumes:
-      - mongo-data:/data/db
-    ports:
-      - 27017:27017
+      - postgres_data:/var/lib/postgresql/data
 
-  mongo-express:
-    image: mongo-express
-    restart: always
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
-      ME_CONFIG_MONGODB_SERVER: mongo
-      ME_CONFIG_BASICAUTH_USERNAME: myadmin
-      ME_CONFIG_BASICAUTH_PASSWORD: mypass
-    ports:
-      - 8081:8081
-    depends_on:
-      - mongo
+#  app:
+#    image: app-image
+#    environment:
+#      POSTGRES_HOST: postgres
+#      POSTGRES_DB: mydatabase
+#      POSTGRES_USER: myuser
+#      POSTGRES_PASSWORD: mypassword
+#    depends_on:
+#      - postgres
 
 volumes:
-  mongo-data: {}
+  postgres_data:

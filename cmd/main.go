@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/1337Bart/improve-yourself/db"
 	"github.com/1337Bart/improve-yourself/routes"
 	"log"
 	"os"
@@ -19,6 +20,14 @@ func main() {
 	if env != nil {
 		panic("Error loading .env file")
 	}
+
+	dbUrl := os.Getenv("DATABASE_URL")
+	err := db.InitDB(dbUrl)
+	if err != nil {
+		fmt.Printf("error connecting to database: %s\n", err)
+		panic("error connecting to db")
+	}
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = ":4000"

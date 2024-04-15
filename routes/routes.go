@@ -37,17 +37,6 @@ var totalTimeData = struct {
 	},
 }
 
-type loginForm struct {
-	Email    string `form:"email"`
-	Password string `form:"password"`
-}
-
-type settingsForm struct {
-	Amount   int  `form:"amount"`
-	SearchOn bool `form:"searchOn"`
-	AddNew   bool `form:"addNew"`
-}
-
 type potatoTimeForm struct {
 	PotatoTime int `form:"potato"`
 }
@@ -57,29 +46,18 @@ type productivityTimeForm struct {
 }
 
 func SetRoutes(app *fiber.App) {
-	app.Get("/", func(c *fiber.Ctx) error {
-		return render(c, views.Home())
-	})
+	app.Get("/", AuthMiddleware, DashboardHandler)
+	app.Post("/", AuthMiddleware, DashboardPostHandler)
+	app.Post("/logout", LogoutHandler)
 
-	app.Post("/", func(c *fiber.Ctx) error {
-		input := settingsForm{}
-		if err := c.BodyParser(&input); err != nil {
-			return c.SendString("<h2>Error: Something went wrong</h2>")
-		}
-		return c.SendStatus(200)
-	})
+	app.Get("/login", LoginHandler)
+	app.Post("/login", LoginPostHandler)
 
-	app.Get("/login", func(c *fiber.Ctx) error {
-		return render(c, views.Login())
-	})
-
-	app.Post("/login", func(c *fiber.Ctx) error {
-		input := loginForm{}
-		if err := c.BodyParser(&input); err != nil {
-			return c.SendString("<h2>Error: Something went wrong</h2>")
-		}
-		return c.SendStatus(200)
-	})
+	//app.Get("/create", func(ctx *fiber.Ctx) error {
+	//	u := &db.User{}
+	//	u.CreateAdmin()
+	//	return ctx.SendString("Created user")
+	//})
 
 	app.Get("/combined", func(c *fiber.Ctx) error {
 		globalTimeData.Lock()
