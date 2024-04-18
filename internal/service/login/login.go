@@ -1,23 +1,25 @@
-package db
+package login
 
 import (
 	"errors"
 	"fmt"
+	"github.com/1337Bart/improve-yourself/internal/db/model"
 	"golang.org/x/crypto/bcrypt"
-	"time"
+	"gorm.io/gorm"
 )
 
-type User struct {
-	ID        string    `gorm:"type:uuid;default:uuid_generate_v4()" json:"id"`
-	Email     string    `gorm:"unique" json:"email"`
-	Password  string    `json:"-"`
-	IsAdmin   bool      `gorm:"default:false" json:"isAdmin"`
-	CreatedAt time.Time `json:"createdAt"`
-	UpdatedAt time.Time `json:"updatedAt"`
+type Login struct {
+	SqlDb *gorm.DB
 }
 
-func (u *User) CreateAdmin() error {
-	user := User{
+func NewLoginService(sqlDbConn *gorm.DB) *Login {
+	return &Login{
+		SqlDb: sqlDbConn,
+	}
+}
+
+func (l *Login) CreateAdmin() error {
+	user := model.User{
 		Email:    "your email",
 		Password: "your password",
 		IsAdmin:  true,
@@ -30,7 +32,7 @@ func (u *User) CreateAdmin() error {
 
 	user.Password = string(password)
 
-	err = DbConn.Create(&user).Error
+	err = l.SqlDb.Create(&user).Error
 	if err != nil {
 		return fmt.Errorf("CreateAdmin error: %s", err)
 	}
@@ -38,8 +40,8 @@ func (u *User) CreateAdmin() error {
 	return nil
 }
 
-func (u *User) LoginAsAdmin(email, password string) (*User, error) {
-	if err := DbConn.Where("email = ? AND is_admin = ?", email, true).First(&u).Error; err != nil {
+func (l *Login) LoginAsAdmin(email, password string, u *model.User) (*model.User, error) {
+	if err := l.SqlDb.Where("email = ? AND is_admin = ?", email, true).First(&u).Error; err != nil {
 		return nil, errors.New("user not found")
 	}
 

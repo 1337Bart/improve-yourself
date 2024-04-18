@@ -2,6 +2,8 @@ package routes
 
 import (
 	"fmt"
+	"github.com/1337Bart/improve-yourself/internal/handlers/login"
+	"github.com/1337Bart/improve-yourself/internal/handlers/settings"
 	"github.com/1337Bart/improve-yourself/views"
 	"github.com/a-h/templ"
 	"github.com/gofiber/fiber/v2"
@@ -9,7 +11,7 @@ import (
 	"sync"
 )
 
-func render(c *fiber.Ctx, component templ.Component, options ...func(*templ.ComponentHandler)) error {
+func Render(c *fiber.Ctx, component templ.Component, options ...func(*templ.ComponentHandler)) error {
 	componentHandler := templ.Handler(component)
 	for _, o := range options {
 		o(componentHandler)
@@ -45,13 +47,13 @@ type productivityTimeForm struct {
 	ProductivityTime int `form:"productivity"`
 }
 
-func SetRoutes(app *fiber.App) {
-	app.Get("/", AuthMiddleware, DashboardHandler)
-	app.Post("/", AuthMiddleware, DashboardPostHandler)
-	app.Post("/logout", LogoutHandler)
+func SetRoutes(app *fiber.App, loginHandler *login.Handler) {
+	app.Get("/", login.AuthMiddleware, settings.SettingsHandler)
 
-	app.Get("/login", LoginHandler)
-	app.Post("/login", LoginPostHandler)
+	app.Post("/logout", loginHandler.Logout)
+
+	app.Get("/login", loginHandler.Login)
+	app.Post("/login", loginHandler.LoginPost)
 
 	//app.Get("/create", func(ctx *fiber.Ctx) error {
 	//	u := &db.User{}
@@ -63,14 +65,14 @@ func SetRoutes(app *fiber.App) {
 		globalTimeData.Lock()
 		defer globalTimeData.Unlock()
 
-		return render(c, views.CombinedView(globalTimeData.Data))
+		return Render(c, views.CombinedView(globalTimeData.Data))
 	})
 
 	app.Get("/total_times", func(c *fiber.Ctx) error {
 		globalTimeData.Lock()
 		defer globalTimeData.Unlock()
 
-		return render(c, views.TotalTimes(totalTimeData.Data))
+		return Render(c, views.TotalTimes(totalTimeData.Data))
 	})
 
 	app.Post("/potato-time", func(c *fiber.Ctx) error {

@@ -1,36 +1,43 @@
-package routes
+package login
 
 import (
-	"fmt"
-	"os"
-	"strconv"
-	"time"
-
-	"github.com/1337Bart/improve-yourself/db"
 	"github.com/1337Bart/improve-yourself/hashing"
+	"github.com/1337Bart/improve-yourself/internal/db/model"
+	"github.com/1337Bart/improve-yourself/internal/routes"
+	"github.com/1337Bart/improve-yourself/internal/service"
 	"github.com/1337Bart/improve-yourself/views"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
+	"os"
+	"time"
 )
 
-type loginForm struct {
+type Handler struct {
+	loginService service.Login
+}
+
+func NewHandler(l service.Login) *Handler {
+	return &Handler{loginService: l}
+}
+
+type LoginForm struct {
 	Email    string `form:"email"`
 	Password string `form:"password"`
 }
 
-func LoginHandler(ctx *fiber.Ctx) error {
-	return render(ctx, views.Login())
+func (h Handler) Login(ctx *fiber.Ctx) error {
+	return routes.Render(ctx, views.Login())
 }
 
-func LoginPostHandler(ctx *fiber.Ctx) error {
-	input := loginForm{}
+func (h Handler) LoginPost(ctx *fiber.Ctx) error {
+	input := LoginForm{}
 	if err := ctx.BodyParser(&input); err != nil {
 		ctx.Status(500)
 		return ctx.SendString("<h2>Error: Something went wrong</h2>")
 	}
 
-	user := &db.User{}
-	user, err := user.LoginAsAdmin(input.Email, input.Password)
+	user := &model.User{}
+	user, err := h.loginService.LoginAsAdmin(input.Email, input.Password, user)
 	if err != nil {
 		ctx.Status(401)
 		return ctx.SendString("<h2>Error: Unauthorized</h2>")
@@ -55,7 +62,7 @@ func LoginPostHandler(ctx *fiber.Ctx) error {
 	return ctx.SendStatus(200)
 }
 
-func LogoutHandler(ctx *fiber.Ctx) error {
+func (h Handler) Logout(ctx *fiber.Ctx) error {
 	ctx.ClearCookie("admin")
 	ctx.Set("HX-Redirect", "/login")
 	return ctx.SendStatus(200)
@@ -87,55 +94,4 @@ func AuthMiddleware(ctx *fiber.Ctx) error {
 	}
 
 	return ctx.Redirect("/login", 302)
-}
-
-func DashboardHandler(ctx *fiber.Ctx) error {
-	settings := db.Settings{}
-	err := settings.Get()
-	if err != nil {
-		ctx.Status(500)
-		return ctx.SendString("<h2>Error: cannot retrieve settings</h2>")
-	}
-	amount := strconv.FormatUint(uint64(settings.Amount), 10)
-	return render(ctx, views.Home(amount, settings.SearchOn, settings.AddNew))
-}
-
-type settingsForm struct {
-	Amount   int    `form:"amount"`
-	SearchOn string `form:"searchOn"`
-	AddNew   string `form:"addNew"`
-}
-
-func DashboardPostHandler(ctx *fiber.Ctx) error {
-	input := settingsForm{}
-	if err := ctx.BodyParser(&input); err != nil {
-		ctx.Status(500)
-		return ctx.SendString("<h2>Error: cannot retrieve settings</h2>")
-	}
-
-	// TODO - optionals here?
-	addNew := false
-	if input.AddNew == "on" {
-		addNew = true
-	}
-
-	searchOn := false
-	if input.SearchOn == "on" {
-		searchOn = true
-	}
-
-	settings := &db.Settings{}
-	settings.Amount = uint(input.Amount)
-	settings.SearchOn = searchOn
-	settings.AddNew = addNew
-
-	err := settings.Update()
-	if err != nil {
-		fmt.Println(err)
-		return ctx.SendString("<h2>Error: cannot update settings</h2>")
-	}
-
-	ctx.Append("HX-Refresh", "true")
-
-	return ctx.SendStatus(200)
 }
