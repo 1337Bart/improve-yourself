@@ -9,6 +9,7 @@ import (
 	"strconv"
 )
 
+// tu zastosowac serwis, przekazywać ID do get i update
 func SettingsHandler(ctx *fiber.Ctx) error {
 	settings := db.Settings{}
 	err := settings.Get()
@@ -26,6 +27,7 @@ type settingsForm struct {
 	AddNew   string `form:"addNew"`
 }
 
+// todo zmienic nazwe dashboard na settings
 func DashboardPostHandler(ctx *fiber.Ctx) error {
 	input := settingsForm{}
 	if err := ctx.BodyParser(&input); err != nil {

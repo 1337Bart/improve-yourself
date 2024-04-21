@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/1337Bart/improve-yourself/internal/db"
 	handlerLogin "github.com/1337Bart/improve-yourself/internal/handlers/login"
 	"github.com/1337Bart/improve-yourself/internal/routes"
 	"github.com/1337Bart/improve-yourself/internal/service/login"
@@ -24,7 +23,7 @@ func main() {
 	}
 
 	dbUrl := os.Getenv("DATABASE_URL")
-	dbConn, err := db.InitDB(dbUrl)
+	dbConn, err := repository.InitDB(dbUrl)
 	if err != nil {
 		fmt.Printf("error connecting to database: %s\n", err)
 		panic("error connecting to db")

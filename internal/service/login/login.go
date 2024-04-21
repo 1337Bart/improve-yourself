@@ -18,6 +18,7 @@ func NewLoginService(sqlDbConn *gorm.DB) *Login {
 	}
 }
 
+// TODO przekazywac email i pass z handlera, dorobic CreateUser z admin = false
 func (l *Login) CreateAdmin() error {
 	user := model.User{
 		Email:    "your email",
@@ -42,6 +43,40 @@ func (l *Login) CreateAdmin() error {
 
 func (l *Login) LoginAsAdmin(email, password string, u *model.User) (*model.User, error) {
 	if err := l.SqlDb.Where("email = ? AND is_admin = ?", email, true).First(&u).Error; err != nil {
+		return nil, errors.New("user not found")
+	}
+
+	if err := bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(password)); err != nil {
+		return nil, errors.New("invalid password")
+	}
+
+	return u, nil
+}
+
+func (l *Login) CreateUser(email, pwd string) error {
+	user := model.User{
+		Email:    email,
+		Password: pwd,
+		IsAdmin:  false,
+	}
+
+	password, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	if err != nil {
+		return fmt.Errorf("could not hash password: %s", err)
+	}
+
+	user.Password = string(password)
+
+	err = l.SqlDb.Create(&user).Error
+	if err != nil {
+		return fmt.Errorf("CreateAdmin error: %s", err)
+	}
+
+	return nil
+}
+
+func (l *Login) LoginAsUser(email, password string, u *model.User) (*model.User, error) {
+	if err := l.SqlDb.Where("email = ?", email).First(&u).Error; err != nil {
 		return nil, errors.New("user not found")
 	}
 

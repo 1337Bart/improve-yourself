@@ -36,6 +36,7 @@ func (h Handler) LoginPost(ctx *fiber.Ctx) error {
 		return ctx.SendString("<h2>Error: Something went wrong</h2>")
 	}
 
+	// tu chcę uzyc login, servis bedzie wybieral czy dostaje admina czy regular
 	user := &model.User{}
 	user, err := h.loginService.LoginAsAdmin(input.Email, input.Password, user)
 	if err != nil {
