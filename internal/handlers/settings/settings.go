@@ -3,22 +3,36 @@ package settings
 import (
 	"fmt"
 	db "github.com/1337Bart/improve-yourself/internal/db/model"
-	"github.com/1337Bart/improve-yourself/internal/routes"
+	"github.com/1337Bart/improve-yourself/internal/render"
+	"github.com/1337Bart/improve-yourself/internal/service"
 	"github.com/1337Bart/improve-yourself/views"
 	"github.com/gofiber/fiber/v2"
 	"strconv"
 )
 
+type Handler struct {
+	settingsService service.Settings
+}
+
+func NewHandler(s service.Settings) *Handler {
+	return &Handler{settingsService: s}
+}
+
 // tu zastosowac serwis, przekazywać ID do get i update
-func SettingsHandler(ctx *fiber.Ctx) error {
-	settings := db.Settings{}
-	err := settings.Get()
+func (h Handler) SettingsGet(ctx *fiber.Ctx) error {
+	userID, ok := ctx.Locals("userID").(string)
+	if !ok {
+		ctx.Status(401)
+		return ctx.SendString("<h2>Error: Unauthorized access</h2>")
+	}
+	fmt.Println("userId", userID)
+	settings, err := h.settingsService.Get(userID)
 	if err != nil {
 		ctx.Status(500)
 		return ctx.SendString("<h2>Error: cannot retrieve settings</h2>")
 	}
 	amount := strconv.FormatUint(uint64(settings.Amount), 10)
-	return routes.Render(ctx, views.Home(amount, settings.SearchOn, settings.AddNew))
+	return render.Render(ctx, views.Home(amount, settings.SearchOn, settings.AddNew))
 }
 
 type settingsForm struct {
@@ -27,31 +41,30 @@ type settingsForm struct {
 	AddNew   string `form:"addNew"`
 }
 
-// todo zmienic nazwe dashboard na settings
-func DashboardPostHandler(ctx *fiber.Ctx) error {
+func (h Handler) SettingsPost(ctx *fiber.Ctx) error {
+	userID, ok := ctx.Locals("userID").(string)
+	if !ok {
+		ctx.Status(401)
+		return ctx.SendString("<h2>Error: Unauthorized access</h2>")
+	}
+
 	input := settingsForm{}
 	if err := ctx.BodyParser(&input); err != nil {
 		ctx.Status(500)
 		return ctx.SendString("<h2>Error: cannot retrieve settings</h2>")
 	}
 
-	// TODO - optionals here?
-	addNew := false
-	if input.AddNew == "on" {
-		addNew = true
+	addNew := input.AddNew == "on"
+	searchOn := input.SearchOn == "on"
+
+	settings := &db.Settings{
+		ID:       userID,
+		Amount:   uint(input.Amount),
+		SearchOn: searchOn,
+		AddNew:   addNew,
 	}
 
-	searchOn := false
-	if input.SearchOn == "on" {
-		searchOn = true
-	}
-
-	settings := &db.Settings{}
-	settings.Amount = uint(input.Amount)
-	settings.SearchOn = searchOn
-	settings.AddNew = addNew
-
-	err := settings.Update()
+	err := h.settingsService.Update(settings)
 	if err != nil {
 		fmt.Println(err)
 		return ctx.SendString("<h2>Error: cannot update settings</h2>")

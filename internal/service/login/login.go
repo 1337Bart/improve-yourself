@@ -18,11 +18,10 @@ func NewLoginService(sqlDbConn *gorm.DB) *Login {
 	}
 }
 
-// TODO przekazywac email i pass z handlera, dorobic CreateUser z admin = false
-func (l *Login) CreateAdmin() error {
+func (l *Login) CreateAdmin(email, pwd string) error {
 	user := model.User{
-		Email:    "your email",
-		Password: "your password",
+		Email:    email,
+		Password: pwd,
 		IsAdmin:  true,
 	}
 

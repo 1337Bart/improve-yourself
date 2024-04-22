@@ -3,7 +3,7 @@ package model
 import "time"
 
 type Settings struct {
-	ID        uint      `gorm:"primarykey" json:"id"`
+	ID        string    `gorm:"type:uuid;primarykey;column:id" json:"id"`
 	SearchOn  bool      `json:"searchOn"`
 	AddNew    bool      `json:"addNew"`
 	Amount    uint      `json:"amount"`

@@ -1,9 +1,10 @@
 package login
 
 import (
+	"fmt"
 	"github.com/1337Bart/improve-yourself/hashing"
 	"github.com/1337Bart/improve-yourself/internal/db/model"
-	"github.com/1337Bart/improve-yourself/internal/routes"
+	"github.com/1337Bart/improve-yourself/internal/render"
 	"github.com/1337Bart/improve-yourself/internal/service"
 	"github.com/1337Bart/improve-yourself/views"
 	"github.com/gofiber/fiber/v2"
@@ -26,7 +27,7 @@ type LoginForm struct {
 }
 
 func (h Handler) Login(ctx *fiber.Ctx) error {
-	return routes.Render(ctx, views.Login())
+	return render.Render(ctx, views.Login())
 }
 
 func (h Handler) LoginPost(ctx *fiber.Ctx) error {
@@ -36,9 +37,8 @@ func (h Handler) LoginPost(ctx *fiber.Ctx) error {
 		return ctx.SendString("<h2>Error: Something went wrong</h2>")
 	}
 
-	// tu chcę uzyc login, servis bedzie wybieral czy dostaje admina czy regular
 	user := &model.User{}
-	user, err := h.loginService.LoginAsAdmin(input.Email, input.Password, user)
+	user, err := h.loginService.LoginAsUser(input.Email, input.Password, user)
 	if err != nil {
 		ctx.Status(401)
 		return ctx.SendString("<h2>Error: Unauthorized</h2>")
@@ -51,7 +51,7 @@ func (h Handler) LoginPost(ctx *fiber.Ctx) error {
 	}
 
 	cookie := fiber.Cookie{
-		Name:     "admin",
+		Name:     "user_token",
 		Value:    signedToken,
 		Expires:  time.Now().Add(24 * time.Hour),
 		HTTPOnly: true,
@@ -64,24 +64,24 @@ func (h Handler) LoginPost(ctx *fiber.Ctx) error {
 }
 
 func (h Handler) Logout(ctx *fiber.Ctx) error {
-	ctx.ClearCookie("admin")
+	ctx.ClearCookie("user_token")
 	ctx.Set("HX-Redirect", "/login")
 	return ctx.SendStatus(200)
 }
 
-type AdminClaims struct {
-	User                 string `json:"user"`
-	Id                   string `json:"id"`
+type UserClaims struct {
+	Email                string `json:"email"`
+	ID                   string `json:"ID"`
 	jwt.RegisteredClaims `json:"claims"`
 }
 
 func AuthMiddleware(ctx *fiber.Ctx) error {
-	cookie := ctx.Cookies("admin")
+	cookie := ctx.Cookies("user_token")
 	if cookie == "" {
 		return ctx.Redirect("/login", 302)
 	}
 
-	token, err := jwt.ParseWithClaims(cookie, &AdminClaims{}, func(token *jwt.Token) (interface{}, error) {
+	token, err := jwt.ParseWithClaims(cookie, &UserClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return []byte(os.Getenv("SECRET_KEY")), nil
 	})
 
@@ -89,10 +89,47 @@ func AuthMiddleware(ctx *fiber.Ctx) error {
 		return ctx.Redirect("/login", 302)
 	}
 
-	_, ok := token.Claims.(*AdminClaims)
+	claims, ok := token.Claims.(*UserClaims)
 	if ok && token.Valid {
+		ctx.Locals("userID", claims.ID)
 		return ctx.Next()
 	}
 
 	return ctx.Redirect("/login", 302)
+}
+
+func (h Handler) RegisterAdmin(ctx *fiber.Ctx) error {
+	input := LoginForm{}
+	if err := ctx.BodyParser(&input); err != nil {
+		ctx.Status(fiber.StatusBadRequest)
+		return ctx.SendString("Error parsing input")
+	}
+
+	err := h.loginService.CreateAdmin(input.Email, input.Password)
+	if err != nil {
+		ctx.Status(fiber.StatusInternalServerError)
+		return ctx.SendString(fmt.Sprintf("Failed to create admin: %s", err))
+	}
+
+	return ctx.SendString("Admin created successfully")
+}
+
+func (h Handler) RegisterUser(ctx *fiber.Ctx) error {
+	input := LoginForm{}
+	if err := ctx.BodyParser(&input); err != nil {
+		ctx.Status(fiber.StatusBadRequest)
+		return ctx.SendString("Error parsing input")
+	}
+
+	err := h.loginService.CreateUser(input.Email, input.Password)
+	if err != nil {
+		ctx.Status(fiber.StatusInternalServerError)
+		return ctx.SendString(fmt.Sprintf("Failed to create admin: %s", err))
+	}
+
+	return ctx.SendString("User created successfully")
+}
+
+func (h Handler) Index(ctx *fiber.Ctx) error {
+	return render.Render(ctx, views.Index2())
 }

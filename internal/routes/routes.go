@@ -3,21 +3,12 @@ package routes
 import (
 	"fmt"
 	"github.com/1337Bart/improve-yourself/internal/handlers/login"
-	"github.com/1337Bart/improve-yourself/internal/handlers/settings"
+	settingsHandler "github.com/1337Bart/improve-yourself/internal/handlers/settings"
+	"github.com/1337Bart/improve-yourself/internal/render"
 	"github.com/1337Bart/improve-yourself/views"
-	"github.com/a-h/templ"
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/adaptor"
 	"sync"
 )
-
-func Render(c *fiber.Ctx, component templ.Component, options ...func(*templ.ComponentHandler)) error {
-	componentHandler := templ.Handler(component)
-	for _, o := range options {
-		o(componentHandler)
-	}
-	return adaptor.HTTPHandler(componentHandler)(c)
-}
 
 var globalTimeData = struct {
 	sync.Mutex
@@ -47,32 +38,30 @@ type productivityTimeForm struct {
 	ProductivityTime int `form:"productivity"`
 }
 
-func SetRoutes(app *fiber.App, loginHandler *login.Handler) {
-	app.Get("/", login.AuthMiddleware, settings.SettingsHandler)
+func SetRoutes(app *fiber.App, loginHandler *login.Handler, settingsHandler *settingsHandler.Handler) {
+	app.Get("/", loginHandler.Index)
+	app.Get("/settings", login.AuthMiddleware, settingsHandler.SettingsGet)
+	app.Post("/settings", login.AuthMiddleware, settingsHandler.SettingsPost)
 
 	app.Post("/logout", loginHandler.Logout)
-
 	app.Get("/login", loginHandler.Login)
 	app.Post("/login", loginHandler.LoginPost)
 
-	//app.Get("/create", func(ctx *fiber.Ctx) error {
-	//	u := &db.User{}
-	//	u.CreateAdmin()
-	//	return ctx.SendString("Created user")
-	//})
+	app.Post("/register-user", loginHandler.RegisterUser)
+	app.Post("/register-admin", loginHandler.RegisterAdmin)
 
 	app.Get("/combined", func(c *fiber.Ctx) error {
 		globalTimeData.Lock()
 		defer globalTimeData.Unlock()
 
-		return Render(c, views.CombinedView(globalTimeData.Data))
+		return render.Render(c, views.CombinedView(globalTimeData.Data))
 	})
 
 	app.Get("/total_times", func(c *fiber.Ctx) error {
 		globalTimeData.Lock()
 		defer globalTimeData.Unlock()
 
-		return Render(c, views.TotalTimes(totalTimeData.Data))
+		return render.Render(c, views.TotalTimes(totalTimeData.Data))
 	})
 
 	app.Post("/potato-time", func(c *fiber.Ctx) error {

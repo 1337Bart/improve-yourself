@@ -2,9 +2,12 @@ package main
 
 import (
 	"fmt"
+	"github.com/1337Bart/improve-yourself/internal/db"
 	handlerLogin "github.com/1337Bart/improve-yourself/internal/handlers/login"
+	handlerSettings "github.com/1337Bart/improve-yourself/internal/handlers/settings"
 	"github.com/1337Bart/improve-yourself/internal/routes"
 	"github.com/1337Bart/improve-yourself/internal/service/login"
+	"github.com/1337Bart/improve-yourself/internal/service/settings"
 	"log"
 	"os"
 	"os/signal"
@@ -23,15 +26,17 @@ func main() {
 	}
 
 	dbUrl := os.Getenv("DATABASE_URL")
-	dbConn, err := repository.InitDB(dbUrl)
+	dbConn, err := db.InitDB(dbUrl)
 	if err != nil {
 		fmt.Printf("error connecting to database: %s\n", err)
 		panic("error connecting to db")
 	}
 
 	loginService := login.NewLoginService(dbConn)
+	settingsService := settings.NewSettingsService(dbConn)
 
 	loginHandler := handlerLogin.NewHandler(loginService)
+	settingsHandler := handlerSettings.NewHandler(settingsService)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -46,7 +51,7 @@ func main() {
 
 	app.Use(compress.New())
 
-	routes.SetRoutes(app, loginHandler)
+	routes.SetRoutes(app, loginHandler, settingsHandler)
 
 	go func() {
 		if err := app.Listen(port); err != nil {
