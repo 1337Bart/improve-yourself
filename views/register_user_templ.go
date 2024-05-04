@@ -10,7 +10,7 @@ import "context"
 import "io"
 import "bytes"
 
-func Index2() templ.Component {
+func RegisterUser() templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -29,7 +29,7 @@ func Index2() templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html> <div class=\"text-center\"><h1 class=\"text-4xl font-bold text-gray-900\">Website Under Construction</h1><p class=\"text-lg text-gray-600 mt-4\">Our website is currently under construction. We will be back soon. Thank you for your patience!</p></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div hx-ext=\"response-targets\" class=\"flex justify-center items-center\"><form class=\"flex flex-col justify-center items-center gap-5 py-5\" hx-post=\"/register-user\" hx-target=\"#feedback\" hx-indicator=\"#indicator\" hx-target-errors=\"#feedback\"><label class=\"input input-bordered flex items-center gap-2 w-full\">Email <input type=\"text\" class=\"grow\" name=\"email\" placeholder=\"email@youremail.com\"></label> <label class=\"input input-bordered flex items-center gap-2 w-full\">Password <input type=\"text\" class=\"grow\" name=\"password\" placeholder=\"Password\"></label> <button type=\"submit\" class=\"btn\">Register</button><div id=\"indicator\" class=\"htmx-indicator\"><div class=\"flex justify-center items-center w-full\"><span class=\"loading loading-spinner loading-lg text-primary h-20 w-20\"></span></div></div><div id=\"feedback\"></div></form></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

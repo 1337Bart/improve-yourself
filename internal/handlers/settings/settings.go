@@ -18,7 +18,6 @@ func NewHandler(s service.Settings) *Handler {
 	return &Handler{settingsService: s}
 }
 
-// tu zastosowac serwis, przekazywać ID do get i update
 func (h Handler) SettingsGet(ctx *fiber.Ctx) error {
 	userID, ok := ctx.Locals("userID").(string)
 	if !ok {
@@ -58,7 +57,7 @@ func (h Handler) SettingsPost(ctx *fiber.Ctx) error {
 	searchOn := input.SearchOn == "on"
 
 	settings := &db.Settings{
-		ID:       userID,
+		UUID:     userID,
 		Amount:   uint(input.Amount),
 		SearchOn: searchOn,
 		AddNew:   addNew,

@@ -3,9 +3,11 @@ package main
 import (
 	"fmt"
 	"github.com/1337Bart/improve-yourself/internal/db"
+	handlerData "github.com/1337Bart/improve-yourself/internal/handlers/data"
 	handlerLogin "github.com/1337Bart/improve-yourself/internal/handlers/login"
 	handlerSettings "github.com/1337Bart/improve-yourself/internal/handlers/settings"
 	"github.com/1337Bart/improve-yourself/internal/routes"
+	"github.com/1337Bart/improve-yourself/internal/service/data"
 	"github.com/1337Bart/improve-yourself/internal/service/login"
 	"github.com/1337Bart/improve-yourself/internal/service/settings"
 	"log"
@@ -34,9 +36,11 @@ func main() {
 
 	loginService := login.NewLoginService(dbConn)
 	settingsService := settings.NewSettingsService(dbConn)
+	dataService := data.NewDataService(dbConn)
 
-	loginHandler := handlerLogin.NewHandler(loginService)
+	loginHandler := handlerLogin.NewHandler(loginService, settingsService, dataService)
 	settingsHandler := handlerSettings.NewHandler(settingsService)
+	dataHandler := handlerData.NewHandler(settingsService, dataService)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -51,7 +55,7 @@ func main() {
 
 	app.Use(compress.New())
 
-	routes.SetRoutes(app, loginHandler, settingsHandler)
+	routes.SetRoutes(app, loginHandler, settingsHandler, dataHandler)
 
 	go func() {
 		if err := app.Listen(port); err != nil {

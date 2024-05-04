@@ -61,14 +61,14 @@ func Home(amount string, searchOn, addNew bool) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col justify-center items-center\"><h1 class=\"text-2xl py-5 text-center\">Welcome to ImproveYourself Settings</h1><div class=\"py-5\"><button hx-post=\"/logout\" class=\"btn\">Logout</button></div><form class=\"flex flex-col justify-center items-center gap-5 py-5\" hx-post=\"/\" hx-target=\"#feedback\" hx-indicator=\"#indicator\"><label class=\"input input-bordered flex items-center gap-2 w-full\">Urls per hour: <input value=\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col items-center\"><div class=\"w-full p-5 flex justify-between items-center bg-gray-100\"><h1 class=\"text-xl\">ImproveYourself Settings</h1><div><a href=\"/settings\" class=\"btn mr-2\">Settings</a> <a href=\"/dashboard\" class=\"btn mr-2\">Dashboard</a> <button hx-post=\"/logout\" class=\"btn\">Logout</button></div></div><div class=\"flex flex-col justify-center items-center p-5\"><form class=\"flex flex-col justify-center items-center gap-5\" hx-post=\"/\" hx-target=\"#feedback\" hx-indicator=\"#indicator\"><label class=\"input input-bordered flex items-center gap-2 w-full\">Urls per hour: <input value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(amount)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/index.templ`, Line: 35, Col: 35}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/index.templ`, Line: 40, Col: 39}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
@@ -94,7 +94,7 @@ func Home(amount string, searchOn, addNew bool) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("></label></div></div><button type=\"submit\" class=\"btn\">Submit</button><div id=\"indicator\" class=\"htmx-indicator\"><div class=\"flex justify-center items-center w-full\"><span class=\"loading loading-spinner loading-lg text-primary h-20 w-20\"></span></div></div><div id=\"feedback\"></div></form></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("></label></div></div><button type=\"submit\" class=\"btn\">Submit</button><div id=\"indicator\" class=\"htmx-indicator\"><div class=\"flex justify-center items-center w-full\"><span class=\"loading loading-spinner loading-lg text-primary h-20 w-20\"></span></div></div><div id=\"feedback\"></div></form></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

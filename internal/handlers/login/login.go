@@ -14,11 +14,17 @@ import (
 )
 
 type Handler struct {
-	loginService service.Login
+	loginService    service.Login
+	settingsService service.Settings
+	dataService     service.Data
 }
 
-func NewHandler(l service.Login) *Handler {
-	return &Handler{loginService: l}
+func NewHandler(l service.Login, s service.Settings, d service.Data) *Handler {
+	return &Handler{
+		loginService:    l,
+		settingsService: s,
+		dataService:     d,
+	}
 }
 
 type LoginForm struct {
@@ -99,6 +105,10 @@ func AuthMiddleware(ctx *fiber.Ctx) error {
 }
 
 func (h Handler) RegisterAdmin(ctx *fiber.Ctx) error {
+	return render.Render(ctx, views.RegisterAdmin())
+}
+
+func (h Handler) RegisterAdminPost(ctx *fiber.Ctx) error {
 	input := LoginForm{}
 	if err := ctx.BodyParser(&input); err != nil {
 		ctx.Status(fiber.StatusBadRequest)
@@ -111,10 +121,26 @@ func (h Handler) RegisterAdmin(ctx *fiber.Ctx) error {
 		return ctx.SendString(fmt.Sprintf("Failed to create admin: %s", err))
 	}
 
+	err = h.settingsService.CreateDefault(input.Email)
+	if err != nil {
+		ctx.Status(fiber.StatusInternalServerError)
+		return ctx.SendString(fmt.Sprintf("Failed to initiate settings for user: %s", err))
+	}
+
+	err = h.dataService.CreateNilPotatoTime(input.Email)
+	if err != nil {
+		ctx.Status(fiber.StatusInternalServerError)
+		return ctx.SendString(fmt.Sprintf("Failed to initiate potato time for user: %s", err))
+	}
+
 	return ctx.SendString("Admin created successfully")
 }
 
 func (h Handler) RegisterUser(ctx *fiber.Ctx) error {
+	return render.Render(ctx, views.RegisterUser())
+}
+
+func (h Handler) RegisterUserPost(ctx *fiber.Ctx) error {
 	input := LoginForm{}
 	if err := ctx.BodyParser(&input); err != nil {
 		ctx.Status(fiber.StatusBadRequest)
@@ -127,9 +153,21 @@ func (h Handler) RegisterUser(ctx *fiber.Ctx) error {
 		return ctx.SendString(fmt.Sprintf("Failed to create admin: %s", err))
 	}
 
+	err = h.settingsService.CreateDefault(input.Email)
+	if err != nil {
+		ctx.Status(fiber.StatusInternalServerError)
+		return ctx.SendString(fmt.Sprintf("Failed to initiate settings for user: %s", err))
+	}
+
+	err = h.dataService.CreateNilPotatoTime(input.Email)
+	if err != nil {
+		ctx.Status(fiber.StatusInternalServerError)
+		return ctx.SendString(fmt.Sprintf("Failed to initiate potato time for user: %s", err))
+	}
+
 	return ctx.SendString("User created successfully")
 }
 
 func (h Handler) Index(ctx *fiber.Ctx) error {
-	return render.Render(ctx, views.Index2())
+	return render.Render(ctx, views.Dashboard())
 }
