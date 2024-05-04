@@ -8,4 +8,6 @@ type Login interface {
 
 	CreateUser(string, string) error
 	LoginAsUser(string, string, *model.User) (*model.User, error)
+
+	GetUUIDByEmail(string) (string, error)
 }

@@ -24,7 +24,7 @@ func (h Handler) SettingsGet(ctx *fiber.Ctx) error {
 		ctx.Status(401)
 		return ctx.SendString("<h2>Error: Unauthorized access</h2>")
 	}
-	fmt.Println("userId", userID)
+
 	settings, err := h.settingsService.Get(userID)
 	if err != nil {
 		ctx.Status(500)

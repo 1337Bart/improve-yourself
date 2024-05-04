@@ -85,3 +85,10 @@ func (l *Login) LoginAsUser(email, password string, u *model.User) (*model.User,
 
 	return u, nil
 }
+
+func (l *Login) GetUUIDByEmail(id string) (user string, err error) {
+	userModel := &model.User{}
+	err = l.SqlDb.Where("email = ?", id).First(&userModel).Error
+
+	return userModel.ID, err
+}

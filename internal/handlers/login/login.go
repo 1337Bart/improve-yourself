@@ -150,16 +150,22 @@ func (h Handler) RegisterUserPost(ctx *fiber.Ctx) error {
 	err := h.loginService.CreateUser(input.Email, input.Password)
 	if err != nil {
 		ctx.Status(fiber.StatusInternalServerError)
-		return ctx.SendString(fmt.Sprintf("Failed to create admin: %s", err))
+		return ctx.SendString(fmt.Sprintf("Failed to create user: %s", err))
 	}
 
-	err = h.settingsService.CreateDefault(input.Email)
+	uuid, err := h.loginService.GetUUIDByEmail(input.Email)
+	if err != nil {
+		ctx.Status(fiber.StatusInternalServerError)
+		return ctx.SendString(fmt.Sprintf("Failed to fetch uuid for user: %s", err))
+	}
+
+	err = h.settingsService.CreateDefault(uuid)
 	if err != nil {
 		ctx.Status(fiber.StatusInternalServerError)
 		return ctx.SendString(fmt.Sprintf("Failed to initiate settings for user: %s", err))
 	}
 
-	err = h.dataService.CreateNilPotatoTime(input.Email)
+	err = h.dataService.CreateNilPotatoTime(uuid)
 	if err != nil {
 		ctx.Status(fiber.StatusInternalServerError)
 		return ctx.SendString(fmt.Sprintf("Failed to initiate potato time for user: %s", err))

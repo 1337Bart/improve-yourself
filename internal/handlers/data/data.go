@@ -1,7 +1,12 @@
 package data
 
 import (
+	"fmt"
+	"github.com/1337Bart/improve-yourself/internal/render"
 	"github.com/1337Bart/improve-yourself/internal/service"
+	"github.com/1337Bart/improve-yourself/views"
+	"github.com/gofiber/fiber/v2"
+	"strconv"
 )
 
 type Handler struct {
@@ -17,43 +22,59 @@ func NewHandler(s service.Settings, d service.Data) *Handler {
 }
 
 type TimePoolForm struct {
-	Time int `form:"time"`
+	Time   uint   `form:"time"`
+	Action string `form:"action"`
 }
 
-//
-//func (h Handler) Login(ctx *fiber.Ctx) error {
-//	return render.Render(ctx, views.Login())
-//}
-//
-//func (h Handler) LoginPost(ctx *fiber.Ctx) error {
-//	input := LoginForm{}
-//	if err := ctx.BodyParser(&input); err != nil {
-//		ctx.Status(500)
-//		return ctx.SendString("<h2>Error: Something went wrong</h2>")
-//	}
-//
-//	user := &model.User{}
-//	user, err := h.loginService.LoginAsUser(input.Email, input.Password, user)
-//	if err != nil {
-//		ctx.Status(401)
-//		return ctx.SendString("<h2>Error: Unauthorized</h2>")
-//	}
-//
-//	signedToken, err := hashing.CreateNewAuthToken(user.ID, user.Email, user.IsAdmin)
-//	if err != nil {
-//		ctx.Status(401)
-//		return ctx.SendString("<h2>Error: Something went wrong logging in</h2>")
-//	}
-//
-//	cookie := fiber.Cookie{
-//		Name:     "user_token",
-//		Value:    signedToken,
-//		Expires:  time.Now().Add(24 * time.Hour),
-//		HTTPOnly: true,
-//	}
-//
-//	ctx.Cookie(&cookie)
-//	ctx.Append("HX-Redirect", "/")
-//
-//	return ctx.SendStatus(200)
-//}
+func (h Handler) PotatoTimeGet(ctx *fiber.Ctx) error {
+	userID, ok := ctx.Locals("userID").(string)
+	if !ok {
+		ctx.Status(401)
+		return ctx.SendString("<h2>Error: Unauthorized access</h2>")
+	}
+
+	time, err := h.dataService.GetPotatoTime(userID)
+	if err != nil {
+		ctx.Status(500)
+		return ctx.SendString("<h2>Error: cannot retrieve potato time</h2>")
+	}
+
+	timeStr := strconv.Itoa(time)
+
+	return render.Render(ctx, views.PotatoTime(timeStr))
+}
+
+func (h Handler) PotatoTimePost(ctx *fiber.Ctx) error {
+	userID, ok := ctx.Locals("userID").(string)
+	if !ok {
+		ctx.Status(401)
+		return ctx.SendString("<h2>Error: Unauthorized access</h2>")
+	}
+
+	input := TimePoolForm{}
+	if err := ctx.BodyParser(&input); err != nil {
+		return ctx.SendString("<h2>Error: Unable to capture input</h2>")
+	}
+
+	var err error
+	switch input.Action {
+	case "add":
+		err = h.dataService.AddPotatoTime(userID, input.Time)
+	case "subtract":
+		err = h.dataService.SubtractPotatoTime(userID, input.Time)
+	default:
+		return ctx.SendString("<h2>Error: Invalid input</h2>")
+	}
+
+	if err != nil {
+		return ctx.Status(fiber.StatusInternalServerError).SendString("<h2>Error processing your request</h2>")
+	}
+
+	updatedTime, err := h.dataService.GetPotatoTime(userID)
+	if err != nil {
+		return ctx.Status(500).SendString("<h2>Error: Cannot retrieve updated time</h2>")
+	}
+	updatedTimeStr := strconv.Itoa(updatedTime)
+
+	return ctx.SendString(fmt.Sprintf("<span id='productivity-time-counter'>%s</span>", updatedTimeStr))
+}
