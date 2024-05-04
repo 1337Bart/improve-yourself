@@ -64,7 +64,7 @@ func (h Handler) LoginPost(ctx *fiber.Ctx) error {
 	}
 
 	ctx.Cookie(&cookie)
-	ctx.Append("HX-Redirect", "/")
+	ctx.Append("HX-Redirect", "/potato-time")
 
 	return ctx.SendStatus(200)
 }

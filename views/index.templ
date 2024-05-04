@@ -12,6 +12,14 @@ templ template(){
         <script src="https://unpkg.com/htmx.org@1.9.11/dist/ext/response-targets.js"></script>
     </head>
     <body>
+        <div class="w-full p-5 flex justify-between items-center bg-gray-100">
+            <h1 class="text-xl">ImproveYourself </h1>
+            <div>
+                <a href="/settings" class="btn mr-2">Settings</a>
+                <a href="/dashboard" class="btn mr-2">Dashboard</a>
+                <button hx-post="/logout" class="btn">Logout</button>
+            </div>
+        </div>
         { children... }
     </body>
     </html>

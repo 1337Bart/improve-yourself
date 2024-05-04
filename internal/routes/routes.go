@@ -49,19 +49,3 @@ func SetRoutes(app *fiber.App, loginHandler *login.Handler, settingsHandler *set
 //	fmt.Println(input)
 //	return c.SendStatus(200)
 //})
-
-//	app.Post("/productivity-time", func(c *fiber.Ctx) error {
-//		input := productivityTimeForm{}
-//		if err := c.BodyParser(&input); err != nil {
-//			return c.SendString("<h2>Error: Something went wrong</h2>")
-//		}
-//
-//		globalTimeData.Lock()
-//		globalTimeData.Data.TimePool += input.ProductivityTime
-//		totalTimeData.Data.Productivity += input.ProductivityTime
-//		globalTimeData.Unlock()
-//
-//		fmt.Println(input)
-//		return c.SendStatus(200)
-//	})
-//}
