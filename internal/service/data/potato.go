@@ -1,8 +1,10 @@
 package data
 
 import (
+	"fmt"
 	"github.com/1337Bart/improve-yourself/internal/db/model"
 	"gorm.io/gorm"
+	"time"
 )
 
 type Data struct {
@@ -15,20 +17,35 @@ func NewDataService(sqlDbConn *gorm.DB) *Data {
 	}
 }
 
+type PotatoTime struct {
+	ID           uint      `gorm:"autoIncrement;column:id" json:"id"`
+	UUID         string    `gorm:"primaryKey;type:uuid;uniqueIndex;column:uuid" json:"uuid"`
+	Amount       int       `json:"amount"`
+	UpdatesCount uint      `json:"updatesCount"`
+	TotalAdded   uint      `json:"totalAdded"`
+	TotalUsed    uint      `json:"totalUsed"`
+	UpdatedAt    time.Time `json:"updatedAt"`
+}
+
 func (d *Data) AddPotatoTime(id string, amount uint) error {
 	potatoTime := &model.PotatoTime{}
 	err := d.SqlDb.Where("uuid = ?", id).First(&potatoTime).Error
+	if err != nil {
+		return fmt.Errorf("error fetching record: %s", err)
+	}
 
-	currentPotatoTime := potatoTime.Amount
-	updatesCount := potatoTime.UpdatesCount + 1
-	totalAddedTime := potatoTime.TotalAdded + amount
+	potatoTime.Amount += int(amount)
+	potatoTime.UpdatesCount++
+	potatoTime.TotalAdded += amount
 
-	potatoTime.Amount = currentPotatoTime + int(amount)
-	potatoTime.UpdatesCount = updatesCount
-	potatoTime.TotalAdded = totalAddedTime
-
-	tx := d.SqlDb.Select("amount", "updateCounts").Where("uuid = ?", id).Updates(potatoTime)
-	err = tx.Error
+	tx := d.SqlDb.Model(&model.PotatoTime{}).Where("uuid = ?", id).Updates(map[string]interface{}{
+		"amount":        potatoTime.Amount,
+		"updates_count": potatoTime.UpdatesCount,
+		"total_added":   potatoTime.TotalAdded,
+	})
+	if err := tx.Error; err != nil {
+		return fmt.Errorf("error updating record: %v", err)
+	}
 
 	return err
 }
@@ -37,16 +54,18 @@ func (d *Data) SubtractPotatoTime(id string, amount uint) error {
 	potatoTime := &model.PotatoTime{}
 	err := d.SqlDb.Where("uuid = ?", id).First(&potatoTime).Error
 
-	currentPotatoTime := potatoTime.Amount
-	updatesCount := potatoTime.UpdatesCount + 1
-	totalUsedTime := potatoTime.TotalUsed + amount
+	potatoTime.Amount -= int(amount)
+	potatoTime.UpdatesCount++
+	potatoTime.TotalUsed += amount
 
-	potatoTime.Amount = currentPotatoTime - int(amount)
-	potatoTime.UpdatesCount = updatesCount
-	potatoTime.TotalUsed = totalUsedTime
-
-	tx := d.SqlDb.Select("amount", "updateCounts").Where("uuid = ?", id).Updates(potatoTime)
-	err = tx.Error
+	tx := d.SqlDb.Model(&model.PotatoTime{}).Where("uuid = ?", id).Updates(map[string]interface{}{
+		"amount":        potatoTime.Amount,
+		"updates_count": potatoTime.UpdatesCount,
+		"total_used":    potatoTime.TotalUsed,
+	})
+	if err := tx.Error; err != nil {
+		return fmt.Errorf("error updating record: %v", err)
+	}
 
 	return err
 }

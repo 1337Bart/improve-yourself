@@ -31,7 +31,7 @@ func (h Handler) SettingsGet(ctx *fiber.Ctx) error {
 		return ctx.SendString("<h2>Error: cannot retrieve settings</h2>")
 	}
 	amount := strconv.FormatUint(uint64(settings.Amount), 10)
-	return render.Render(ctx, views.Home(amount, settings.SearchOn, settings.AddNew))
+	return render.Render(ctx, views.Settings(amount, settings.SearchOn, settings.AddNew))
 }
 
 type settingsForm struct {

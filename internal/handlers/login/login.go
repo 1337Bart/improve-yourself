@@ -173,7 +173,3 @@ func (h Handler) RegisterUserPost(ctx *fiber.Ctx) error {
 
 	return ctx.SendString("User created successfully")
 }
-
-func (h Handler) Index(ctx *fiber.Ctx) error {
-	return render.Render(ctx, views.Dashboard())
-}

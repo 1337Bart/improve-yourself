@@ -78,3 +78,31 @@ func (h Handler) PotatoTimePost(ctx *fiber.Ctx) error {
 
 	return ctx.SendString(fmt.Sprintf("<span id='productivity-time-counter'>%s</span>", updatedTimeStr))
 }
+
+func (h Handler) Dashboard(ctx *fiber.Ctx) error {
+	userID, ok := ctx.Locals("userID").(string)
+	if !ok {
+		ctx.Status(401)
+		return ctx.SendString("<h2>Error: Unauthorized access</h2>")
+	}
+
+	timesUpdated, err := h.dataService.GetPotatoTimeUpdatesCount(userID)
+	if err != nil {
+		ctx.Status(500)
+		return ctx.SendString("<h2>Error: cannot retrieve timesUpdated time</h2>")
+	}
+
+	totalUsedPotatoTime, err := h.dataService.GetTotalUsedTime(userID)
+	if err != nil {
+		ctx.Status(500)
+		return ctx.SendString("<h2>Error: cannot retrieve totalUsedPotatoTime time</h2>")
+	}
+
+	totalAddedProductivityTime, err := h.dataService.GetTotalAddedTime(userID)
+	if err != nil {
+		ctx.Status(500)
+		return ctx.SendString("<h2>Error: cannot retrieve totalAddedProductivityTime time</h2>")
+	}
+
+	return render.Render(ctx, views.Dashboard(int(totalAddedProductivityTime), int(totalUsedPotatoTime), int(timesUpdated)))
+}

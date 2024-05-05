@@ -1,4 +1,19 @@
 package views
 
-templ Dashboard() {
-    @template() {}}
+import (
+    "strconv"
+)
+
+templ Dashboard(productivityTime int, potatoTime int, timesUpdated int) {
+    @template() {
+    <div class="flex flex-col justify-center items-center gap-10 py-5">
+        <div class="text-center mb-5">
+            <h2 class="text-lg font-bold">Total times </h2>
+            <p>Productivity time added since start: <span id="total-productivity-counter">{strconv.Itoa(productivityTime)}</span> min</p>
+            <p>Potato time taken out since start: <span id="total-potato-counter">{strconv.Itoa(potatoTime)}</span> min</p>
+            <p>Potato time was updated <span id="total-potato-counter">{strconv.Itoa(timesUpdated)}</span> times since start</p>
+        </div>
+        <div id="feedback"></div>
+    </div>
+    }
+}

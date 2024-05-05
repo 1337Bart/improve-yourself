@@ -8,7 +8,8 @@ import (
 )
 
 func SetRoutes(app *fiber.App, loginHandler *login.Handler, settingsHandler *settingsHandler.Handler, dataHandler *dataHandler.Handler) {
-	app.Get("/", login.AuthMiddleware, loginHandler.Index)
+	// do wywalenia?
+	app.Get("/", login.AuthMiddleware, dataHandler.Dashboard)
 
 	app.Post("/logout", loginHandler.Logout)
 	app.Get("/login", loginHandler.Login)
@@ -26,26 +27,5 @@ func SetRoutes(app *fiber.App, loginHandler *login.Handler, settingsHandler *set
 	app.Get("/potato-time", login.AuthMiddleware, dataHandler.PotatoTimeGet)
 	app.Post("/update-time", login.AuthMiddleware, dataHandler.PotatoTimePost)
 
+	app.Get("/dashboard", login.AuthMiddleware, dataHandler.Dashboard)
 }
-
-//app.Get("/total_times", func(c *fiber.Ctx) error {
-//	globalTimeData.Lock()
-//	defer globalTimeData.Unlock()
-//
-//	return render.Render(c, views.TotalTimes(totalTimeData.Data))
-//})
-//
-//app.Post("/potato-time", func(c *fiber.Ctx) error {
-//	input := potatoTimeForm{}
-//	if err := c.BodyParser(&input); err != nil {
-//		return c.SendString("<h2>Error: Something went wrong</h2>")
-//	}
-//
-//	globalTimeData.Lock()
-//	globalTimeData.Data.TimePool -= input.PotatoTime
-//	totalTimeData.Data.Potato -= input.PotatoTime
-//	globalTimeData.Unlock()
-//
-//	fmt.Println(input)
-//	return c.SendStatus(200)
-//})
