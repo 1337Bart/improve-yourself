@@ -1,4 +1,4 @@
-package data
+package potato_time
 
 import (
 	"fmt"

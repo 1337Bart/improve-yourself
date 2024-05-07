@@ -7,8 +7,8 @@ import (
 	handlerLogin "github.com/1337Bart/improve-yourself/internal/handlers/login"
 	handlerSettings "github.com/1337Bart/improve-yourself/internal/handlers/settings"
 	"github.com/1337Bart/improve-yourself/internal/routes"
-	"github.com/1337Bart/improve-yourself/internal/service/data"
 	"github.com/1337Bart/improve-yourself/internal/service/login"
+	"github.com/1337Bart/improve-yourself/internal/service/potato_time"
 	"github.com/1337Bart/improve-yourself/internal/service/settings"
 	"log"
 	"os"
@@ -36,7 +36,7 @@ func main() {
 
 	loginService := login.NewLoginService(dbConn)
 	settingsService := settings.NewSettingsService(dbConn)
-	dataService := data.NewDataService(dbConn)
+	dataService := potato_time.NewDataService(dbConn)
 
 	loginHandler := handlerLogin.NewHandler(loginService, settingsService, dataService)
 	settingsHandler := handlerSettings.NewHandler(settingsService)

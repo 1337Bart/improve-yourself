@@ -11,10 +11,10 @@ import (
 
 type Handler struct {
 	settingsService service.Settings
-	dataService     service.Data
+	dataService     service.PotatoTime
 }
 
-func NewHandler(s service.Settings, d service.Data) *Handler {
+func NewHandler(s service.Settings, d service.PotatoTime) *Handler {
 	return &Handler{
 		settingsService: s,
 		dataService:     d,

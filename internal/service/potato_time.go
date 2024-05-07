@@ -1,6 +1,6 @@
 package service
 
-type Data interface {
+type PotatoTime interface {
 	CreateNilPotatoTime(id string) error
 
 	GetPotatoTime(id string) (time int, err error)
