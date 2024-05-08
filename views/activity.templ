@@ -1,0 +1,43 @@
+package views
+
+
+templ ActivityLog() {
+    @template() {
+    <div class="flex flex-col justify-center items-center gap-10 py-5">
+        <div class="text-center mb-5">
+            <h2 class="text-lg font-bold">Log Activity</h2>
+            <p>Add details about your activity below:</p>
+        </div>
+        <form class="flex flex-col justify-center items-center gap-5"
+              hx-post="/activity-log"
+              hx-target="#feedback"
+              hx-swap="outerHTML"
+              hx-indicator="#indicator">
+            <label class="input input-bordered flex items-center gap-2 w-full">
+                Activity
+                <input type="text" class="grow" name="activity" placeholder="Enter activity" required />
+            </label>
+            <label class="input input-bordered flex items-center gap-2 w-full">
+                Start Time
+                <input type="datetime-local" step="1" class="grow" name="start_time" required />
+            </label>
+            <label class="input input-bordered flex items-center gap-2 w-full">
+                End Time
+                <input type="datetime-local" step="1" class="grow" name="end_time" required />
+            </label>
+            <div class="input input-bordered flex flex-col w-full">
+                <label for="comments" class="mb-2">Comments (optional)</label>
+                <textarea id="comments" name="comments" placeholder="Add comments" class="textarea textarea-bordered grow resize-none"
+                          oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'"></textarea>
+            </div>
+            <button type="submit" class="btn">Submit activity</button>
+        </form>
+        <div id="indicator" class="htmx-indicator">
+            <div class="flex justify-center items-center w-full">
+                <span class="loading loading-spinner loading-lg text-primary h-20 w-20"></span>
+            </div>
+        </div>
+        <div id="feedback" class="text-center"></div>
+    </div>
+    }
+}

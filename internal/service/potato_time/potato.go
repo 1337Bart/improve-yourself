@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/1337Bart/improve-yourself/internal/db/model"
 	"gorm.io/gorm"
-	"time"
 )
 
 type Data struct {
@@ -15,16 +14,6 @@ func NewDataService(sqlDbConn *gorm.DB) *Data {
 	return &Data{
 		SqlDb: sqlDbConn,
 	}
-}
-
-type PotatoTime struct {
-	ID           uint      `gorm:"autoIncrement;column:id" json:"id"`
-	UUID         string    `gorm:"primaryKey;type:uuid;uniqueIndex;column:uuid" json:"uuid"`
-	Amount       int       `json:"amount"`
-	UpdatesCount uint      `json:"updatesCount"`
-	TotalAdded   uint      `json:"totalAdded"`
-	TotalUsed    uint      `json:"totalUsed"`
-	UpdatedAt    time.Time `json:"updatedAt"`
 }
 
 func (d *Data) AddPotatoTime(id string, amount uint) error {

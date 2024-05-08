@@ -3,10 +3,12 @@ package main
 import (
 	"fmt"
 	"github.com/1337Bart/improve-yourself/internal/db"
+	handlerActivity "github.com/1337Bart/improve-yourself/internal/handlers/activity"
 	handlerData "github.com/1337Bart/improve-yourself/internal/handlers/data"
 	handlerLogin "github.com/1337Bart/improve-yourself/internal/handlers/login"
 	handlerSettings "github.com/1337Bart/improve-yourself/internal/handlers/settings"
 	"github.com/1337Bart/improve-yourself/internal/routes"
+	"github.com/1337Bart/improve-yourself/internal/service/activity"
 	"github.com/1337Bart/improve-yourself/internal/service/login"
 	"github.com/1337Bart/improve-yourself/internal/service/potato_time"
 	"github.com/1337Bart/improve-yourself/internal/service/settings"
@@ -37,10 +39,12 @@ func main() {
 	loginService := login.NewLoginService(dbConn)
 	settingsService := settings.NewSettingsService(dbConn)
 	dataService := potato_time.NewDataService(dbConn)
+	activityService := activity.NewActviyService(dbConn)
 
 	loginHandler := handlerLogin.NewHandler(loginService, settingsService, dataService)
 	settingsHandler := handlerSettings.NewHandler(settingsService)
-	dataHandler := handlerData.NewHandler(settingsService, dataService)
+	dataHandler := handlerData.NewHandler(dataService)
+	activityHandler := handlerActivity.NewHandler(activityService)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -55,7 +59,7 @@ func main() {
 
 	app.Use(compress.New())
 
-	routes.SetRoutes(app, loginHandler, settingsHandler, dataHandler)
+	routes.SetRoutes(app, loginHandler, settingsHandler, dataHandler, activityHandler)
 
 	go func() {
 		if err := app.Listen(port); err != nil {

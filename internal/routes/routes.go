@@ -1,13 +1,14 @@
 package routes
 
 import (
+	activityHandler "github.com/1337Bart/improve-yourself/internal/handlers/activity"
 	dataHandler "github.com/1337Bart/improve-yourself/internal/handlers/data"
 	"github.com/1337Bart/improve-yourself/internal/handlers/login"
 	settingsHandler "github.com/1337Bart/improve-yourself/internal/handlers/settings"
 	"github.com/gofiber/fiber/v2"
 )
 
-func SetRoutes(app *fiber.App, loginHandler *login.Handler, settingsHandler *settingsHandler.Handler, dataHandler *dataHandler.Handler) {
+func SetRoutes(app *fiber.App, loginHandler *login.Handler, settingsHandler *settingsHandler.Handler, dataHandler *dataHandler.Handler, activityHandler *activityHandler.Handler) {
 	// do wywalenia?
 	app.Get("/", login.AuthMiddleware, dataHandler.Dashboard)
 
@@ -28,4 +29,7 @@ func SetRoutes(app *fiber.App, loginHandler *login.Handler, settingsHandler *set
 	app.Post("/update-time", login.AuthMiddleware, dataHandler.PotatoTimePost)
 
 	app.Get("/dashboard", login.AuthMiddleware, dataHandler.Dashboard)
+
+	app.Get("/activity-log", login.AuthMiddleware, activityHandler.LogActivityGet)
+	app.Post("/activity-log", login.AuthMiddleware, activityHandler.LogActivityPost)
 }
