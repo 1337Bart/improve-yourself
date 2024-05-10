@@ -50,8 +50,6 @@ func toServiceActivityLog(input ActivityLogForm) (service.ActivityLog, error) {
 }
 
 func parseTime(timeStr string) (time.Time, error) {
-	fmt.Println("entered parseTime")
-	// Define the layout that matches your input, adjust if more precision is needed
 	layout := "2006-01-02T15:04:05"
 	return time.Parse(layout, timeStr)
 }

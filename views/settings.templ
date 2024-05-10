@@ -12,19 +12,19 @@ templ Settings(amount string, searchOn, addNew bool) {
                 hx-indicator="#indicator"
             >
                 <label class="input input-bordered flex items-center gap-2 w-full text-white bg-gray-600">
-                  Urls per hour:
+                  Losowy setting input:
                   <input value={ amount } type="text" class="grow" name="amount" placeholder="5" />
                 </label>
                 <div class="flex flex-col ">
                   <div class="form-control w-52">
                     <label class="cursor-pointer label">
-                      <span class="label-text">Search On: </span>
+                      <span class="label-text">Dynks 1: </span>
                       <input type="checkbox" class="toggle toggle-primary" name="searchOn" checked?={ searchOn }/>
                     </label>
                   </div>
                   <div class="form-control w-52">
                     <label class="cursor-pointer label">
-                      <span class="label-text">Add new urls:</span>
+                      <span class="label-text">Dynks 2:</span>
                       <input type="checkbox" class="toggle toggle-secondary" name="addNew" checked?={ addNew } />
                     </label>
                   </div>
