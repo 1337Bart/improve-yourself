@@ -2,28 +2,27 @@ package views
 
 import "github.com/1337Bart/improve-yourself/internal/service"
 
-templ ActivityDayLog(activities []service.ActivityLog) {
+templ ActivityDayLog(activities []service.ActivityLogDisplay) {
     @template() {
-    <div class="flex flex-col justify-center items-center gap-10 py-5">
-        <div class="text-center mb-5">
-            <p>Select a date to view activities:</p>
+        <div class="flex flex-col justify-center items-center gap-10 py-5">
+            <div class="text-center mb-5">
+                <p>Select a date to view activities:</p>
+            </div>
+            <div id="date-indicator" class="htmx-indicator">
+                <span class="loading loading-spinner loading-lg text-primary h-20 w-20"></span>
+            </div>
+            <div>
+            <ul>
+            for _, activity := range activities {
+                <li>
+                Activity: { activity.Activity }
+                Start Time: { activity.StartTime }
+                End Time: { activity.EndTime }
+                Duration: { activity.Duration }
+                </li>
+                }
+            </ul>
+            </div>
         </div>
-        <div id="date-indicator" class="htmx-indicator">
-            <span class="loading loading-spinner loading-lg text-primary h-20 w-20"></span>
-        </div>
-        <div id="activity-list" class="w-full">
-            {{ range .activities }}
-                <div class="card bordered p-4 mb-2">
-                    <div class="card-body">
-                        <h3 class="card-title">{{ .Activity }}</h3>
-                        <p><strong>Start Time:</strong> {{ .StartTime.Format "Jan 2, 2006 15:04" }}</p>
-                        <p><strong>End Time:</strong> {{ .EndTime.Format "Jan 2, 2006 15:04" }}</p>
-                        <p><strong>Duration:</strong> {{ .Duration }} minutes</p>
-                        <p><strong>Comments:</strong> {{ .Comments }}</p>
-                    </div>
-                </div>
-            {{ end }}
-        </div>
-    </div>
     }
 }

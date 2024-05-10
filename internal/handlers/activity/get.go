@@ -8,6 +8,14 @@ import (
 	"time"
 )
 
+type ActivityLogDisplay struct {
+	Activity  string
+	StartTime string
+	EndTime   string
+	Duration  string
+	Comments  string
+}
+
 func (h *Handler) ActivitiesForDayGet(ctx *fiber.Ctx) error {
 	userID, ok := ctx.Locals("userID").(string)
 	if !ok {

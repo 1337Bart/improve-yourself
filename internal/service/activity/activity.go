@@ -22,7 +22,6 @@ func (a *Activity) AddActivityLog(userID string, activity service.ActivityLog) e
 	tx := a.SqlDb.Model(&model.ActivityLog{}).Create(map[string]interface{}{
 		"uuid":       userID,
 		"activity":   activity.Activity,
-		"duration":   calculateDuration(activity.StartTime, activity.EndTime),
 		"start_time": activity.StartTime,
 		"end_time":   activity.EndTime,
 		"comments":   activity.Comments,
@@ -37,14 +36,9 @@ func (a *Activity) AddActivityLog(userID string, activity service.ActivityLog) e
 
 }
 
-func calculateDuration(startTime time.Time, endTime time.Time) uint {
-	return uint(endTime.Sub(startTime).Minutes())
-}
-
-func (a *Activity) GetActivitiesForDay(userID, date string) ([]service.ActivityLog, error) {
+func (a *Activity) GetActivitiesForDay(userID, date string) ([]service.ActivityLogDisplay, error) {
 	var activities []service.ActivityLog
 
-	// Parse the input date string to time.Time
 	startOfDay, err := time.Parse("2006-01-02", date)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing date: %v", err)
@@ -60,5 +54,21 @@ func (a *Activity) GetActivitiesForDay(userID, date string) ([]service.ActivityL
 		return nil, fmt.Errorf("error retrieving activities: %v", result.Error)
 	}
 
-	return activities, nil
+	return toDisplayctivities(activities), nil
+}
+
+func toDisplayctivities(activities []service.ActivityLog) []service.ActivityLogDisplay {
+	displayActivities := make([]service.ActivityLogDisplay, 0, len(activities))
+
+	for _, item := range activities {
+		displayActivities = append(displayActivities, service.ActivityLogDisplay{
+			Activity:  item.Activity,
+			StartTime: item.StartTime.Format("Jan 2, 2006 15:04"),
+			EndTime:   item.EndTime.Format("Jan 2, 2006 15:04"),
+			Duration:  fmt.Sprintf("%v minutes", item.EndTime.Sub(item.StartTime).Minutes()),
+			Comments:  item.Comments,
+		})
+	}
+
+	return displayActivities
 }

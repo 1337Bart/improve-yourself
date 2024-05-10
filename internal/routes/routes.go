@@ -35,3 +35,8 @@ func SetRoutes(app *fiber.App, loginHandler *login.Handler, settingsHandler *set
 
 	app.Get("/activities-for-day", login.AuthMiddleware, activityHandler.ActivitiesForDayGet)
 }
+
+//Start Time: { item.StartTime.Format "Jan 2, 2006 15:04" }
+//End Time: { item.EndTime.Format "Jan 2, 2006 15:04" }
+//Duration: { item.Duration } minutes
+//Comments: { item.Comments }
