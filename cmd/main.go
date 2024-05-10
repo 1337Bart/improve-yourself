@@ -43,7 +43,7 @@ func main() {
 
 	loginHandler := handlerLogin.NewHandler(loginService, settingsService, dataService)
 	settingsHandler := handlerSettings.NewHandler(settingsService)
-	dataHandler := handlerData.NewHandler(dataService)
+	dataHandler := handlerData.NewHandler(dataService, activityService)
 	activityHandler := handlerActivity.NewHandler(activityService)
 
 	port := os.Getenv("PORT")

@@ -7,15 +7,18 @@ import (
 	"github.com/1337Bart/improve-yourself/views"
 	"github.com/gofiber/fiber/v2"
 	"strconv"
+	"time"
 )
 
 type Handler struct {
-	dataService service.PotatoTime
+	dataService     service.PotatoTime
+	activityService service.Activity
 }
 
-func NewHandler(d service.PotatoTime) *Handler {
+func NewHandler(d service.PotatoTime, a service.Activity) *Handler {
 	return &Handler{
-		dataService: d,
+		dataService:     d,
+		activityService: a,
 	}
 }
 
@@ -102,5 +105,15 @@ func (h Handler) Dashboard(ctx *fiber.Ctx) error {
 		return ctx.SendString("<h2>Error: cannot retrieve totalAddedProductivityTime time</h2>")
 	}
 
-	return render.Render(ctx, views.Dashboard(int(totalAddedProductivityTime), int(totalUsedPotatoTime), int(timesUpdated)))
+	date := ctx.Query("selected_date")
+	if date == "" {
+		date = time.Now().Format("2006-01-02")
+	}
+
+	activities, err := h.activityService.GetActivitiesForDay(userID, date)
+	if err != nil {
+		return ctx.Status(500).SendString(fmt.Sprintf("<h2>Error fetching activities: %v</h2>", err))
+	}
+
+	return render.Render(ctx, views.Dashboard(int(totalAddedProductivityTime), int(totalUsedPotatoTime), int(timesUpdated), activities))
 }

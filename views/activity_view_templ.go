@@ -31,69 +31,69 @@ func ActivityDayLog(activities []service.ActivityLogDisplay) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col justify-center items-center gap-10 py-5\"><div class=\"text-center mb-5\"><p>Select a date to view activities:</p></div><div id=\"date-indicator\" class=\"htmx-indicator\"><span class=\"loading loading-spinner loading-lg text-primary h-20 w-20\"></span></div><div><ul>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col justify-center items-center gap-10 py-5\"><div id=\"date-indicator\" class=\"htmx-indicator\"><span class=\"loading loading-spinner loading-lg text-primary h-20 w-20\"></span></div><div class=\"w-full max-w-4xl bg-gray-600 rounded-lg shadow-md p-5\"><ul class=\"list-none space-y-3\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			for _, activity := range activities {
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li>Activity: ")
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li class=\"p-4 bg-gray-100 rounded-lg\"><div class=\"font-semibold text-lg text-blue-700 mb-2\">Activity: ")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var3 string
 				templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(activity.Activity)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/activity_view.templ`, Line: 18, Col: 45}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/activity_view.templ`, Line: 15, Col: 111}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" Start Time: ")
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><div class=\"text-gray-700\"><p>Start Time: ")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var4 string
 				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(activity.StartTime)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/activity_view.templ`, Line: 19, Col: 48}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/activity_view.templ`, Line: 17, Col: 67}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" End Time: ")
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p><p>End Time: ")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var5 string
 				templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(activity.EndTime)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/activity_view.templ`, Line: 20, Col: 44}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/activity_view.templ`, Line: 18, Col: 63}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" Duration: ")
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p><p>Duration: ")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var6 string
 				templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(activity.Duration)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/activity_view.templ`, Line: 21, Col: 45}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/activity_view.templ`, Line: 19, Col: 64}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</li>")
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p></div></li>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</ul></div></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</ul></div><div class=\"text-center mb-5\"><p>Select a date to view past activities:</p></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
