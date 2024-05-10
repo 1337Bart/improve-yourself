@@ -40,3 +40,25 @@ func (a *Activity) AddActivityLog(userID string, activity service.ActivityLog) e
 func calculateDuration(startTime time.Time, endTime time.Time) uint {
 	return uint(endTime.Sub(startTime).Minutes())
 }
+
+func (a *Activity) GetActivitiesForDay(userID, date string) ([]service.ActivityLog, error) {
+	var activities []service.ActivityLog
+
+	// Parse the input date string to time.Time
+	startOfDay, err := time.Parse("2006-01-02", date)
+	if err != nil {
+		return nil, fmt.Errorf("error parsing date: %v", err)
+	}
+	endOfDay := startOfDay.AddDate(0, 0, 1).Add(-time.Second)
+
+	// Query to find activities
+	result := a.SqlDb.Model(&model.ActivityLog{}).
+		Where("uuid = ? AND start_time >= ? AND end_time <= ?", userID, startOfDay, endOfDay).
+		Find(&activities)
+
+	if result.Error != nil {
+		return nil, fmt.Errorf("error retrieving activities: %v", result.Error)
+	}
+
+	return activities, nil
+}
