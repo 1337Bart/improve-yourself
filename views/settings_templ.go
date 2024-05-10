@@ -29,7 +29,7 @@ func Settings(amount string, searchOn, addNew bool) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col items-center\"><div class=\"flex flex-col justify-center items-center p-5\">Currently not used for anything, but will be in the future.<form class=\"flex flex-col justify-center items-center gap-5\" hx-post=\"/\" hx-target=\"#feedback\" hx-indicator=\"#indicator\"><label class=\"input input-bordered flex items-center gap-2 w-full\">Urls per hour: <input value=\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col items-center text-white bg-gray-600\"><div class=\"flex flex-col justify-center items-center p-5\">Currently not used for anything, but will be in the future.<form class=\"flex flex-col justify-center items-center gap-5 text-white bg-gray-600\" hx-post=\"/\" hx-target=\"#feedback\" hx-indicator=\"#indicator\"><label class=\"input input-bordered flex items-center gap-2 w-full text-white bg-gray-600\">Urls per hour: <input value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -42,7 +42,7 @@ func Settings(amount string, searchOn, addNew bool) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" type=\"text\" class=\"grow\" name=\"amount\" placeholder=\"5\"></label><div class=\"flex flex-col\"><div class=\"form-control w-52\"><label class=\"cursor-pointer label\"><span class=\"label-text\">Search On: </span> <input type=\"checkbox\" class=\"toggle toggle-primary\" name=\"searchOn\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" type=\"text\" class=\"grow\" name=\"amount\" placeholder=\"5\"></label><div class=\"flex flex-col \"><div class=\"form-control w-52\"><label class=\"cursor-pointer label\"><span class=\"label-text\">Search On: </span> <input type=\"checkbox\" class=\"toggle toggle-primary\" name=\"searchOn\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

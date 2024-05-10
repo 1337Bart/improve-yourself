@@ -1,41 +1,66 @@
 package views
 
-
 templ ActivityLog() {
     @template() {
-    <div class="flex flex-col justify-center items-center gap-10 py-5">
-        <div class="text-center mb-5">
-            <h2 class="text-lg font-bold text-white bg-gray-800 p-3 rounded">Log Activity</h2>
-        </div>
-        <form class="flex flex-col justify-center items-center gap-5 w-full max-w-md"
-              hx-post="/activity-log"
-              hx-target="#feedback"
-              hx-swap="outerHTML"
-              hx-indicator="#indicator">
-            <label class="input input-bordered flex items-center gap-2 w-full text-white bg-gray-600">
-                Activity
-                <input type="text" class="input input-bordered" name="activity" required />
-            </label>
-            <label class="input input-bordered flex items-center gap-2 w-full text-white bg-gray-600">
-                Start Time
-                <input type="datetime-local" step="1" class="input input-bordered" name="start_time" required />
-            </label>
-            <label class="input input-bordered flex items-center gap-2 w-full text-white bg-gray-600">
-                End Time
-                <input type="datetime-local" step="1" class="input input-bordered" name="end_time" required />
-            </label>
-            <label class="input input-bordered flex items-center gap-2 w-full text-white bg-gray-600">
-                Comments
-                <input type="text" class="input input-bordered" name="comments" placeholder="optional" />
-            </label>
-            <button type="submit" class="btn bg-gray-600 text-white hover:bg-gray-700">Submit activity</button>
-        </form>
-        <div id="indicator" class="htmx-indicator">
-            <div class="flex justify-center items-center w-full">
-                <span class="loading loading-spinner loading-lg text-primary h-20 w-20"></span>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    </head>
+    <body class="bg-gray-100 text-gray-900">
+        <div class="flex flex-col justify-center items-center gap-10 py-5">
+            <div class="text-center mb-5">
+                <h2 class="text-lg font-bold text-white bg-gray-800 p-3 rounded">Log Activity</h2>
             </div>
+            <form class="flex flex-col justify-center items-center gap-5 w-full max-w-md"
+                  hx-post="/activity-log"
+                  hx-target="#feedback"
+                  hx-swap="outerHTML"
+                  hx-indicator="#indicator">
+                <label class="input input-bordered flex items-center gap-2 w-full text-white bg-gray-600">
+                    Activity
+                    <input type="text" class="input input-bordered" name="activity" required />
+                </label>
+                <label class="input input-bordered flex items-center gap-2 w-full text-white bg-gray-600">
+                    Start Time
+                    <input type="text" class="input input-bordered" id="start_time" name="start_time" required />
+                </label>
+                <label class="input input-bordered flex items-center gap-2 w-full text-white bg-gray-600">
+                    End Time
+                    <input type="text" class="input input-bordered" id="end_time" name="end_time" required />
+                </label>
+                <label class="input input-bordered flex items-center gap-2 w-full text-white bg-gray-600">
+                    Comments
+                    <input type="text" class="input input-bordered" name="comments" placeholder="optional" />
+                </label>
+                <button type="submit" class="btn bg-gray-600 text-white hover:bg-gray-700">Submit activity</button>
+            </form>
+            <div id="indicator" class="htmx-indicator">
+                <div class="flex justify-center items-center w-full">
+                    <span class="loading loading-spinner loading-lg text-primary h-20 w-20"></span>
+                </div>
+            </div>
+            <div id="feedback" class="text-center"></div>
         </div>
-        <div id="feedback" class="text-center"></div>
-    </div>
+        <script>
+            flatpickr("#start_time", {
+                enableTime: true,
+                noCalendar: false,
+                dateFormat: "Y-m-d H:i",
+                time_24hr: true
+            });
+            flatpickr("#end_time", {
+                enableTime: true,
+                noCalendar: false,
+                dateFormat: "Y-m-d H:i",
+                time_24hr: true
+            });
+        </script>
+    </body>
+    </html>
     }
 }

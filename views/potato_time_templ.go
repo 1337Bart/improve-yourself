@@ -29,7 +29,7 @@ func PotatoTime(time string) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col justify-center items-center gap-10 py-5\"><div class=\"text-center mb-5\"><h2 class=\"text-lg font-bold text-white bg-gray-600 p-3 rounded\">Current Times</h2><p class=\"mt-2\">Current time pool: <span id=\"productivity-time-counter\" class=\"text-lg font-semibold\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col justify-center items-center gap-10 py-5\"><div class=\"text-center mb-5\"><h2 class=\"text-lg font-bold text-white bg-gray-600 p-3 rounded\">Potato time </h2><p class=\"mt-2\">Current time pool: <span id=\"productivity-time-counter\" class=\"text-lg font-semibold\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
