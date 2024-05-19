@@ -29,7 +29,7 @@ func Login() templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div hx-ext=\"response-targets\" class=\"flex justify-center items-center text-white bg-gray-600\"><form class=\"flex flex-col justify-center items-center gap-5 py-5\" hx-post=\"/login\" hx-target=\"#feedback\" hx-indicator=\"#indicator\" hx-target-errors=\"#feedback\"><label class=\"input input-bordered flex items-center gap-2 w-full text-white bg-gray-600\">Email <input type=\"text\" class=\"grow\" name=\"email\" placeholder=\"email@youremail.com\"></label> <label class=\"input input-bordered flex items-center gap-2 w-full text-white bg-gray-600\">Password <input type=\"text\" class=\"grow\" name=\"password\" placeholder=\"Password\"></label> <button type=\"submit\" class=\"btn\">Login</button><div id=\"indicator\" class=\"htmx-indicator\"><div class=\"flex justify-center items-center w-full\"><span class=\"loading loading-spinner loading-lg text-primary h-20 w-20\"></span></div></div><div id=\"feedback\"></div></form></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex justify-center items-center min-h-screen bg-gray-600\"><form class=\"flex flex-col justify-center items-center gap-5 p-5 bg-gray-800 rounded shadow-lg\" hx-post=\"/login\" hx-target=\"#feedback\" hx-indicator=\"#indicator\" hx-target-errors=\"#feedback\"><label class=\"input input-bordered flex items-center gap-2 w-full text-white bg-gray-600\">Email <input type=\"text\" class=\"grow\" name=\"email\" placeholder=\"email@youremail.com\"></label> <label class=\"input input-bordered flex items-center gap-2 w-full text-white bg-gray-600\">Password <input type=\"text\" class=\"grow\" name=\"password\" placeholder=\"Password\"></label> <button type=\"submit\" class=\"btn bg-blue-500 hover:bg-blue-700\">Login</button><div id=\"indicator\" class=\"hidden\"><div class=\"flex justify-center items-center w-full\"><span class=\"loading loading-spinner loading-lg\"></span></div></div><div id=\"feedback\"></div></form></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -38,7 +38,39 @@ func Login() templ.Component {
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = template().Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = baseTemplate().Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if !templ_7745c5c3_IsBuffer {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
+		}
+		return templ_7745c5c3_Err
+	})
+}
+
+func baseTemplate() templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
+		if !templ_7745c5c3_IsBuffer {
+			templ_7745c5c3_Buffer = templ.GetBuffer()
+			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var3 == nil {
+			templ_7745c5c3_Var3 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link href=\"https://cdn.jsdelivr.net/npm/daisyui@4.10.1/dist/full.min.css\" rel=\"stylesheet\" type=\"text/css\"><script src=\"https://cdn.tailwindcss.com\"></script><script src=\"https://unpkg.com/htmx.org@1.9.11\" integrity=\"sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0\" crossorigin=\"anonymous\"></script><script src=\"https://unpkg.com/htmx.org@1.9.11/dist/ext/response-targets.js\"></script></head><body class=\"bg-gray-100 text-gray-900\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templ_7745c5c3_Var3.Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

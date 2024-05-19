@@ -1,6 +1,6 @@
 package views
 
-templ template(){
+templ template() {
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -10,20 +10,38 @@ templ template(){
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/htmx.org@1.9.11/dist/ext/response-targets.js"></script>
+        <style>
+            .main-header {
+                font-family: 'Arial', sans-serif;
+                font-size: 24px;
+                font-weight: bold;
+                color: #000;
+                margin: 20px 0;
+            }
+            .nav-buttons a {
+                margin-right: 10px;
+                padding: 10px 15px;
+                border-radius: 5px;
+                text-decoration: none;
+                color: #fff;
+            }
+        </style>
     </head>
-    <body class="bg-gray-100 text-gray-900">
-        <div class="w-full p-5 flex justify-between items-center bg-gray-800 text-white">
-            <h1 class="text-xl font-bold">ImproveYourself</h1>
-            <div>
-                <a href="/activity-log" class="btn bg-gray-600 hover:bg-green-700 mr-2">Add Activity</a>
-                <a href="/activities-for-day" class="btn bg-gray-600 hover:bg-blue-700 mr-2">Browse Activity</a>
-                <a href="/potato-time" class="btn bg-gray-600 hover:bg-red-700 mr-2">Potato Time</a>
-                <a href="/dashboard" class="btn bg-gray-600 hover:bg-purple-700 mr-2">Dashboard</a>
-                <a href="/settings" class="btn bg-gray-600 hover:bg-gray-700 mr-2">Settings</a>
-                <button hx-post="/logout" class="btn bg-black hover:bg-gray-800">Logout</button>
+    <body class="bg-white text-gray-900">
+        <div class="container mx-auto p-5">
+            <div class="flex justify-between items-center border-b pb-5 mb-5">
+                <h1 class="main-header">ImproveYourself</h1>
+                <div class="nav-buttons">
+                    <a href="/activity-log" class="bg-gray-600 hover:bg-green-700">Add Activity</a>
+                    <a href="/activities-for-day" class="bg-gray-600 hover:bg-blue-700">Browse Activity</a>
+                    <a href="/potato-time" class="bg-gray-600 hover:bg-red-700">Potato Time</a>
+                    <a href="/dashboard" class="bg-gray-600 hover:bg-purple-700">Dashboard</a>
+                    <a href="/settings" class="bg-gray-600 hover:bg-gray-700">Settings</a>
+                    <button hx-post="/logout" class="bg-black hover:bg-gray-800">Logout</button>
+                </div>
             </div>
+            { children... }
         </div>
-        { children... }
     </body>
     </html>
 }
