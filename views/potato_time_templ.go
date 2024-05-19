@@ -29,20 +29,20 @@ func PotatoTime(time string) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col justify-center items-center gap-10 py-5\"><div class=\"text-center mb-5\"><h2 class=\"text-lg font-bold text-white bg-gray-600 p-3 rounded\">Potato time </h2><p class=\"mt-2\">Current time pool: <span id=\"productivity-time-counter\" class=\"text-lg font-semibold\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col justify-center items-center gap-10 py-5\"><div class=\"text-center mb-5\"><h2 class=\"text-lg font-bold text-black text-gray-600 p-3 rounded\">Potato time</h2><p class=\"mt-2\">Current time pool: <span id=\"productivity-time-counter\" class=\"text-lg font-semibold\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(time)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/potato_time.templ`, Line: 8, Col: 119}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/potato_time.templ`, Line: 8, Col: 123}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span> min</p></div><form class=\"flex flex-col justify-center items-center gap-5\" hx-post=\"/update-time\" hx-target=\"#productivity-time-counter\" hx-swap=\"outerHTML\" hx-indicator=\"#indicator\"><label class=\"input input-bordered flex items-center gap-2 w-full bg-gray-600\"><input type=\"text\" class=\"grow font-bold text-white\" name=\"time\" placeholder=\"Enter time [min]\"></label> <button type=\"submit\" class=\"btn bg-gray-600 hover:bg-green-700\" name=\"action\" value=\"add\">Add productivity time</button> <button type=\"submit\" class=\"btn bg-gray-600 hover:bg-red-700\" name=\"action\" value=\"subtract\">Subtract potato time</button></form><div id=\"indicator\" class=\"htmx-indicator\"><div class=\"flex justify-center items-center w-full\"><span class=\"loading loading-spinner loading-lg text-primary h-20 w-20\"></span></div></div><div id=\"feedback\"></div></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span> min</p></div><form class=\"flex flex-col justify-center items-center gap-5\" hx-post=\"/update-time\" hx-target=\"#productivity-time-counter\" hx-swap=\"outerHTML\" hx-indicator=\"#indicator\"><label class=\"input input-bordered flex items-center gap-2 w-full bg-gray-100 rounded-lg p-3 shadow\"><input type=\"text\" class=\"grow font-bold text-black\" name=\"time\" placeholder=\"Enter time [min]\"></label> <button type=\"submit\" class=\"text-green-700 hover:underline\" name=\"action\" value=\"add\">Add productivity time</button> <button type=\"submit\" class=\"text-red-500 hover:underline\" name=\"action\" value=\"subtract\">Subtract potato time</button></form><div id=\"indicator\" class=\"htmx-indicator\"><div class=\"flex justify-center items-center w-full\"><span class=\"loading loading-spinner loading-lg text-primary h-20 w-20\"></span></div></div><div id=\"feedback\"></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

@@ -2,42 +2,42 @@ package views
 
 templ Settings(amount string, searchOn, addNew bool) {
     @template() {
-    <div class="flex flex-col items-center text-white bg-gray-600">
-        <div class="flex flex-col justify-center items-center p-5">
-                        Currently not used for anything, but will be in the future.
-            <form
-                class="flex flex-col justify-center items-center gap-5 text-white bg-gray-600"
-                hx-post="/"
-                hx-target="#feedback"
-                hx-indicator="#indicator"
-            >
-                <label class="input input-bordered flex items-center gap-2 w-full text-white bg-gray-600">
-                  Losowy setting input:
-                  <input value={ amount } type="text" class="grow" name="amount" placeholder="5" />
-                </label>
-                <div class="flex flex-col ">
-                  <div class="form-control w-52">
-                    <label class="cursor-pointer label">
-                      <span class="label-text">Dynks 1: </span>
-                      <input type="checkbox" class="toggle toggle-primary" name="searchOn" checked?={ searchOn }/>
+        <div class="flex flex-col items-center text-gray-900 bg-white">
+            <div class="flex flex-col justify-center items-center p-5">
+                <p class="mb-5">Currently not used for anything, but will be in the future.</p>
+                <form
+                    class="flex flex-col justify-center items-center gap-5"
+                    hx-post="/"
+                    hx-target="#feedback"
+                    hx-indicator="#indicator"
+                >
+                    <label class="flex items-center gap-2 w-full">
+                        <span>Losowy setting input:</span>
+                        <input value={ amount } type="text" class="grow border border-gray-300 p-2 rounded text-gray-900 bg-gray-100" name="amount" placeholder="5" />
                     </label>
-                  </div>
-                  <div class="form-control w-52">
-                    <label class="cursor-pointer label">
-                      <span class="label-text">Dynks 2:</span>
-                      <input type="checkbox" class="toggle toggle-secondary" name="addNew" checked?={ addNew } />
-                    </label>
-                  </div>
-                </div>
-                <button type="submit" class="btn">Submit</button>
-                <div id="indicator" class="htmx-indicator">
-                    <div class="flex justify-center items-center w-full">
-                        <span class="loading loading-spinner loading-lg text-primary h-20 w-20"></span>
+                    <div class="flex flex-col gap-3">
+                        <div class="form-control w-52">
+                            <label class="cursor-pointer flex items-center gap-2">
+                                <span>Dynks 1: </span>
+                                <input type="checkbox" class="toggle toggle-primary" name="searchOn" checked?={ searchOn }/>
+                            </label>
+                        </div>
+                        <div class="form-control w-52">
+                            <label class="cursor-pointer flex items-center gap-2">
+                                <span>Dynks 2:</span>
+                                <input type="checkbox" class="toggle toggle-secondary" name="addNew" checked?={ addNew } />
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div id="feedback"></div>
-            </form>
+                    <button type="submit" class="text-blue-500 hover:underline">Submit</button>
+                    <div id="indicator" class="htmx-indicator">
+                        <div class="flex justify-center items-center w-full">
+                            <span class="loading loading-spinner loading-lg text-primary h-20 w-20"></span>
+                        </div>
+                    </div>
+                    <div id="feedback"></div>
+                </form>
+            </div>
         </div>
-    </div>
     }
 }

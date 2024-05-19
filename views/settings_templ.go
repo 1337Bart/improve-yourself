@@ -29,20 +29,20 @@ func Settings(amount string, searchOn, addNew bool) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col items-center text-white bg-gray-600\"><div class=\"flex flex-col justify-center items-center p-5\">Currently not used for anything, but will be in the future.<form class=\"flex flex-col justify-center items-center gap-5 text-white bg-gray-600\" hx-post=\"/\" hx-target=\"#feedback\" hx-indicator=\"#indicator\"><label class=\"input input-bordered flex items-center gap-2 w-full text-white bg-gray-600\">Losowy setting input: <input value=\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col items-center text-gray-900 bg-white\"><div class=\"flex flex-col justify-center items-center p-5\"><p class=\"mb-5\">Currently not used for anything, but will be in the future.</p><form class=\"flex flex-col justify-center items-center gap-5\" hx-post=\"/\" hx-target=\"#feedback\" hx-indicator=\"#indicator\"><label class=\"flex items-center gap-2 w-full\"><span>Losowy setting input:</span> <input value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(amount)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/settings.templ`, Line: 16, Col: 39}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/settings.templ`, Line: 16, Col: 45}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" type=\"text\" class=\"grow\" name=\"amount\" placeholder=\"5\"></label><div class=\"flex flex-col \"><div class=\"form-control w-52\"><label class=\"cursor-pointer label\"><span class=\"label-text\">Dynks 1: </span> <input type=\"checkbox\" class=\"toggle toggle-primary\" name=\"searchOn\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" type=\"text\" class=\"grow border border-gray-300 p-2 rounded text-gray-900 bg-gray-100\" name=\"amount\" placeholder=\"5\"></label><div class=\"flex flex-col gap-3\"><div class=\"form-control w-52\"><label class=\"cursor-pointer flex items-center gap-2\"><span>Dynks 1: </span> <input type=\"checkbox\" class=\"toggle toggle-primary\" name=\"searchOn\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -52,7 +52,7 @@ func Settings(amount string, searchOn, addNew bool) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("></label></div><div class=\"form-control w-52\"><label class=\"cursor-pointer label\"><span class=\"label-text\">Dynks 2:</span> <input type=\"checkbox\" class=\"toggle toggle-secondary\" name=\"addNew\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("></label></div><div class=\"form-control w-52\"><label class=\"cursor-pointer flex items-center gap-2\"><span>Dynks 2:</span> <input type=\"checkbox\" class=\"toggle toggle-secondary\" name=\"addNew\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -62,7 +62,7 @@ func Settings(amount string, searchOn, addNew bool) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("></label></div></div><button type=\"submit\" class=\"btn\">Submit</button><div id=\"indicator\" class=\"htmx-indicator\"><div class=\"flex justify-center items-center w-full\"><span class=\"loading loading-spinner loading-lg text-primary h-20 w-20\"></span></div></div><div id=\"feedback\"></div></form></div></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("></label></div></div><button type=\"submit\" class=\"text-blue-500 hover:underline\">Submit</button><div id=\"indicator\" class=\"htmx-indicator\"><div class=\"flex justify-center items-center w-full\"><span class=\"loading loading-spinner loading-lg text-primary h-20 w-20\"></span></div></div><div id=\"feedback\"></div></form></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

@@ -2,28 +2,28 @@ package views
 
 templ PotatoTime(time string) {
     @template() {
-    <div class="flex flex-col justify-center items-center gap-10 py-5">
-        <div class="text-center mb-5">
-            <h2 class="text-lg font-bold text-white bg-gray-600 p-3 rounded"> Potato time </h2>
-            <p class="mt-2">Current time pool: <span id="productivity-time-counter" class="text-lg font-semibold">{time}</span> min</p>
-        </div>
-        <form class="flex flex-col justify-center items-center gap-5"
-              hx-post="/update-time"
-              hx-target="#productivity-time-counter"
-              hx-swap="outerHTML"
-              hx-indicator="#indicator">
-            <label class="input input-bordered flex items-center gap-2 w-full bg-gray-600">
-                <input type="text" class="grow font-bold text-white" name="time" placeholder="Enter time [min]" />
-            </label>
-            <button type="submit" class="btn bg-gray-600 hover:bg-green-700" name="action" value="add">Add productivity time</button>
-            <button type="submit" class="btn bg-gray-600 hover:bg-red-700" name="action" value="subtract">Subtract potato time</button>
-        </form>
-        <div id="indicator" class="htmx-indicator">
-            <div class="flex justify-center items-center w-full">
-                <span class="loading loading-spinner loading-lg text-primary h-20 w-20"></span>
+        <div class="flex flex-col justify-center items-center gap-10 py-5">
+            <div class="text-center mb-5">
+                <h2 class="text-lg font-bold text-black text-gray-600 p-3 rounded">Potato time</h2>
+                <p class="mt-2">Current time pool: <span id="productivity-time-counter" class="text-lg font-semibold">{time}</span> min</p>
             </div>
+            <form class="flex flex-col justify-center items-center gap-5"
+                  hx-post="/update-time"
+                  hx-target="#productivity-time-counter"
+                  hx-swap="outerHTML"
+                  hx-indicator="#indicator">
+                <label class="input input-bordered flex items-center gap-2 w-full bg-gray-100 rounded-lg p-3 shadow">
+                    <input type="text" class="grow font-bold text-black" name="time" placeholder="Enter time [min]" />
+                </label>
+                <button type="submit" class="text-green-700 hover:underline" name="action" value="add">Add productivity time</button>
+                <button type="submit" class="text-red-500 hover:underline" name="action" value="subtract">Subtract potato time</button>
+            </form>
+            <div id="indicator" class="htmx-indicator">
+                <div class="flex justify-center items-center w-full">
+                    <span class="loading loading-spinner loading-lg text-primary h-20 w-20"></span>
+                </div>
+            </div>
+            <div id="feedback"></div>
         </div>
-        <div id="feedback"></div>
-    </div>
     }
 }

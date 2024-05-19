@@ -18,12 +18,24 @@ templ template() {
                 color: #000;
                 margin: 20px 0;
             }
-            .nav-buttons a {
+            .nav-buttons a, .nav-buttons button {
                 margin-right: 10px;
                 padding: 10px 15px;
                 border-radius: 5px;
                 text-decoration: none;
-                color: #fff;
+                color: #555; /* Dark gray for better visibility */
+                background: none; /* Removing any background color */
+                transition: color 0.3s; /* Smooth transition for hover effects */
+            }
+            .nav-buttons a:hover, .nav-buttons button:hover {
+                color: #ccc; /* Lighter gray when hovered */
+            }
+            body {
+                background-color: white; /* White background */
+                color: black; /* Black text for better visibility */
+            }
+            .container {
+                max-width: 1200px; /* Ensure container does not exceed screen width */
             }
         </style>
     </head>
@@ -32,12 +44,12 @@ templ template() {
             <div class="flex justify-between items-center border-b pb-5 mb-5">
                 <h1 class="main-header">ImproveYourself</h1>
                 <div class="nav-buttons">
-                    <a href="/activity-log" class="bg-gray-600 hover:bg-green-700">Add Activity</a>
-                    <a href="/activities-for-day" class="bg-gray-600 hover:bg-blue-700">Browse Activity</a>
-                    <a href="/potato-time" class="bg-gray-600 hover:bg-red-700">Potato Time</a>
-                    <a href="/dashboard" class="bg-gray-600 hover:bg-purple-700">Dashboard</a>
-                    <a href="/settings" class="bg-gray-600 hover:bg-gray-700">Settings</a>
-                    <button hx-post="/logout" class="bg-black hover:bg-gray-800">Logout</button>
+                    <a href="/activity-log">Add Activity</a>
+                    <a href="/activities-for-day">Browse Activity</a>
+                    <a href="/potato-time">Potato Time</a>
+                    <a href="/dashboard">Dashboard</a>
+                    <a href="/settings">Settings</a>
+                    <button hx-post="/logout">Logout</button>
                 </div>
             </div>
             { children... }
