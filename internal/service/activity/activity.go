@@ -45,7 +45,6 @@ func (a *Activity) GetActivitiesForDay(userID, date string) ([]service.ActivityL
 	}
 	endOfDay := startOfDay.AddDate(0, 0, 1).Add(-time.Second)
 
-	// Query to find activities
 	result := a.SqlDb.Model(&model.ActivityLog{}).
 		Where("uuid = ? AND start_time >= ? AND end_time <= ?", userID, startOfDay, endOfDay).
 		Find(&activities)
@@ -57,6 +56,7 @@ func (a *Activity) GetActivitiesForDay(userID, date string) ([]service.ActivityL
 	return toDisplayctivities(activities), nil
 }
 
+// todo - pozbyć się tego (robie to samo znowu w handlerze)
 func toDisplayctivities(activities []service.ActivityLog) []service.ActivityLogDisplay {
 	displayActivities := make([]service.ActivityLogDisplay, 0, len(activities))
 
@@ -65,7 +65,7 @@ func toDisplayctivities(activities []service.ActivityLog) []service.ActivityLogD
 			Activity:  item.Activity,
 			StartTime: item.StartTime.Format("Jan 2, 2006 15:04"),
 			EndTime:   item.EndTime.Format("Jan 2, 2006 15:04"),
-			Duration:  fmt.Sprintf("%v minutes", item.EndTime.Sub(item.StartTime).Minutes()),
+			Duration:  fmt.Sprintf("%v", item.EndTime.Sub(item.StartTime).Minutes()),
 			Comments:  item.Comments,
 		})
 	}
