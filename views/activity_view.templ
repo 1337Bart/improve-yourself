@@ -4,37 +4,64 @@ import "github.com/1337Bart/improve-yourself/internal/service"
 
 templ ActivityDayLog(groupedActivities map[string][]service.ActivityLogDisplayTransformed) {
     @template() {
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <style>
+                input[type='date']::-webkit-calendar-picker-indicator {
+                    filter: invert(1);
+                    cursor: pointer;
+                    opacity: 1;
+                    background-color: #000;
+                }
+            </style>
+        </head>
+        <body>
         <div class="flex flex-col justify-center items-center gap-10 py-5">
             <div id="date-indicator" class="htmx-indicator">
                 <span class="loading loading-spinner loading-lg text-primary h-20 w-20"></span>
             </div>
-            <div class="w-full max-w-4xl bg-gray-100 rounded-lg shadow-md p-5">
+            <div id="activity-log" class="w-full max-w-4xl bg-gray-100 rounded-lg shadow-md p-5">
                 if len(groupedActivities) == 0 {
                     <div class="p-4 bg-white rounded-lg shadow">
                         <div class="font-semibold text-lg text-black mb-2">No activities found.</div>
                     </div>
                 } else {
-                for date, activities := range groupedActivities {
-                    <div class="mb-5">
-                        <h2 class="font-semibold text-2xl text-black mb-3">{ date }</h2>
-                        <ul class="list-none space-y-3">
-                        for _, activity := range activities {
-                            <li class="p-4 bg-white rounded-lg shadow">
-                                <div class="font-semibold text-lg text-black mb-2">Activity: { activity.Activity }</div>
-                                <div class="text-gray-700">
-                                    <p> { activity.StartTime } - { activity.EndTime } </p>
-                                    <p>{ activity.Duration } min </p>
-                                </div>
-                            </li>
-                        }
-                        </ul>
-                    </div>
-                }
+                    for date, activities := range groupedActivities {
+                        <div class="mb-5">
+                            <h2 class="font-semibold text-2xl text-black mb-3">{ date }</h2>
+                            <ul class="list-none space-y-3">
+                                for _, activity := range activities {
+                                    <li class="p-4 bg-white rounded-lg shadow">
+                                        <div class="font-semibold text-lg text-black mb-2"> { activity.Activity }</div>
+                                        <div class="text-gray-700">
+                                            <p>{ activity.StartTime } - { activity.EndTime }</p>
+                                            <p>{ activity.Duration } min</p>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
                 }
             </div>
             <div class="text-center mb-5">
                 <p>Select a date to view past activities:</p>
+                <form class="flex flex-col justify-center items-center gap-5 p-5 bg-gray-800 rounded shadow-lg"
+                    hx-post="/activities-for-day"
+                    hx-trigger="change delay:500ms"
+                    hx-target="#activity-log"
+                    hx-swap="innerHTML"
+                    >
+                    <label class="input input-bordered flex items-center gap-2 w-full bg-white text-gray-900">
+                        Start Time
+                        <input type="date" class="input input-bordered text-gray-900" name="selected_date" max="{ time.Now().Format '2006-01-02' }" class="border p-2 rounded" required />
+                    </label>
+                    <button type="submit" class="ml-3 p-2 bg-blue-500 text-white rounded">View Activities</button>
+                </form>
             </div>
         </div>
+        </body>
+        </html>
     }
 }
