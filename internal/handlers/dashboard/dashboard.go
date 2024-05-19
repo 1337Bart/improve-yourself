@@ -115,7 +115,22 @@ func (h Handler) Dashboard(ctx *fiber.Ctx) error {
 		return ctx.Status(500).SendString(fmt.Sprintf("<h2>Error fetching activities: %v</h2>", err))
 	}
 
-	fmt.Printf("distribution: %+v", distribution)
+	longestActivity, err := h.activityService.GetLongestActivityByPeriod(userID, weekAgo, todaysDate)
+	if err != nil {
+		return ctx.Status(500).SendString(fmt.Sprintf("<h2>Error fetching longest activity: %v</h2>", err))
+	}
 
-	return render.Render(ctx, views.Dashboard(int(totalAddedProductivityTime), int(totalUsedPotatoTime), int(timesUpdated), distribution))
+	topThreeDuration, err := h.activityService.GetTopThreeActivities(userID, weekAgo, todaysDate)
+	if err != nil {
+		return ctx.Status(500).SendString(fmt.Sprintf("<h2>Error fetching top three activities: %v</h2>", err))
+
+	}
+
+	timeCoveragePercentage, err := h.activityService.GetTimeTrackedAveragesDaily(userID, weekAgo, todaysDate)
+	if err != nil {
+		return ctx.Status(500).SendString(fmt.Sprintf("<h2>Error fetching time coverage percentage: %v</h2>", err))
+
+	}
+
+	return render.Render(ctx, views.Dashboard(int(totalAddedProductivityTime), int(totalUsedPotatoTime), int(timesUpdated), distribution, longestActivity, topThreeDuration, timeCoveragePercentage))
 }

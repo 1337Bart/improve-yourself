@@ -2,9 +2,10 @@ package views
 
 import (
     "strconv"
+	"github.com/1337Bart/improve-yourself/internal/service"
 )
 
-templ Dashboard(productivityTime int, potatoTime int, timesUpdated int, distribution map[string]int) {
+templ Dashboard(productivityTime int, potatoTime int, timesUpdated int, distribution map[string]int, longestActivity service.ActivityLogDisplay, topThreeDuration map[string]int, timeCoveragePercentage []service.DayCoverage) {
     @template() {
     <div class="flex flex-col justify-center items-center gap-10 py-5">
         <div class="text-center mb-5 w-full max-w-3xl bg-white rounded-lg shadow-md p-6">
@@ -12,6 +13,25 @@ templ Dashboard(productivityTime int, potatoTime int, timesUpdated int, distribu
             <p>Productivity time added since start: <span class="font-medium text-green-600" id="total-productivity-counter">{strconv.Itoa(productivityTime)}</span> min</p>
             <p>Potato time taken out since start: <span class="font-medium text-red-600" id="total-potato-counter">{strconv.Itoa(potatoTime)}</span> min</p>
             <p>Potato time was updated <span class="font-medium text-blue-600" id="times-updated-counter">{strconv.Itoa(timesUpdated)}</span> times since start</p>
+        </div>
+        <div class="w-full max-w-3xl bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-lg font-bold text-blue-800 mb-3">Time tracked per day </h2>
+            <table class="w-full table-auto">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">Day </th>
+                        <th class="px-4 py-2">% tracked </th>
+                    </tr>
+                </thead>
+                <tbody>
+                for _, day := range timeCoveragePercentage {
+                    <tr>
+                        <td class="border px-4 py-2">{ day.Day }</td>
+                        <td class="border px-4 py-2">{ strconv.Itoa(day.Coverage) } % </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
         </div>
         <div class="w-full max-w-3xl bg-white rounded-lg shadow-md p-6">
             <h2 class="text-lg font-bold text-blue-800 mb-3">Activity Distribution</h2>
@@ -27,6 +47,33 @@ templ Dashboard(productivityTime int, potatoTime int, timesUpdated int, distribu
                     <tr>
                         <td class="border px-4 py-2">{ day }</td>
                         <td class="border px-4 py-2">{ strconv.Itoa(activities) }</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="w-full max-w-3xl bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-lg font-bold text-blue-800 mb-3">Last week's longest activity</h2>
+            <div class="font-semibold text-lg text-black mb-2"> { longestActivity.Activity }</div>
+            <div class="text-gray-700">
+                <p>{ longestActivity.StartTime } - { longestActivity.EndTime }</p>
+                <p>{ longestActivity.Duration } min</p>
+            </div>
+        </div>
+        <div class="w-full max-w-3xl bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-lg font-bold text-blue-800 mb-3">Top 3 by duration </h2>
+            <table class="w-full table-auto">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">Activity </th>
+                        <th class="px-4 py-2">Duration sum over the last week </th>
+                    </tr>
+                </thead>
+                <tbody>
+                for activity, duration := range topThreeDuration {
+                    <tr>
+                        <td class="border px-4 py-2">{ activity }</td>
+                        <td class="border px-4 py-2">{ strconv.Itoa(duration) } min </td>
                     </tr>
                     }
                 </tbody>

@@ -25,9 +25,17 @@ type ActivityLogDisplayTransformed struct {
 	Comments  string
 }
 
+type DayCoverage struct {
+	Day      string
+	Coverage int
+}
+
 type Activity interface {
 	AddActivityLog(id string, activityLog ActivityLog) error
 	GetActivitiesForDay(userID, date string) ([]ActivityLogDisplay, error)
 
 	GetActivityDistributionByPeriod(userId, startDate, endDate string) (map[string]int, error)
+	GetLongestActivityByPeriod(userId, startDate, endDate string) (ActivityLogDisplay, error)
+	GetTopThreeActivities(userId, startDate, endDate string) (map[string]int, error)
+	GetTimeTrackedAveragesDaily(userId, startDate, endDate string) ([]DayCoverage, error)
 }
