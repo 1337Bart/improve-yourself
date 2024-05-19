@@ -29,7 +29,59 @@ func ActivityLog(todaysDate string, yesterdaysDate string) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("`<!doctype html> <html><head><style>\n            input[type='time']::-webkit-calendar-picker-indicator {\n                filter: invert(1);\n                cursor: pointer;\n                opacity: 1;\n                background-color: #000;\n            }\n        </style></head><body><div class=\"flex flex-col justify-center items-center gap-5 py-5\"><div class=\"text-center mb-5\"><h2 class=\"text-xl font-bold text-gray-900\">Log Activity</h2></div><form class=\"flex flex-col justify-center items-center gap-5 w-full max-w-md\" hx-post=\"/activity-log\" hx-target=\"#feedback\" hx-swap=\"outerHTML\" hx-indicator=\"#indicator\"><label class=\"input input-bordered flex items-center gap-2 w-full bg-white text-gray-900\">Activity <input type=\"text\" class=\"input input-bordered text-gray-900\" name=\"activity\" required></label> <label class=\"input input-bordered flex items-center gap-2 w-full bg-white text-gray-900\">Start Time <input type=\"time\" class=\"input input-bordered text-gray-900\" name=\"start_time\" required></label> <label class=\"input input-bordered flex items-center gap-2 w-full bg-white text-gray-900\">End Time <input type=\"time\" class=\"input input-bordered text-gray-900\" name=\"end_time\" required></label> <label class=\"input input-bordered flex items-center gap-2 w-full bg-white text-gray-900\">Comments <input type=\"text\" class=\"input input-bordered text-gray-900\" name=\"comments\" placeholder=\"optional\"></label> <button type=\"submit\" class=\"btn bg-blue-500 text-white hover:bg-blue-600\">Submit activity</button></form><div id=\"indicator\" class=\"htmx-indicator hidden\"><div class=\"flex justify-center items-center w-full\"><span class=\"loading loading-spinner loading-lg text-primary h-20 w-20\"></span></div></div><div id=\"feedback\" class=\"text-center\"></div></div></body></html>`")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("`<!doctype html> <html><head><style>\n            input[type='time']::-webkit-calendar-picker-indicator {\n                filter: invert(1);\n                cursor: pointer;\n                opacity: 1;\n                background-color: #000;\n            }\n        </style></head><body><div class=\"flex flex-col justify-center items-center gap-5 py-5\"><div class=\"text-center mb-5\"><h2 class=\"text-xl font-bold text-gray-900\">Log Activity</h2></div><div class=\"w-full max-w-md\"><div class=\"mb-5\"><h3 class=\"text-lg font-semibold text-gray-900\">Activities for Today ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var3 string
+			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(todaysDate)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/activity_add.templ`, Line: 25, Col: 100}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h3><form id=\"todayForm\" class=\"flex flex-col justify-center items-center gap-5 w-full bg-white p-4 rounded-lg shadow-md\" hx-post=\"/activity-log\" hx-target=\"#todayFeedback\" hx-swap=\"innerHTML\" hx-indicator=\"#indicator\"><input type=\"hidden\" name=\"date\" value=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var4 string
+			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(todaysDate)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/activity_add.templ`, Line: 31, Col: 74}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"> <label class=\"input input-bordered flex items-center gap-2 w-full bg-white text-gray-900\">Activity <input type=\"text\" class=\"input input-bordered text-gray-900\" name=\"activity\" required></label> <label class=\"input input-bordered flex items-center gap-2 w-full bg-white text-gray-900\">Start Time <input type=\"time\" class=\"input input-bordered text-gray-900\" name=\"start_time\" required></label> <label class=\"input input-bordered flex items-center gap-2 w-full bg-white text-gray-900\">End Time <input type=\"time\" class=\"input input-bordered text-gray-900\" name=\"end_time\" required></label> <label class=\"input input-bordered flex items-center gap-2 w-full bg-white text-gray-900\">Comments <input type=\"text\" class=\"input input-bordered text-gray-900\" name=\"comments\" placeholder=\"optional\"></label> <button type=\"submit\" class=\"btn bg-blue-500 text-white hover:bg-blue-600\">Submit activity</button></form><div id=\"todayFeedback\" class=\"text-center\"></div></div><div class=\"mb-5\"><h3 class=\"text-lg font-semibold text-gray-900\">Activities for Yesterday ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var5 string
+			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(yesterdaysDate)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/activity_add.templ`, Line: 53, Col: 108}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h3><form id=\"yesterdayForm\" class=\"flex flex-col justify-center items-center gap-5 w-full bg-white p-4 rounded-lg shadow-md\" hx-post=\"/activity-log\" hx-target=\"#yesterdayFeedback\" hx-swap=\"innerHTML\" hx-indicator=\"#indicator\"><input type=\"hidden\" name=\"date\" value=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var6 string
+			templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(yesterdaysDate)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/activity_add.templ`, Line: 59, Col: 78}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"> <label class=\"input input-bordered flex items-center gap-2 w-full bg-white text-gray-900\">Activity <input type=\"text\" class=\"input input-bordered text-gray-900\" name=\"activity\" required></label> <label class=\"input input-bordered flex items-center gap-2 w-full bg-white text-gray-900\">Start Time <input type=\"time\" class=\"input input-bordered text-gray-900\" name=\"start_time\" required></label> <label class=\"input input-bordered flex items-center gap-2 w-full bg-white text-gray-900\">End Time <input type=\"time\" class=\"input input-bordered text-gray-900\" name=\"end_time\" required></label> <label class=\"input input-bordered flex items-center gap-2 w-full bg-white text-gray-900\">Comments <input type=\"text\" class=\"input input-bordered text-gray-900\" name=\"comments\" placeholder=\"optional\"></label> <button type=\"submit\" class=\"btn bg-blue-500 text-white hover:bg-blue-600\">Submit activity</button></form><div id=\"yesterdayFeedback\" class=\"text-center\"></div></div></div><div id=\"indicator\" class=\"htmx-indicator hidden\"><div class=\"flex justify-center items-center w-full\"><span class=\"loading loading-spinner loading-lg text-primary h-20 w-20\"></span></div></div></div><script>\n            document.addEventListener('htmx:afterOnLoad', function(event) {\n                if (event.detail.target.id === 'todayFeedback') {\n                    document.getElementById('todayForm').reset();\n                } else if (event.detail.target.id === 'yesterdayFeedback') {\n                    document.getElementById('yesterdayForm').reset();\n                }\n            });\n\n            document.addEventListener('htmx:sendError', function(event) {\n                console.error('HTMX request error:', event.detail);\n            });\n\n            document.addEventListener('htmx:targetError', function(event) {\n                console.error('HTMX target error:', event.detail);\n            });\n        </script></body></html>`")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

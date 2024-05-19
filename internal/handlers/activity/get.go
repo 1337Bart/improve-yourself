@@ -16,6 +16,8 @@ type ActivityLogDisplay struct {
 	Comments  string
 }
 
+// musze sie nauczyc przekazywac zakres dat
+// bedzie oddawalo wszystkie aktywnosci dla zakresu dat (max 7 dni walidacja - inaczej sie rozjade)
 func (h *Handler) ActivitiesForDayGet(ctx *fiber.Ctx) error {
 	userID, ok := ctx.Locals("userID").(string)
 	if !ok {

@@ -25,17 +25,21 @@ type ActivityLogForm struct {
 	StartTime string `form:"start_time"` // Matches the start time input
 	EndTime   string `form:"end_time"`   // Matches the end time input
 	Comments  string `form:"comments"`   // Matches the comments input
+	Date      string `form:"date"`       // Matches the date input
 }
 
 func toServiceActivityLog(input ActivityLogForm) (service.ActivityLog, error) {
 	activityLog := service.ActivityLog{}
 
-	startTime, err := parseTime(input.StartTime)
+	startTimeStr := fmt.Sprintf("%sT%s:00", input.Date, input.StartTime)
+	fmt.Println("at activity log")
+	startTime, err := parseTime(startTimeStr)
 	if err != nil {
 		return activityLog, fmt.Errorf("Invalid start time format: %s", err)
 	}
 
-	endTime, err := parseTime(input.EndTime)
+	endTimeStr := fmt.Sprintf("%sT%s:00", input.Date, input.EndTime)
+	endTime, err := parseTime(endTimeStr)
 	if err != nil {
 		return activityLog, fmt.Errorf("Invalid end time format: %s", err)
 	}
@@ -61,9 +65,13 @@ func (h Handler) LogActivityGet(ctx *fiber.Ctx) error {
 		return ctx.SendString("<h2>Error: Unauthorized access</h2>")
 	}
 
-	// to powinno pokazywać ostatni dzień aktywności
+	today := time.Now()
+	yesterday := today.AddDate(0, 0, -1)
 
-	return render.Render(ctx, views.ActivityLog())
+	todayStr := today.Format("2006-01-02")
+	yesterdayStr := yesterday.Format("2006-01-02")
+
+	return render.Render(ctx, views.ActivityLog(todayStr, yesterdayStr))
 }
 
 func (h Handler) LogActivityPost(ctx *fiber.Ctx) error {
@@ -82,12 +90,12 @@ func (h Handler) LogActivityPost(ctx *fiber.Ctx) error {
 
 	serviceACtivityLog, err := toServiceActivityLog(input)
 	if err != nil {
-		return ctx.Status(fiber.StatusInternalServerError).SendString("<h2>Error processing your request</h2>")
+		return ctx.SendString("<h2>Error processing your request</h2>")
 	}
 
 	err = h.activityService.AddActivityLog(userID, serviceACtivityLog)
 	if err != nil {
-		return ctx.Status(fiber.StatusInternalServerError).SendString("<h2>Error processing your request</h2>")
+		return ctx.SendString("<h2>Error processing your request</h2>")
 	}
 
 	return ctx.SendString("<p>Activity logged successfully!</p>")

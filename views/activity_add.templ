@@ -20,36 +20,87 @@ templ ActivityLog(todaysDate string, yesterdaysDate string) {
             <div class="text-center mb-5">
                 <h2 class="text-xl font-bold text-gray-900">Log Activity</h2>
             </div>
-            <form class="flex flex-col justify-center items-center gap-5 w-full max-w-md"
-                  hx-post="/activity-log"
-                  hx-target="#feedback"
-                  hx-swap="outerHTML"
-                  hx-indicator="#indicator">
-                <label class="input input-bordered flex items-center gap-2 w-full bg-white text-gray-900">
-                    Activity
-                    <input type="text" class="input input-bordered text-gray-900" name="activity" required />
-                </label>
-                <label class="input input-bordered flex items-center gap-2 w-full bg-white text-gray-900">
-                    Start Time
-                    <input type="time" class="input input-bordered text-gray-900" name="start_time" required />
-                </label>
-                <label class="input input-bordered flex items-center gap-2 w-full bg-white text-gray-900">
-                    End Time
-                    <input type="time" class="input input-bordered text-gray-900" name="end_time" required />
-                </label>
-                <label class="input input-bordered flex items-center gap-2 w-full bg-white text-gray-900">
-                    Comments
-                    <input type="text" class="input input-bordered text-gray-900" name="comments" placeholder="optional" />
-                </label>
-                <button type="submit" class="btn bg-blue-500 text-white hover:bg-blue-600">Submit activity</button>
-            </form>
+            <div class="w-full max-w-md">
+                <div class="mb-5">
+                    <h3 class="text-lg font-semibold text-gray-900">Activities for Today {todaysDate}</h3>
+                    <form id="todayForm" class="flex flex-col justify-center items-center gap-5 w-full bg-white p-4 rounded-lg shadow-md"
+                          hx-post="/activity-log"
+                          hx-target="#todayFeedback"
+                          hx-swap="innerHTML"
+                          hx-indicator="#indicator">
+                        <input type="hidden" name="date" value={todaysDate} />
+                        <label class="input input-bordered flex items-center gap-2 w-full bg-white text-gray-900">
+                            Activity
+                            <input type="text" class="input input-bordered text-gray-900" name="activity" required />
+                        </label>
+                        <label class="input input-bordered flex items-center gap-2 w-full bg-white text-gray-900">
+                            Start Time
+                            <input type="time" class="input input-bordered text-gray-900" name="start_time" required />
+                        </label>
+                        <label class="input input-bordered flex items-center gap-2 w-full bg-white text-gray-900">
+                            End Time
+                            <input type="time" class="input input-bordered text-gray-900" name="end_time" required />
+                        </label>
+                        <label class="input input-bordered flex items-center gap-2 w-full bg-white text-gray-900">
+                            Comments
+                            <input type="text" class="input input-bordered text-gray-900" name="comments" placeholder="optional" />
+                        </label>
+                        <button type="submit" class="btn bg-blue-500 text-white hover:bg-blue-600">Submit activity</button>
+                    </form>
+                    <div id="todayFeedback" class="text-center"></div>
+                </div>
+                <div class="mb-5">
+                    <h3 class="text-lg font-semibold text-gray-900">Activities for Yesterday {yesterdaysDate}</h3>
+                    <form id="yesterdayForm" class="flex flex-col justify-center items-center gap-5 w-full bg-white p-4 rounded-lg shadow-md"
+                          hx-post="/activity-log"
+                          hx-target="#yesterdayFeedback"
+                          hx-swap="innerHTML"
+                          hx-indicator="#indicator">
+                        <input type="hidden" name="date" value={yesterdaysDate} />
+                        <label class="input input-bordered flex items-center gap-2 w-full bg-white text-gray-900">
+                            Activity
+                            <input type="text" class="input input-bordered text-gray-900" name="activity" required />
+                        </label>
+                        <label class="input input-bordered flex items-center gap-2 w-full bg-white text-gray-900">
+                            Start Time
+                            <input type="time" class="input input-bordered text-gray-900" name="start_time" required />
+                        </label>
+                        <label class="input input-bordered flex items-center gap-2 w-full bg-white text-gray-900">
+                            End Time
+                            <input type="time" class="input input-bordered text-gray-900" name="end_time" required />
+                        </label>
+                        <label class="input input-bordered flex items-center gap-2 w-full bg-white text-gray-900">
+                            Comments
+                            <input type="text" class="input input-bordered text-gray-900" name="comments" placeholder="optional" />
+                        </label>
+                        <button type="submit" class="btn bg-blue-500 text-white hover:bg-blue-600">Submit activity</button>
+                    </form>
+                    <div id="yesterdayFeedback" class="text-center"></div>
+                </div>
+            </div>
             <div id="indicator" class="htmx-indicator hidden">
                 <div class="flex justify-center items-center w-full">
                     <span class="loading loading-spinner loading-lg text-primary h-20 w-20"></span>
                 </div>
             </div>
-            <div id="feedback" class="text-center"></div>
         </div>
+        <script>
+            document.addEventListener('htmx:afterOnLoad', function(event) {
+                if (event.detail.target.id === 'todayFeedback') {
+                    document.getElementById('todayForm').reset();
+                } else if (event.detail.target.id === 'yesterdayFeedback') {
+                    document.getElementById('yesterdayForm').reset();
+                }
+            });
+
+            document.addEventListener('htmx:sendError', function(event) {
+                console.error('HTMX request error:', event.detail);
+            });
+
+            document.addEventListener('htmx:targetError', function(event) {
+                console.error('HTMX target error:', event.detail);
+            });
+        </script>
     </body>
     </html>
     `
