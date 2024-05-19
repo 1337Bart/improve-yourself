@@ -28,4 +28,6 @@ type ActivityLogDisplayTransformed struct {
 type Activity interface {
 	AddActivityLog(id string, activityLog ActivityLog) error
 	GetActivitiesForDay(userID, date string) ([]ActivityLogDisplay, error)
+
+	GetActivityDistributionByPeriod(userId, startDate, endDate string) (map[string]int, error)
 }

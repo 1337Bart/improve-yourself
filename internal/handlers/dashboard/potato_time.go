@@ -1,4 +1,4 @@
-package data
+package dashboard
 
 import (
 	"fmt"
@@ -105,15 +105,17 @@ func (h Handler) Dashboard(ctx *fiber.Ctx) error {
 		return ctx.SendString("<h2>Error: cannot retrieve totalAddedProductivityTime time</h2>")
 	}
 
-	date := ctx.Query("selected_date")
-	if date == "" {
-		date = time.Now().Format("2006-01-02")
-	}
+	// always fetches today for now
+	date := time.Now()
+	todaysDate := date.Format("2006-01-02")
+	weekAgo := date.AddDate(0, 0, -7).Format("2006-01-02")
 
-	activities, err := h.activityService.GetActivitiesForDay(userID, date)
+	distribution, err := h.activityService.GetActivityDistributionByPeriod(userID, weekAgo, todaysDate)
 	if err != nil {
 		return ctx.Status(500).SendString(fmt.Sprintf("<h2>Error fetching activities: %v</h2>", err))
 	}
 
-	return render.Render(ctx, views.Dashboard(int(totalAddedProductivityTime), int(totalUsedPotatoTime), int(timesUpdated), activities))
+	fmt.Printf("distribution: %+v", distribution)
+
+	return render.Render(ctx, views.Dashboard(int(totalAddedProductivityTime), int(totalUsedPotatoTime), int(timesUpdated), distribution))
 }

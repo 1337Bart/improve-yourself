@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/1337Bart/improve-yourself/internal/db"
 	handlerActivity "github.com/1337Bart/improve-yourself/internal/handlers/activity"
-	handlerData "github.com/1337Bart/improve-yourself/internal/handlers/data"
+	handlerData "github.com/1337Bart/improve-yourself/internal/handlers/dashboard"
 	handlerLogin "github.com/1337Bart/improve-yourself/internal/handlers/login"
 	handlerSettings "github.com/1337Bart/improve-yourself/internal/handlers/settings"
 	"github.com/1337Bart/improve-yourself/internal/routes"

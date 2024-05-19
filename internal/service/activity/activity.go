@@ -72,3 +72,36 @@ func toDisplayctivities(activities []service.ActivityLog) []service.ActivityLogD
 
 	return displayActivities
 }
+
+func (a *Activity) GetActivityDistributionByPeriod(userId, startDate, endDate string) (map[string]int, error) {
+	var activities []service.ActivityLog
+
+	startDay, err := time.Parse("2006-01-02", startDate)
+	if err != nil {
+		return nil, fmt.Errorf("error parsing date: %v", err)
+	}
+
+	endDay, err := time.Parse("2006-01-02", endDate)
+	if err != nil {
+		return nil, fmt.Errorf("error parsing date: %v", err)
+	}
+
+	// add full one day to the end date to include the end date in the query
+	endDay = endDay.AddDate(0, 0, 1).Add(-time.Nanosecond)
+
+	result := a.SqlDb.Model(&model.ActivityLog{}).
+		Where("uuid = ? AND start_time >= ? AND end_time <= ?", userId, startDay, endDay).
+		Find(&activities)
+
+	if result.Error != nil {
+		return nil, fmt.Errorf("error retrieving activities: %v", result.Error)
+	}
+
+	dayCount := make(map[string]int)
+	for _, activity := range activities {
+		day := activity.StartTime.Weekday().String()
+		dayCount[day]++
+	}
+
+	return dayCount, nil
+}

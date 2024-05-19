@@ -2,7 +2,7 @@ package routes
 
 import (
 	activityHandler "github.com/1337Bart/improve-yourself/internal/handlers/activity"
-	dataHandler "github.com/1337Bart/improve-yourself/internal/handlers/data"
+	dataHandler "github.com/1337Bart/improve-yourself/internal/handlers/dashboard"
 	"github.com/1337Bart/improve-yourself/internal/handlers/login"
 	settingsHandler "github.com/1337Bart/improve-yourself/internal/handlers/settings"
 	"github.com/gofiber/fiber/v2"
@@ -37,8 +37,3 @@ func SetRoutes(app *fiber.App, loginHandler *login.Handler, settingsHandler *set
 	app.Post("/activities-for-day", login.AuthMiddleware, activityHandler.ActivitiesForDayPost)
 
 }
-
-//Start Time: { item.StartTime.Format "Jan 2, 2006 15:04" }
-//End Time: { item.EndTime.Format "Jan 2, 2006 15:04" }
-//Duration: { item.Duration } minutes
-//Comments: { item.Comments }
