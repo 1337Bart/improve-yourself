@@ -36,4 +36,6 @@ func SetRoutes(app *fiber.App, loginHandler *login.Handler, settingsHandler *set
 	app.Get("/activities-for-day", login.AuthMiddleware, activityHandler.ActivitiesForDayGet)
 	app.Post("/activities-for-day", login.AuthMiddleware, activityHandler.ActivitiesForDayPost)
 
+	app.Get("/daily-checkin", login.AuthMiddleware, activityHandler.LogDailyReportGet)
+	app.Post("/daily-checkin", login.AuthMiddleware, activityHandler.LogDailyReportPost)
 }

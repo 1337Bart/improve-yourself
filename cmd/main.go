@@ -9,6 +9,7 @@ import (
 	handlerSettings "github.com/1337Bart/improve-yourself/internal/handlers/settings"
 	"github.com/1337Bart/improve-yourself/internal/routes"
 	"github.com/1337Bart/improve-yourself/internal/service/activity"
+	"github.com/1337Bart/improve-yourself/internal/service/daily_checkin"
 	"github.com/1337Bart/improve-yourself/internal/service/login"
 	"github.com/1337Bart/improve-yourself/internal/service/potato_time"
 	"github.com/1337Bart/improve-yourself/internal/service/settings"
@@ -39,12 +40,13 @@ func main() {
 	loginService := login.NewLoginService(dbConn)
 	settingsService := settings.NewSettingsService(dbConn)
 	dataService := potato_time.NewDataService(dbConn)
-	activityService := activity.NewActviyService(dbConn)
+	activityService := activity.NewActivityService(dbConn)
+	dailyReportService := daily_checkin.NewDailyCheckinService(dbConn)
 
 	loginHandler := handlerLogin.NewHandler(loginService, settingsService, dataService)
 	settingsHandler := handlerSettings.NewHandler(settingsService)
 	dataHandler := handlerData.NewHandler(dataService, activityService)
-	activityHandler := handlerActivity.NewHandler(activityService)
+	activityHandler := handlerActivity.NewHandler(activityService, dailyReportService)
 
 	port := os.Getenv("PORT")
 	if port == "" {

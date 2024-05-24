@@ -15,7 +15,7 @@ type Activity struct {
 	SqlDb *gorm.DB
 }
 
-func NewActviyService(sqlDbConn *gorm.DB) *Activity {
+func NewActivityService(sqlDbConn *gorm.DB) *Activity {
 	return &Activity{
 		SqlDb: sqlDbConn,
 	}
