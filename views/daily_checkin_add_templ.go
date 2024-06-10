@@ -29,29 +29,16 @@ func DailyReportLog(todaysDate string, yesterdaysDate string) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html> <html><head><style>\n                input[type='number'], input[type='range'], input[type='text'], input[type='checkbox'] {\n                    width: 100%;\n                    margin: 0.5em 0;\n                }\n                label {\n                    display: flex;\n                    align-items: center;\n                    gap: 10px;\n                    width: 100%;\n                }\n                input[type='checkbox'] {\n                    width: 18px;\n                    height: 18px;\n                    accent-color: #000; /* Change the color of the checkbox */\n                }\n                .input-bordered {\n                    display: flex;\n                    flex-direction: row;\n                    align-items: center;\n                    padding: 0.5em;\n                    border: 1px solid #ccc;\n                    border-radius: 0.25em;\n                    background-color: #fff;\n                    width: 100%;\n                }\n            </style></head><body><div class=\"flex flex-col justify-center items-center gap-5 py-5\"><div class=\"text-center mb-5\"><h2 class=\"text-xl font-bold text-gray-900\">Daily Report</h2></div><div class=\"w-full max-w-md\"><div class=\"mb-5\"><h3 class=\"text-lg font-semibold text-gray-900\">Report for Yesterday ")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html> <html><head><style>\n                input[type='number'], input[type='range'], input[type='text'], input[type='checkbox'] {\n                    width: 100%;\n                    margin: 0.5em 0;\n                }\n                label {\n                    display: flex;\n                    align-items: center;\n                    gap: 10px;\n                    width: 100%;\n                }\n                input[type='checkbox'] {\n                    width: 18px;\n                    height: 18px;\n                    accent-color: #000; /* Change the color of the checkbox */\n                }\n                .input-bordered {\n                    display: flex;\n                    flex-direction: row;\n                    align-items: center;\n                    padding: 0.5em;\n                    border: 1px solid #ccc;\n                    border-radius: 0.25em;\n                    background-color: #fff;\n                    width: 100%;\n                }\n            </style></head><body><div class=\"flex flex-col justify-center items-center gap-5 py-5\"><div class=\"text-center mb-5\"><h2 class=\"text-xl font-bold text-gray-900\">Daily Report</h2></div><div class=\"w-full max-w-md\"><div class=\"mb-5\"><h3 class=\"text-lg font-semibold text-gray-900\">How do you feel about yesterday? </h3><form id=\"dailyReportForm\" class=\"flex flex-col justify-center items-center gap-5 w-full bg-white p-4 rounded-lg shadow-md\" hx-post=\"/daily-checkin\" hx-target=\"#reportFeedback\" hx-swap=\"innerHTML\" hx-indicator=\"#indicator\"><input type=\"hidden\" name=\"date\" value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(yesterdaysDate)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/daily_checkin.templ`, Line: 44, Col: 90}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/daily_checkin_add.templ`, Line: 50, Col: 61}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h3><form id=\"dailyReportForm\" class=\"flex flex-col justify-center items-center gap-5 w-full bg-white p-4 rounded-lg shadow-md\" hx-post=\"/daily-checkin\" hx-target=\"#reportFeedback\" hx-swap=\"innerHTML\" hx-indicator=\"#indicator\"><input type=\"hidden\" name=\"date\" value=\"")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			var templ_7745c5c3_Var4 string
-			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(yesterdaysDate)
-			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/daily_checkin.templ`, Line: 50, Col: 61}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

@@ -1,0 +1,84 @@
+package views
+
+import (
+    "github.com/1337Bart/improve-yourself/internal/service"
+)
+
+templ DailyCheckinGet(dailyReport service.DailyReportForm) {
+    @template() {
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <style>
+                input[type='date']::-webkit-calendar-picker-indicator {
+                    filter: invert(1);
+                    cursor: pointer;
+                    opacity: 1;
+                    background-color: #000;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                th, td {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+                }
+                tr:nth-child(even) {
+                    background-color: #f2f2f2;
+                }
+            </style>
+        </head>
+        <body>
+        <div class="flex flex-col justify-center items-center gap-10 py-5">
+            <div id="date-indicator" class="htmx-indicator">
+                <span class="loading loading-spinner loading-lg text-primary h-20 w-20"></span>
+            </div>
+            <div id="activity-log" class="w-full max-w-4xl bg-gray-100 rounded-lg shadow-md p-5">
+                <div class="mb-5">
+                    <h2 class="font-semibold text-2xl text-black mb-3">{ dailyReport.Date }</h2>
+                    <table>
+                        <tr>
+                            <th>Field</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr><td>Did Meditate</td><td>{ dailyReport.DidMeditate }</td></tr>
+                        <tr><td>Minutes of Sports</td><td>{ dailyReport.MinutesOfSports }</td></tr>
+                        <tr><td>Meals Eaten</td><td>{ dailyReport.MealsEaten }</td></tr>
+                        <tr><td>Water Drank (Liters)</td><td>{ dailyReport.WaterDrankLiters }</td></tr>
+                        <tr><td>Steps Made</td><td>{ dailyReport.StepsMade }</td></tr>
+                        <tr><td>Sleep Score</td><td>{ dailyReport.SleepScore }</td></tr>
+                        <tr><td>Happiness Rating</td><td>{ dailyReport.HappinessRating }</td></tr>
+                        <tr><td>Productivity Score</td><td>{ dailyReport.ProductivityScore }</td></tr>
+                        <tr><td>Stress Level</td><td>{ dailyReport.StressLevel }</td></tr>
+                        <tr><td>Social Interactions</td><td>{ dailyReport.SocialInteractions }</td></tr>
+                        <tr><td>Screen Time (Hours)</td><td>{ dailyReport.ScreenTimeHours }</td></tr>
+                        <tr><td>Work Hours</td><td>{ dailyReport.WorkHours }</td></tr>
+                        <tr><td>Leisure Time (Hours)</td><td>{ dailyReport.LeisureTimeHours }</td></tr>
+                        <tr><td>Alcohol Units</td><td>{ dailyReport.AlcoholUnits }</td></tr>
+                        <tr><td>Caffeine Cups</td><td>{ dailyReport.CaffeineCups }</td></tr>
+                        <tr><td>Outdoor Time (Hours)</td><td>{ dailyReport.OutdoorTimeHours }</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="text-center mb-5">
+                <p>Select a date to view past activities:</p>
+                <form class="flex flex-col justify-center items-center gap-5 p-5 bg-gray-800 rounded shadow-lg"
+                    hx-post="/daily-checkin-for-day"
+                    hx-trigger="change delay:500ms"
+                    hx-target="#activity-log"
+                    hx-swap="innerHTML"
+                    >
+                    <label class="input input-bordered flex items-center gap-2 w-full bg-white text-gray-900">
+                        Start Time
+                        <input type="date" class="input input-bordered text-gray-900" name="selected_date" max="{{time.Now().Format '2006-01-02'}}" required />
+                    </label>
+                    <button type="submit" class="ml-3 p-2 bg-blue-500 text-white rounded">View Activities</button>
+                </form>
+            </div>
+        </div>
+        </body>
+        </html>
+    }
+}

@@ -142,7 +142,7 @@ func (h Handler) LogDailyReportPost(ctx *fiber.Ctx) error {
 		return ctx.SendString("<h2>Error converting your input</h2>")
 	}
 
-	err = h.dailyReportService.AddDailyReport(userID, serviceDailyReport)
+	err = h.dailyReportService.AddDailyCheckin(userID, serviceDailyReport)
 	if err != nil {
 		fmt.Println("error: ", err)
 		return ctx.SendString("<h2>Error processing your request</h2>")
@@ -158,7 +158,13 @@ func toServiceDailyReport(input DailyReportForm) (service.ServiceDailyReport, er
 	startTimeStr := fmt.Sprintf("%sT00:01:00", input.Date)
 
 	converted.Date = startTimeStr
-	converted.DidMeditate = (input.DidMeditate == "true" || input.DidMeditate == "on")
+
+	if input.DidMeditate == "true" || input.DidMeditate == "on" {
+		converted.DidMeditate = true
+	} else {
+		converted.DidMeditate = false
+
+	}
 
 	if converted.MinutesOfSports, err = strconv.Atoi(input.MinutesOfSports); err != nil {
 		return converted, fmt.Errorf("invalid number for minutes of sports: %v", input.MinutesOfSports)

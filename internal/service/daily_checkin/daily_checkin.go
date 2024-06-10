@@ -19,7 +19,7 @@ func NewDailyCheckinService(sqlDbConn *gorm.DB) *DailyCheckin {
 	}
 }
 
-func (d *DailyCheckin) AddDailyReport(userID string, checkin service.ServiceDailyReport) error {
+func (d *DailyCheckin) AddDailyCheckin(userID string, checkin service.ServiceDailyReport) error {
 	date, err := parseTime(checkin.Date)
 	if err != nil {
 		return fmt.Errorf("invalid start time format: %s", err)
@@ -59,4 +59,37 @@ func (d *DailyCheckin) AddDailyReport(userID string, checkin service.ServiceDail
 func parseTime(timeStr string) (time.Time, error) {
 	layout := "2006-01-02T15:04:05"
 	return time.Parse(layout, timeStr)
+}
+
+func (d *DailyCheckin) GetDailyCheckinForDay(userID string, date string) (service.ServiceDailyReport, error) {
+	var checkin model.DailyCheckIn
+
+	datePattern := date + "%"
+
+	err := d.SqlDb.Where("uuid = ? AND to_char(date, 'YYYY-MM-DD') LIKE ?", userID, datePattern).First(&checkin).Error
+	if err != nil {
+		return service.ServiceDailyReport{}, fmt.Errorf("error fetching daily checkin: %v", err)
+	}
+
+	fmt.Printf("checkin: %+v\n", checkin)
+
+	return service.ServiceDailyReport{
+		Date:               checkin.Date.Format("2006-01-02T15:04:05"),
+		DidMeditate:        checkin.DidMeditate,
+		MinutesOfSports:    checkin.MinutesOfSports,
+		MealsEaten:         checkin.MealsEaten,
+		WaterDrankLiters:   checkin.WaterDrankLiters,
+		StepsMade:          checkin.StepsMade,
+		SleepScore:         checkin.SleepScore,
+		HappinessRating:    checkin.HappinessRating,
+		ProductivityScore:  checkin.ProductivityScore,
+		StressLevel:        checkin.StressLevel,
+		SocialInteractions: checkin.SocialInteractions,
+		ScreenTimeHours:    checkin.ScreenTimeHours,
+		WorkHours:          checkin.WorkHours,
+		LeisureTimeHours:   checkin.LeisureTimeHours,
+		AlcoholUnits:       checkin.AlcoholUnits,
+		CaffeineCups:       checkin.CaffeineCups,
+		OutdoorTimeHours:   checkin.OutdoorTimeHours,
+	}, nil
 }

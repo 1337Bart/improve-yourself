@@ -8,7 +8,6 @@ type ServiceDailyReport struct {
 	WaterDrankLiters   float64
 	StepsMade          int
 	SleepScore         int
-	DominatingEmotion  string
 	HappinessRating    int
 	ProductivityScore  int
 	StressLevel        int
@@ -22,5 +21,26 @@ type ServiceDailyReport struct {
 }
 
 type DailyCheckin interface {
-	AddDailyReport(string, ServiceDailyReport) error
+	AddDailyCheckin(string, ServiceDailyReport) error
+	GetDailyCheckinForDay(string, string) (ServiceDailyReport, error)
+}
+
+type DailyReportForm struct {
+	Date               string
+	DidMeditate        string
+	MinutesOfSports    string
+	MealsEaten         string
+	WaterDrankLiters   string
+	StepsMade          string
+	SleepScore         string
+	HappinessRating    string
+	ProductivityScore  string
+	StressLevel        string
+	SocialInteractions string
+	ScreenTimeHours    string
+	WorkHours          string
+	LeisureTimeHours   string
+	AlcoholUnits       string
+	CaffeineCups       string
+	OutdoorTimeHours   string
 }
