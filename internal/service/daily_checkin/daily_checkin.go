@@ -71,8 +71,6 @@ func (d *DailyCheckin) GetDailyCheckinForDay(userID string, date string) (servic
 		fmt.Printf("error fetching daily checkin: %v", err)
 	}
 
-	fmt.Printf("checkin: %+v\n", checkin)
-
 	return service.ServiceDailyReport{
 		Date:               date,
 		DidMeditate:        checkin.DidMeditate,

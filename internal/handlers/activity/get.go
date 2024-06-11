@@ -42,6 +42,7 @@ func groupActivitiesByDate(activities []service.ActivityLogDisplay) map[string][
 		groupedActivities[date] = append(groupedActivities[date], transformedActivity)
 	}
 
+	fmt.Printf("groupActivitiesByDate: %+v", groupedActivities)
 	return groupedActivities
 }
 
@@ -60,8 +61,9 @@ func (h *Handler) ActivitiesForDayGet(ctx *fiber.Ctx) error {
 	if err != nil {
 		return ctx.Status(500).SendString(fmt.Sprintf("<h2>Error fetching activities: %v</h2>", err))
 	}
-	fmt.Printf("activities: %+v\n", activities)
+	fmt.Printf("ActivitiesForDayGet activities: %+v\n", activities)
 	groupedActivities := groupActivitiesByDate(activities)
+
 	return render.Render(ctx, views.ActivityDayLog(groupedActivities))
 }
 
@@ -89,7 +91,7 @@ func (h *Handler) ActivitiesForDayPost(ctx *fiber.Ctx) error {
 		return ctx.Status(500).SendString(fmt.Sprintf("<h2>Error fetching activities: %v</h2>", err))
 	}
 
-	fmt.Printf("activities: %+v\n", activities)
+	fmt.Printf("ActivitiesForDayPost activities: %+v\n", activities)
 	groupedActivities := groupActivitiesByDate(activities)
 	return render.Render(ctx, views.ActivityDayLog(groupedActivities))
 }
@@ -107,7 +109,6 @@ func (h *Handler) DailyCheckinForDayGet(ctx *fiber.Ctx) error {
 
 	checkin, _ := h.dailyReportService.GetDailyCheckinForDay(userID, date)
 
-	fmt.Printf("checkin: %+v\n", checkin)
 	return render.Render(ctx, views.DailyCheckinGet(ToDailyReportForm(checkin)))
 }
 

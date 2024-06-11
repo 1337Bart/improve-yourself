@@ -1,6 +1,8 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"github.com/1337Bart/improve-yourself/internal/db"
 	"github.com/1337Bart/improve-yourself/internal/service"
@@ -9,6 +11,7 @@ import (
 	"github.com/joho/godotenv"
 	"log"
 	"os"
+	"os/exec"
 	"time"
 )
 
@@ -38,9 +41,39 @@ func main() {
 	userID := "afcd065f-7205-4353-b7f7-f51d3f0abff3"
 
 	dates := getLastNDays(11)
+	reports := fetchReports(activityService, dailyReportService, userID, dates)
+
+	fileName := "reports.json"
+	err = saveReportsToFile(reports, fileName)
+	if err != nil {
+		log.Fatalf("error saving reports to file: %s", err)
+	}
+
+	output, err := executePythonScript(fileName)
+	if err != nil {
+		log.Fatalf("error executing Python script: %s", err)
+	}
+
+	// Process the captured output
+	fmt.Println(":::::::GOLANG::::::")
+	fmt.Println("Output from Python script:")
+	fmt.Println(output)
+}
+
+func getLastNDays(N int) []string {
+	var dates []string
+	now := time.Now()
+	for i := N - 1; i >= 0; i-- {
+		date := now.AddDate(0, 0, -i).Format("2006-01-02")
+		dates = append(dates, date)
+	}
+	return dates
+}
+
+func fetchReports(activityService *activity.Activity, dailyReportService *daily_checkin.DailyCheckin, userID string, dates []string) dailyReportMap {
 	reports := make(dailyReportMap)
 	for _, date := range dates {
-		fmt.Println("####DATE####", date)
+
 		dailyReport, err := dailyReportService.GetDailyCheckinForDay(userID, date)
 		if err != nil {
 			log.Printf("error fetching daily report for date %s: %s\n", date, err)
@@ -60,14 +93,33 @@ func main() {
 
 		reports[date] = combinedReport
 	}
+	return reports
 }
 
-func getLastNDays(N int) []string {
-	var dates []string
-	now := time.Now()
-	for i := N - 1; i >= 0; i-- {
-		date := now.AddDate(0, 0, -i).Format("2006-01-02")
-		dates = append(dates, date)
+func saveReportsToFile(reports dailyReportMap, fileName string) error {
+	file, err := os.Create(fileName)
+	if err != nil {
+		return err
 	}
-	return dates
+	defer file.Close()
+
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", "  ")
+	return encoder.Encode(reports)
+}
+
+func executePythonScript(fileName string) (string, error) {
+	cmd := exec.Command("python3", "llm_script.py", fileName)
+
+	var out bytes.Buffer
+	cmd.Stdout = &out
+	cmd.Stderr = &out
+
+	err := cmd.Run()
+	if err != nil {
+		return "", err
+	}
+
+	fmt.Println("out.String: ", out.String())
+	return out.String(), nil
 }
