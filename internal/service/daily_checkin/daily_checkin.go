@@ -68,13 +68,13 @@ func (d *DailyCheckin) GetDailyCheckinForDay(userID string, date string) (servic
 
 	err := d.SqlDb.Where("uuid = ? AND to_char(date, 'YYYY-MM-DD') LIKE ?", userID, datePattern).First(&checkin).Error
 	if err != nil {
-		return service.ServiceDailyReport{}, fmt.Errorf("error fetching daily checkin: %v", err)
+		fmt.Printf("error fetching daily checkin: %v", err)
 	}
 
 	fmt.Printf("checkin: %+v\n", checkin)
 
 	return service.ServiceDailyReport{
-		Date:               checkin.Date.Format("2006-01-02T15:04:05"),
+		Date:               date,
 		DidMeditate:        checkin.DidMeditate,
 		MinutesOfSports:    checkin.MinutesOfSports,
 		MealsEaten:         checkin.MealsEaten,
