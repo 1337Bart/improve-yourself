@@ -14,3 +14,8 @@ type ProposedActivity struct {
 	Description string `json:"description"`
 	Details     string `json:"details"`
 }
+
+type AiInsight interface {
+	AddAiInsight(userID string, insight AiRecommendation) error
+	GetAiRecommendation(userID string) (AiRecommendation, error)
+}

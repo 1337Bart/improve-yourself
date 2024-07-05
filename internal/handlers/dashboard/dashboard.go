@@ -11,14 +11,16 @@ import (
 )
 
 type Handler struct {
-	dataService     service.PotatoTime
-	activityService service.Activity
+	dataService      service.PotatoTime
+	activityService  service.Activity
+	aiInsightService service.AiInsight
 }
 
-func NewHandler(d service.PotatoTime, a service.Activity) *Handler {
+func NewHandler(d service.PotatoTime, a service.Activity, ai service.AiInsight) *Handler {
 	return &Handler{
-		dataService:     d,
-		activityService: a,
+		dataService:      d,
+		activityService:  a,
+		aiInsightService: ai,
 	}
 }
 
@@ -132,5 +134,10 @@ func (h Handler) Dashboard(ctx *fiber.Ctx) error {
 
 	}
 
-	return render.Render(ctx, views.Dashboard(int(totalAddedProductivityTime), int(totalUsedPotatoTime), int(timesUpdated), distribution, longestActivity, topThreeDuration, timeCoveragePercentage))
+	aiInsights, err := h.aiInsightService.GetAiRecommendation(userID)
+	if err != nil {
+		return ctx.Status(500).SendString(fmt.Sprintf("<h2>Error fetching ai insights: %v</h2>", err))
+	}
+
+	return render.Render(ctx, views.Dashboard(int(totalAddedProductivityTime), int(totalUsedPotatoTime), int(timesUpdated), distribution, longestActivity, topThreeDuration, timeCoveragePercentage, aiInsights))
 }

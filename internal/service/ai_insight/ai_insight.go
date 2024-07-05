@@ -44,31 +44,30 @@ func (a *AiInsight) AddAiInsight(userID string, insight service.AiRecommendation
 	return nil
 }
 
-func (a *AiInsight) GetAiRecommendation(userID string) (*service.AiRecommendation, error) {
+func (a *AiInsight) GetAiRecommendation(userID string) (service.AiRecommendation, error) {
 	var aiRec model.AiRecommendation
+	serviceAiRec := service.AiRecommendation{}
 
 	tx := a.SqlDb.Where("uuid = ?", userID).First(&aiRec)
 	if tx.Error != nil {
 		if tx.Error == gorm.ErrRecordNotFound {
-			return nil, fmt.Errorf("record not found")
+			return serviceAiRec, fmt.Errorf("record not found")
 		}
-		return nil, fmt.Errorf("error retrieving record: %v", tx.Error)
+		return serviceAiRec, fmt.Errorf("error retrieving record: %v", tx.Error)
 	}
 
 	var insights []service.Insight
 	if err := json.Unmarshal([]byte(aiRec.Insights), &insights); err != nil {
-		return nil, fmt.Errorf("error unmarshalling insights: %v", err)
+		return serviceAiRec, fmt.Errorf("error unmarshalling insights: %v", err)
 	}
 
 	var proposedActivities []service.ProposedActivity
 	if err := json.Unmarshal([]byte(aiRec.ProposedActivities), &proposedActivities); err != nil {
-		return nil, fmt.Errorf("error unmarshalling proposed activities: %v", err)
+		return serviceAiRec, fmt.Errorf("error unmarshalling proposed activities: %v", err)
 	}
 
-	serviceAiRec := &service.AiRecommendation{
-		Insights:           insights,
-		ProposedActivities: proposedActivities,
-	}
+	serviceAiRec.Insights = insights
+	serviceAiRec.ProposedActivities = proposedActivities
 
 	return serviceAiRec, nil
 }
