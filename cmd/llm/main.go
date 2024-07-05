@@ -7,6 +7,7 @@ import (
 	"github.com/1337Bart/improve-yourself/internal/db"
 	"github.com/1337Bart/improve-yourself/internal/service"
 	"github.com/1337Bart/improve-yourself/internal/service/activity"
+	"github.com/1337Bart/improve-yourself/internal/service/ai_insight"
 	"github.com/1337Bart/improve-yourself/internal/service/daily_checkin"
 	"github.com/joho/godotenv"
 	"log"
@@ -54,10 +55,21 @@ func main() {
 		log.Fatalf("error executing Python script: %s", err)
 	}
 
-	// Process the captured output
-	fmt.Println(":::::::GOLANG::::::")
-	fmt.Println("Output from Python script:")
-	fmt.Println(output)
+	var scriptOutput service.AiRecommendation
+
+	err = json.Unmarshal([]byte(output), &scriptOutput)
+	if err != nil {
+		log.Fatalf("error unmarshalling JSON output: %s", err)
+	}
+
+	aiService := ai_insight.NewAiInsightService(dbConn)
+
+	err = aiService.AddAiInsight(userID, scriptOutput)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("AI insights saved successfully. Exiting..")
 }
 
 func getLastNDays(N int) []string {

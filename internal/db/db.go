@@ -22,7 +22,7 @@ func InitDB(dbUrl string) (*gorm.DB, error) {
 		return nil, fmt.Errorf("unable to create uuid extension: %w", err)
 	}
 
-	err = DbConn.AutoMigrate(&model.User{}, &model.Settings{}, &model.PotatoTime{}, &model.ActivityLog{}, &model.DailyCheckIn{})
+	err = DbConn.AutoMigrate(&model.User{}, &model.Settings{}, &model.PotatoTime{}, &model.ActivityLog{}, &model.DailyCheckIn{}, &model.AiRecommendation{})
 	if err != nil {
 		return nil, fmt.Errorf("unable to migrate DB: %w", err)
 	}

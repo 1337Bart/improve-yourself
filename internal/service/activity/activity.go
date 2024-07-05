@@ -150,7 +150,7 @@ func toDisplayctivity(activity service.ActivityLog) service.ActivityLogDisplay {
 		Activity:  activity.Activity,
 		StartTime: activity.StartTime.Format("Jan 2, 2006 15:04"),
 		EndTime:   activity.EndTime.Format("Jan 2, 2006 15:04"),
-		Duration:  fmt.Sprintf("%v", activity.EndTime.Sub(activity.StartTime).Minutes()),
+		Duration:  fmt.Sprintf("%v", math.Abs(activity.EndTime.Sub(activity.StartTime).Minutes())),
 		Comments:  activity.Comments,
 	}
 }

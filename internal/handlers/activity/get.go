@@ -12,22 +12,40 @@ import (
 func groupActivitiesByDate(activities []service.ActivityLogDisplay) map[string][]service.ActivityLogDisplayTransformed {
 	groupedActivities := make(map[string][]service.ActivityLogDisplayTransformed)
 
+	dateFormats := []string{
+		"January 02, 2006 15:04",
+		"Jan 2, 2006 15:04",
+		"2006-01-02 15:04",
+		"2006/01/02 15:04",
+		"02.01.2006 15:04",
+	}
+
 	for _, activity := range activities {
-		// Parse the StartTime and EndTime to time.Time
-		startTime, err := time.Parse("January 02, 2006 15:04", activity.StartTime)
+		var startTime, endTime time.Time
+		var err error
+
+		for _, format := range dateFormats {
+			startTime, err = time.Parse(format, activity.StartTime)
+			if err == nil {
+				break
+			}
+		}
 		if err != nil {
-			continue // Skip if there's an error in parsing
+			continue
 		}
 
-		endTime, err := time.Parse("January 02, 2006 15:04", activity.EndTime)
+		for _, format := range dateFormats {
+			endTime, err = time.Parse(format, activity.EndTime)
+			if err == nil {
+				break
+			}
+		}
 		if err != nil {
-			continue // Skip if there's an error in parsing
+			continue
 		}
 
-		// Extract date in "DD:MM:YYYY" format
 		date := startTime.Format("02.01.2006")
 
-		// Extract time in "HH:MM" format
 		startTimeStr := startTime.Format("15:04")
 		endTimeStr := endTime.Format("15:04")
 
@@ -76,14 +94,6 @@ func (h *Handler) ActivitiesForDayPost(ctx *fiber.Ctx) error {
 	date := ctx.FormValue("selected_date")
 	if date == "" {
 		date = time.Now().Format("2006-01-02")
-	} else { // od else do wywalenia caly blok
-		selectedDate, err := time.Parse("2006-01-02", date)
-		if err != nil {
-			return ctx.Status(400).SendString("<h2>Error: Invalid date format</h2>")
-		}
-		if time.Since(selectedDate).Hours() > 7*24 {
-			return ctx.Status(400).SendString("<h2>Error: Date must be within the last 7 days</h2>")
-		}
 	}
 
 	activities, err := h.activityService.GetActivitiesForDay(userID, date)
@@ -121,68 +131,22 @@ func ToDailyReportForm(serviceDailyReport service.ServiceDailyReport) service.Da
 		ret.Date = "Entries not found for selected date"
 	}
 
-	if serviceDailyReport.DidMeditate != false {
-		ret.DidMeditate = fmt.Sprintf("%t", serviceDailyReport.DidMeditate)
-	}
-
-	if serviceDailyReport.MinutesOfSports != 0 {
-		ret.MinutesOfSports = fmt.Sprintf("%d", serviceDailyReport.MinutesOfSports)
-	}
-
-	if serviceDailyReport.MealsEaten != 0 {
-		ret.MealsEaten = fmt.Sprintf("%d", serviceDailyReport.MealsEaten)
-	}
-
-	if serviceDailyReport.WaterDrankLiters != 0 {
-		ret.WaterDrankLiters = fmt.Sprintf("%f", serviceDailyReport.WaterDrankLiters)
-	}
-
-	if serviceDailyReport.StepsMade != 0 {
-		ret.StepsMade = fmt.Sprintf("%d", serviceDailyReport.StepsMade)
-	}
-
-	if serviceDailyReport.SleepScore != 0 {
-		ret.SleepScore = fmt.Sprintf("%d", serviceDailyReport.SleepScore)
-	}
-
-	if serviceDailyReport.HappinessRating != 0 {
-		ret.HappinessRating = fmt.Sprintf("%d", serviceDailyReport.HappinessRating)
-	}
-
-	if serviceDailyReport.ProductivityScore != 0 {
-		ret.ProductivityScore = fmt.Sprintf("%d", serviceDailyReport.ProductivityScore)
-	}
-
-	if serviceDailyReport.StressLevel != 0 {
-		ret.StressLevel = fmt.Sprintf("%d", serviceDailyReport.StressLevel)
-	}
-	if serviceDailyReport.SocialInteractions != 0 {
-		ret.SocialInteractions = fmt.Sprintf("%f", serviceDailyReport.SocialInteractions)
-	}
-
-	if serviceDailyReport.ScreenTimeHours != 0 {
-		ret.ScreenTimeHours = fmt.Sprintf("%f", serviceDailyReport.ScreenTimeHours)
-	}
-
-	if serviceDailyReport.WorkHours != 0 {
-		ret.WorkHours = fmt.Sprintf("%f", serviceDailyReport.WorkHours)
-	}
-
-	if serviceDailyReport.LeisureTimeHours != 0 {
-		ret.LeisureTimeHours = fmt.Sprintf("%f", serviceDailyReport.LeisureTimeHours)
-	}
-
-	if serviceDailyReport.AlcoholUnits != 0 {
-		ret.AlcoholUnits = fmt.Sprintf("%f", serviceDailyReport.AlcoholUnits)
-	}
-
-	if serviceDailyReport.CaffeineCups != 0 {
-		ret.CaffeineCups = fmt.Sprintf("%f", serviceDailyReport.CaffeineCups)
-	}
-
-	if serviceDailyReport.OutdoorTimeHours != 0 {
-		ret.OutdoorTimeHours = fmt.Sprintf("%f", serviceDailyReport.OutdoorTimeHours)
-	}
+	ret.DidMeditate = fmt.Sprintf("%t", serviceDailyReport.DidMeditate)
+	ret.MinutesOfSports = fmt.Sprintf("%d", serviceDailyReport.MinutesOfSports)
+	ret.MealsEaten = fmt.Sprintf("%d", serviceDailyReport.MealsEaten)
+	ret.WaterDrankLiters = fmt.Sprintf("%.2f", serviceDailyReport.WaterDrankLiters)
+	ret.StepsMade = fmt.Sprintf("%d", serviceDailyReport.StepsMade)
+	ret.SleepScore = fmt.Sprintf("%d", serviceDailyReport.SleepScore)
+	ret.HappinessRating = fmt.Sprintf("%d", serviceDailyReport.HappinessRating)
+	ret.ProductivityScore = fmt.Sprintf("%d", serviceDailyReport.ProductivityScore)
+	ret.StressLevel = fmt.Sprintf("%d", serviceDailyReport.StressLevel)
+	ret.SocialInteractions = fmt.Sprintf("%.2f", serviceDailyReport.SocialInteractions)
+	ret.ScreenTimeHours = fmt.Sprintf("%.2f", serviceDailyReport.ScreenTimeHours)
+	ret.WorkHours = fmt.Sprintf("%.2f", serviceDailyReport.WorkHours)
+	ret.LeisureTimeHours = fmt.Sprintf("%.2f", serviceDailyReport.LeisureTimeHours)
+	ret.AlcoholUnits = fmt.Sprintf("%.2f", serviceDailyReport.AlcoholUnits)
+	ret.CaffeineCups = fmt.Sprintf("%.2f", serviceDailyReport.CaffeineCups)
+	ret.OutdoorTimeHours = fmt.Sprintf("%.2f", serviceDailyReport.OutdoorTimeHours)
 
 	return ret
 }

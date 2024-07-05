@@ -5,7 +5,7 @@ import (
 	"github.com/1337Bart/improve-yourself/internal/service"
 )
 
-templ Dashboard(productivityTime int, potatoTime int, timesUpdated int, distribution map[string]int, longestActivity service.ActivityLogDisplay, topThreeDuration map[string]int, timeCoveragePercentage []service.DayCoverage) {
+templ Dashboard(productivityTime int, potatoTime int, timesUpdated int, distribution map[string]int, longestActivity service.ActivityLogDisplay, topThreeDuration map[string]int, timeCoveragePercentage []service.DayCoverage, aiInsight service.AiRecommendation) {
     @template() {
     <div class="flex flex-col justify-center items-center gap-10 py-5">
         <div class="text-center mb-5 w-full max-w-3xl bg-white rounded-lg shadow-md p-6">

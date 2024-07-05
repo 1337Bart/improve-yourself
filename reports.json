@@ -1,751 +1,661 @@
 {
-  "2024-06-01": {
+  "2024-06-25": {
     "DailyReport": {
-      "Date": "2024-06-01",
-      "DidMeditate": true,
-      "MinutesOfSports": 10,
-      "MealsEaten": 3,
-      "WaterDrankLiters": 2,
-      "StepsMade": 5000,
-      "SleepScore": 90,
-      "HappinessRating": 9,
-      "ProductivityScore": 6,
-      "StressLevel": 3,
-      "SocialInteractions": 4,
-      "ScreenTimeHours": 4,
-      "WorkHours": 5,
-      "LeisureTimeHours": 4,
+      "Date": "2024-06-25",
+      "DidMeditate": false,
+      "MinutesOfSports": 0,
+      "MealsEaten": 0,
+      "WaterDrankLiters": 0,
+      "StepsMade": 0,
+      "SleepScore": 0,
+      "HappinessRating": 0,
+      "ProductivityScore": 0,
+      "StressLevel": 0,
+      "SocialInteractions": 0,
+      "ScreenTimeHours": 0,
+      "WorkHours": 0,
+      "LeisureTimeHours": 0,
       "AlcoholUnits": 0,
-      "CaffeineCups": 1,
-      "OutdoorTimeHours": 2
+      "CaffeineCups": 0,
+      "OutdoorTimeHours": 0
+    },
+    "Activities": []
+  },
+  "2024-06-26": {
+    "DailyReport": {
+      "Date": "2024-06-26",
+      "DidMeditate": false,
+      "MinutesOfSports": 0,
+      "MealsEaten": 0,
+      "WaterDrankLiters": 0,
+      "StepsMade": 0,
+      "SleepScore": 0,
+      "HappinessRating": 0,
+      "ProductivityScore": 0,
+      "StressLevel": 0,
+      "SocialInteractions": 0,
+      "ScreenTimeHours": 0,
+      "WorkHours": 0,
+      "LeisureTimeHours": 0,
+      "AlcoholUnits": 0,
+      "CaffeineCups": 0,
+      "OutdoorTimeHours": 0
+    },
+    "Activities": []
+  },
+  "2024-06-27": {
+    "DailyReport": {
+      "Date": "2024-06-27",
+      "DidMeditate": false,
+      "MinutesOfSports": 0,
+      "MealsEaten": 0,
+      "WaterDrankLiters": 0,
+      "StepsMade": 0,
+      "SleepScore": 0,
+      "HappinessRating": 0,
+      "ProductivityScore": 0,
+      "StressLevel": 0,
+      "SocialInteractions": 0,
+      "ScreenTimeHours": 0,
+      "WorkHours": 0,
+      "LeisureTimeHours": 0,
+      "AlcoholUnits": 0,
+      "CaffeineCups": 0,
+      "OutdoorTimeHours": 0
+    },
+    "Activities": []
+  },
+  "2024-06-28": {
+    "DailyReport": {
+      "Date": "2024-06-28",
+      "DidMeditate": false,
+      "MinutesOfSports": 0,
+      "MealsEaten": 0,
+      "WaterDrankLiters": 0,
+      "StepsMade": 0,
+      "SleepScore": 0,
+      "HappinessRating": 0,
+      "ProductivityScore": 0,
+      "StressLevel": 0,
+      "SocialInteractions": 0,
+      "ScreenTimeHours": 0,
+      "WorkHours": 0,
+      "LeisureTimeHours": 0,
+      "AlcoholUnits": 0,
+      "CaffeineCups": 0,
+      "OutdoorTimeHours": 0
+    },
+    "Activities": []
+  },
+  "2024-06-29": {
+    "DailyReport": {
+      "Date": "2024-06-29",
+      "DidMeditate": false,
+      "MinutesOfSports": 0,
+      "MealsEaten": 0,
+      "WaterDrankLiters": 0,
+      "StepsMade": 0,
+      "SleepScore": 0,
+      "HappinessRating": 0,
+      "ProductivityScore": 0,
+      "StressLevel": 0,
+      "SocialInteractions": 0,
+      "ScreenTimeHours": 0,
+      "WorkHours": 0,
+      "LeisureTimeHours": 0,
+      "AlcoholUnits": 0,
+      "CaffeineCups": 0,
+      "OutdoorTimeHours": 0
+    },
+    "Activities": []
+  },
+  "2024-06-30": {
+    "DailyReport": {
+      "Date": "2024-06-30",
+      "DidMeditate": false,
+      "MinutesOfSports": 0,
+      "MealsEaten": 0,
+      "WaterDrankLiters": 0,
+      "StepsMade": 0,
+      "SleepScore": 0,
+      "HappinessRating": 0,
+      "ProductivityScore": 0,
+      "StressLevel": 0,
+      "SocialInteractions": 0,
+      "ScreenTimeHours": 0,
+      "WorkHours": 0,
+      "LeisureTimeHours": 0,
+      "AlcoholUnits": 0,
+      "CaffeineCups": 0,
+      "OutdoorTimeHours": 0
+    },
+    "Activities": []
+  },
+  "2024-07-01": {
+    "DailyReport": {
+      "Date": "2024-07-01",
+      "DidMeditate": false,
+      "MinutesOfSports": 0,
+      "MealsEaten": 0,
+      "WaterDrankLiters": 0,
+      "StepsMade": 0,
+      "SleepScore": 0,
+      "HappinessRating": 0,
+      "ProductivityScore": 0,
+      "StressLevel": 0,
+      "SocialInteractions": 0,
+      "ScreenTimeHours": 0,
+      "WorkHours": 0,
+      "LeisureTimeHours": 0,
+      "AlcoholUnits": 0,
+      "CaffeineCups": 0,
+      "OutdoorTimeHours": 0
     },
     "Activities": [
       {
-        "Activity": "Activity1",
-        "StartTime": "Jun 1, 2024 10:00",
-        "EndTime": "Jun 1, 2024 11:00",
-        "Duration": "60",
-        "Comments": "Comment1"
-      },
-      {
         "Activity": "Work",
-        "StartTime": "Jun 1, 2024 10:00",
-        "EndTime": "Jun 1, 2024 18:00",
-        "Duration": "480",
-        "Comments": "Work on project A"
-      },
-      {
-        "Activity": "Work",
-        "StartTime": "Jun 1, 2024 10:00",
-        "EndTime": "Jun 1, 2024 18:00",
+        "StartTime": "Jul 1, 2024 10:00",
+        "EndTime": "Jul 1, 2024 18:00",
         "Duration": "480",
         "Comments": "Work on project A"
       },
       {
         "Activity": "Lunch",
-        "StartTime": "Jun 1, 2024 18:00",
-        "EndTime": "Jun 1, 2024 19:00",
+        "StartTime": "Jul 1, 2024 18:00",
+        "EndTime": "Jul 1, 2024 19:00",
         "Duration": "60",
         "Comments": "Lunch break"
       },
       {
         "Activity": "Shopping",
-        "StartTime": "Jun 1, 2024 19:00",
-        "EndTime": "Jun 1, 2024 20:00",
+        "StartTime": "Jul 1, 2024 19:00",
+        "EndTime": "Jul 1, 2024 20:00",
         "Duration": "60",
         "Comments": "Grocery shopping"
       },
       {
         "Activity": "Dinner",
-        "StartTime": "Jun 1, 2024 20:00",
-        "EndTime": "Jun 1, 2024 21:00",
+        "StartTime": "Jul 1, 2024 20:00",
+        "EndTime": "Jul 1, 2024 21:00",
         "Duration": "60",
         "Comments": "Dinner at home"
       },
       {
         "Activity": "Reading",
-        "StartTime": "Jun 1, 2024 21:00",
-        "EndTime": "Jun 1, 2024 22:00",
+        "StartTime": "Jul 1, 2024 21:00",
+        "EndTime": "Jul 1, 2024 22:00",
         "Duration": "60",
         "Comments": "Reading a book"
       },
       {
         "Activity": "TV",
-        "StartTime": "Jun 1, 2024 22:00",
-        "EndTime": "Jun 2, 2024 00:00",
+        "StartTime": "Jul 1, 2024 22:00",
+        "EndTime": "Jul 2, 2024 00:00",
         "Duration": "120",
         "Comments": "Watching TV"
       }
     ]
   },
-  "2024-06-02": {
+  "2024-07-02": {
     "DailyReport": {
-      "Date": "2024-06-02",
-      "DidMeditate": true,
-      "MinutesOfSports": 20,
-      "MealsEaten": 3,
-      "WaterDrankLiters": 2.5,
-      "StepsMade": 8000,
-      "SleepScore": 80,
-      "HappinessRating": 8,
-      "ProductivityScore": 7,
-      "StressLevel": 4,
-      "SocialInteractions": 5,
-      "ScreenTimeHours": 5,
-      "WorkHours": 7,
-      "LeisureTimeHours": 3,
+      "Date": "2024-07-02",
+      "DidMeditate": false,
+      "MinutesOfSports": 0,
+      "MealsEaten": 0,
+      "WaterDrankLiters": 0,
+      "StepsMade": 0,
+      "SleepScore": 0,
+      "HappinessRating": 0,
+      "ProductivityScore": 0,
+      "StressLevel": 0,
+      "SocialInteractions": 0,
+      "ScreenTimeHours": 0,
+      "WorkHours": 0,
+      "LeisureTimeHours": 0,
       "AlcoholUnits": 0,
-      "CaffeineCups": 2,
-      "OutdoorTimeHours": 1.5
+      "CaffeineCups": 0,
+      "OutdoorTimeHours": 0
     },
     "Activities": [
       {
         "Activity": "Work",
-        "StartTime": "Jun 2, 2024 10:00",
-        "EndTime": "Jun 2, 2024 18:00",
+        "StartTime": "Jul 2, 2024 10:00",
+        "EndTime": "Jul 2, 2024 18:00",
         "Duration": "480",
         "Comments": "Work on project B"
       },
       {
         "Activity": "Gym",
-        "StartTime": "Jun 2, 2024 18:00",
-        "EndTime": "Jun 2, 2024 19:00",
+        "StartTime": "Jul 2, 2024 18:00",
+        "EndTime": "Jul 2, 2024 19:00",
         "Duration": "60",
         "Comments": "Gym workout"
       },
       {
         "Activity": "Shower",
-        "StartTime": "Jun 2, 2024 19:00",
-        "EndTime": "Jun 2, 2024 19:30",
+        "StartTime": "Jul 2, 2024 19:00",
+        "EndTime": "Jul 2, 2024 19:30",
         "Duration": "30",
         "Comments": "Shower and refresh"
       },
       {
         "Activity": "Cooking",
-        "StartTime": "Jun 2, 2024 19:30",
-        "EndTime": "Jun 2, 2024 21:00",
+        "StartTime": "Jul 2, 2024 19:30",
+        "EndTime": "Jul 2, 2024 21:00",
         "Duration": "90",
         "Comments": "Cooking dinner"
       },
       {
         "Activity": "Dinner",
-        "StartTime": "Jun 2, 2024 21:00",
-        "EndTime": "Jun 2, 2024 22:00",
+        "StartTime": "Jul 2, 2024 21:00",
+        "EndTime": "Jul 2, 2024 22:00",
         "Duration": "60",
         "Comments": "Dinner with family"
       },
       {
         "Activity": "Movie",
-        "StartTime": "Jun 2, 2024 22:00",
-        "EndTime": "Jun 3, 2024 00:00",
+        "StartTime": "Jul 2, 2024 22:00",
+        "EndTime": "Jul 3, 2024 00:00",
         "Duration": "120",
         "Comments": "Watching a movie"
+      },
+      {
+        "Activity": "Work",
+        "StartTime": "Jul 2, 2024 11:00",
+        "EndTime": "Jul 2, 2024 14:00",
+        "Duration": "180",
+        "Comments": "Morning work session"
+      },
+      {
+        "Activity": "Lunch",
+        "StartTime": "Jul 2, 2024 14:00",
+        "EndTime": "Jul 2, 2024 14:30",
+        "Duration": "30",
+        "Comments": "Lunch break"
+      },
+      {
+        "Activity": "Programming",
+        "StartTime": "Jul 2, 2024 14:30",
+        "EndTime": "Jul 2, 2024 17:00",
+        "Duration": "150",
+        "Comments": "Worked on project"
+      },
+      {
+        "Activity": "Sports",
+        "StartTime": "Jul 2, 2024 17:00",
+        "EndTime": "Jul 2, 2024 18:00",
+        "Duration": "60",
+        "Comments": "Played basketball"
+      },
+      {
+        "Activity": "Dinner",
+        "StartTime": "Jul 2, 2024 20:00",
+        "EndTime": "Jul 2, 2024 20:30",
+        "Duration": "30",
+        "Comments": "Dinner break"
+      },
+      {
+        "Activity": "Video Games",
+        "StartTime": "Jul 2, 2024 21:00",
+        "EndTime": "Jul 2, 2024 23:00",
+        "Duration": "120",
+        "Comments": "Played games with friends"
+      },
+      {
+        "Activity": "Sleep",
+        "StartTime": "Jul 3, 2024 00:00",
+        "EndTime": "Jul 2, 2024 06:00",
+        "Duration": "-1080",
+        "Comments": "Night sleep"
       }
     ]
   },
-  "2024-06-03": {
+  "2024-07-03": {
     "DailyReport": {
-      "Date": "2024-06-03",
+      "Date": "2024-07-03",
       "DidMeditate": false,
-      "MinutesOfSports": 30,
-      "MealsEaten": 2,
-      "WaterDrankLiters": 2,
-      "StepsMade": 7000,
-      "SleepScore": 75,
-      "HappinessRating": 6,
-      "ProductivityScore": 8,
-      "StressLevel": 6,
-      "SocialInteractions": 2,
-      "ScreenTimeHours": 6,
-      "WorkHours": 9,
-      "LeisureTimeHours": 2,
-      "AlcoholUnits": 1,
-      "CaffeineCups": 3,
-      "OutdoorTimeHours": 1
+      "MinutesOfSports": 0,
+      "MealsEaten": 0,
+      "WaterDrankLiters": 0,
+      "StepsMade": 0,
+      "SleepScore": 0,
+      "HappinessRating": 0,
+      "ProductivityScore": 0,
+      "StressLevel": 0,
+      "SocialInteractions": 0,
+      "ScreenTimeHours": 0,
+      "WorkHours": 0,
+      "LeisureTimeHours": 0,
+      "AlcoholUnits": 0,
+      "CaffeineCups": 0,
+      "OutdoorTimeHours": 0
     },
     "Activities": [
       {
         "Activity": "Work",
-        "StartTime": "Jun 3, 2024 10:00",
-        "EndTime": "Jun 3, 2024 18:00",
+        "StartTime": "Jul 3, 2024 10:00",
+        "EndTime": "Jul 3, 2024 18:00",
         "Duration": "480",
         "Comments": "Team meetings"
       },
       {
         "Activity": "Coffee",
-        "StartTime": "Jun 3, 2024 18:00",
-        "EndTime": "Jun 3, 2024 19:00",
+        "StartTime": "Jul 3, 2024 18:00",
+        "EndTime": "Jul 3, 2024 19:00",
         "Duration": "60",
         "Comments": "Coffee with friend"
       },
       {
         "Activity": "Walk",
-        "StartTime": "Jun 3, 2024 19:00",
-        "EndTime": "Jun 3, 2024 20:00",
+        "StartTime": "Jul 3, 2024 19:00",
+        "EndTime": "Jul 3, 2024 20:00",
         "Duration": "60",
         "Comments": "Evening walk"
       },
       {
         "Activity": "Dinner",
-        "StartTime": "Jun 3, 2024 20:00",
-        "EndTime": "Jun 3, 2024 21:00",
+        "StartTime": "Jul 3, 2024 20:00",
+        "EndTime": "Jul 3, 2024 21:00",
         "Duration": "60",
         "Comments": "Light dinner"
       },
       {
         "Activity": "Reading",
-        "StartTime": "Jun 3, 2024 21:00",
-        "EndTime": "Jun 3, 2024 22:00",
+        "StartTime": "Jul 3, 2024 21:00",
+        "EndTime": "Jul 3, 2024 22:00",
         "Duration": "60",
         "Comments": "Reading news"
       },
       {
         "Activity": "TV",
-        "StartTime": "Jun 3, 2024 22:00",
-        "EndTime": "Jun 4, 2024 00:00",
+        "StartTime": "Jul 3, 2024 22:00",
+        "EndTime": "Jul 4, 2024 00:00",
         "Duration": "120",
         "Comments": "Watching series"
+      },
+      {
+        "Activity": "Work",
+        "StartTime": "Jul 3, 2024 11:00",
+        "EndTime": "Jul 3, 2024 14:00",
+        "Duration": "180",
+        "Comments": "Morning work session"
+      },
+      {
+        "Activity": "Lunch",
+        "StartTime": "Jul 3, 2024 14:00",
+        "EndTime": "Jul 3, 2024 14:30",
+        "Duration": "30",
+        "Comments": "Lunch break"
+      },
+      {
+        "Activity": "Programming",
+        "StartTime": "Jul 3, 2024 14:30",
+        "EndTime": "Jul 3, 2024 17:00",
+        "Duration": "150",
+        "Comments": "Worked on project"
+      },
+      {
+        "Activity": "Sports",
+        "StartTime": "Jul 3, 2024 17:00",
+        "EndTime": "Jul 3, 2024 18:00",
+        "Duration": "60",
+        "Comments": "Jogging"
+      },
+      {
+        "Activity": "Dinner",
+        "StartTime": "Jul 3, 2024 20:00",
+        "EndTime": "Jul 3, 2024 20:30",
+        "Duration": "30",
+        "Comments": "Dinner break"
+      },
+      {
+        "Activity": "Video Games",
+        "StartTime": "Jul 3, 2024 21:00",
+        "EndTime": "Jul 3, 2024 23:00",
+        "Duration": "120",
+        "Comments": "Played games with friends"
+      },
+      {
+        "Activity": "Sleep",
+        "StartTime": "Jul 4, 2024 00:00",
+        "EndTime": "Jul 3, 2024 06:00",
+        "Duration": "-1080",
+        "Comments": "Night sleep"
       }
     ]
   },
-  "2024-06-04": {
+  "2024-07-04": {
     "DailyReport": {
-      "Date": "2024-06-04",
+      "Date": "2024-07-04",
       "DidMeditate": true,
-      "MinutesOfSports": 50,
-      "MealsEaten": 3,
-      "WaterDrankLiters": 3,
-      "StepsMade": 10000,
-      "SleepScore": 85,
-      "HappinessRating": 9,
-      "ProductivityScore": 7,
-      "StressLevel": 3,
-      "SocialInteractions": 4,
-      "ScreenTimeHours": 4,
-      "WorkHours": 5,
-      "LeisureTimeHours": 4,
-      "AlcoholUnits": 0,
-      "CaffeineCups": 1,
+      "MinutesOfSports": 17,
+      "MealsEaten": 4,
+      "WaterDrankLiters": 2,
+      "StepsMade": 6000,
+      "SleepScore": 90,
+      "HappinessRating": 8,
+      "ProductivityScore": 5,
+      "StressLevel": 4,
+      "SocialInteractions": 1,
+      "ScreenTimeHours": 10,
+      "WorkHours": 8,
+      "LeisureTimeHours": 2,
+      "AlcoholUnits": 1,
+      "CaffeineCups": 2,
       "OutdoorTimeHours": 2
     },
     "Activities": [
       {
         "Activity": "Work",
-        "StartTime": "Jun 4, 2024 10:00",
-        "EndTime": "Jun 4, 2024 18:00",
+        "StartTime": "Jul 4, 2024 10:00",
+        "EndTime": "Jul 4, 2024 18:00",
         "Duration": "480",
         "Comments": "Finish report"
       },
       {
         "Activity": "Nap",
-        "StartTime": "Jun 4, 2024 18:00",
-        "EndTime": "Jun 4, 2024 19:00",
+        "StartTime": "Jul 4, 2024 18:00",
+        "EndTime": "Jul 4, 2024 19:00",
         "Duration": "60",
         "Comments": "Afternoon nap"
       },
       {
         "Activity": "Yoga",
-        "StartTime": "Jun 4, 2024 19:00",
-        "EndTime": "Jun 4, 2024 20:00",
+        "StartTime": "Jul 4, 2024 19:00",
+        "EndTime": "Jul 4, 2024 20:00",
         "Duration": "60",
         "Comments": "Yoga session"
       },
       {
         "Activity": "Dinner",
-        "StartTime": "Jun 4, 2024 20:00",
-        "EndTime": "Jun 4, 2024 21:00",
+        "StartTime": "Jul 4, 2024 20:00",
+        "EndTime": "Jul 4, 2024 21:00",
         "Duration": "60",
         "Comments": "Healthy dinner"
       },
       {
         "Activity": "Reading",
-        "StartTime": "Jun 4, 2024 21:00",
-        "EndTime": "Jun 4, 2024 22:00",
+        "StartTime": "Jul 4, 2024 21:00",
+        "EndTime": "Jul 4, 2024 22:00",
         "Duration": "60",
         "Comments": "Read a novel"
       },
       {
         "Activity": "TV",
-        "StartTime": "Jun 4, 2024 22:00",
-        "EndTime": "Jun 5, 2024 00:00",
+        "StartTime": "Jul 4, 2024 22:00",
+        "EndTime": "Jul 5, 2024 00:00",
         "Duration": "120",
         "Comments": "Watch documentary"
-      }
-    ]
-  },
-  "2024-06-05": {
-    "DailyReport": {
-      "Date": "2024-06-05",
-      "DidMeditate": false,
-      "MinutesOfSports": 20,
-      "MealsEaten": 3,
-      "WaterDrankLiters": 1.5,
-      "StepsMade": 7000,
-      "SleepScore": 70,
-      "HappinessRating": 7,
-      "ProductivityScore": 6,
-      "StressLevel": 5,
-      "SocialInteractions": 2,
-      "ScreenTimeHours": 6,
-      "WorkHours": 8,
-      "LeisureTimeHours": 2,
-      "AlcoholUnits": 1,
-      "CaffeineCups": 2,
-      "OutdoorTimeHours": 1
-    },
-    "Activities": [
+      },
       {
         "Activity": "Work",
-        "StartTime": "Jun 5, 2024 10:00",
-        "EndTime": "Jun 5, 2024 18:00",
-        "Duration": "480",
-        "Comments": "Client meeting"
-      },
-      {
-        "Activity": "Shopping",
-        "StartTime": "Jun 5, 2024 18:00",
-        "EndTime": "Jun 5, 2024 19:00",
-        "Duration": "60",
-        "Comments": "Buy groceries"
-      },
-      {
-        "Activity": "Cooking",
-        "StartTime": "Jun 5, 2024 19:00",
-        "EndTime": "Jun 5, 2024 21:00",
-        "Duration": "120",
-        "Comments": "Prepare dinner"
-      },
-      {
-        "Activity": "Dinner",
-        "StartTime": "Jun 5, 2024 21:00",
-        "EndTime": "Jun 5, 2024 22:00",
-        "Duration": "60",
-        "Comments": "Dinner with family"
-      },
-      {
-        "Activity": "Reading",
-        "StartTime": "Jun 5, 2024 22:00",
-        "EndTime": "Jun 5, 2024 23:00",
-        "Duration": "60",
-        "Comments": "Read articles"
-      },
-      {
-        "Activity": "TV",
-        "StartTime": "Jun 5, 2024 23:00",
-        "EndTime": "Jun 6, 2024 00:00",
-        "Duration": "60",
-        "Comments": "Watch news"
-      }
-    ]
-  },
-  "2024-06-06": {
-    "DailyReport": {
-      "Date": "2024-06-06",
-      "DidMeditate": true,
-      "MinutesOfSports": 45,
-      "MealsEaten": 3,
-      "WaterDrankLiters": 2.5,
-      "StepsMade": 6000,
-      "SleepScore": 90,
-      "HappinessRating": 10,
-      "ProductivityScore": 6,
-      "StressLevel": 2,
-      "SocialInteractions": 4,
-      "ScreenTimeHours": 3,
-      "WorkHours": 6,
-      "LeisureTimeHours": 5,
-      "AlcoholUnits": 0,
-      "CaffeineCups": 1,
-      "OutdoorTimeHours": 2
-    },
-    "Activities": [
-      {
-        "Activity": "Work",
-        "StartTime": "Jun 6, 2024 10:00",
-        "EndTime": "Jun 6, 2024 18:00",
-        "Duration": "480",
-        "Comments": "Project planning"
-      },
-      {
-        "Activity": "Jogging",
-        "StartTime": "Jun 6, 2024 18:00",
-        "EndTime": "Jun 6, 2024 19:00",
-        "Duration": "60",
-        "Comments": "Evening jog"
-      },
-      {
-        "Activity": "Shower",
-        "StartTime": "Jun 6, 2024 19:00",
-        "EndTime": "Jun 6, 2024 19:30",
-        "Duration": "30",
-        "Comments": "Refreshing shower"
-      },
-      {
-        "Activity": "Cooking",
-        "StartTime": "Jun 6, 2024 19:30",
-        "EndTime": "Jun 6, 2024 21:00",
-        "Duration": "90",
-        "Comments": "Prepare dinner"
-      },
-      {
-        "Activity": "Dinner",
-        "StartTime": "Jun 6, 2024 21:00",
-        "EndTime": "Jun 6, 2024 22:00",
-        "Duration": "60",
-        "Comments": "Dinner with family"
-      },
-      {
-        "Activity": "TV",
-        "StartTime": "Jun 6, 2024 22:00",
-        "EndTime": "Jun 7, 2024 00:00",
-        "Duration": "120",
-        "Comments": "Watch movie"
-      }
-    ]
-  },
-  "2024-06-07": {
-    "DailyReport": {
-      "Date": "2024-06-07",
-      "DidMeditate": true,
-      "MinutesOfSports": 60,
-      "MealsEaten": 3,
-      "WaterDrankLiters": 3,
-      "StepsMade": 10000,
-      "SleepScore": 85,
-      "HappinessRating": 9,
-      "ProductivityScore": 10,
-      "StressLevel": 3,
-      "SocialInteractions": 3,
-      "ScreenTimeHours": 4,
-      "WorkHours": 12,
-      "LeisureTimeHours": 2,
-      "AlcoholUnits": 0,
-      "CaffeineCups": 4,
-      "OutdoorTimeHours": 1.5
-    },
-    "Activities": [
-      {
-        "Activity": "Work",
-        "StartTime": "Jun 7, 2024 10:00",
-        "EndTime": "Jun 7, 2024 18:00",
-        "Duration": "480",
-        "Comments": "Write code"
+        "StartTime": "Jul 4, 2024 11:00",
+        "EndTime": "Jul 4, 2024 14:00",
+        "Duration": "180",
+        "Comments": "Morning work session"
       },
       {
         "Activity": "Lunch",
-        "StartTime": "Jun 7, 2024 18:00",
-        "EndTime": "Jun 7, 2024 19:00",
-        "Duration": "60",
-        "Comments": "Lunch with colleague"
+        "StartTime": "Jul 4, 2024 14:00",
+        "EndTime": "Jul 4, 2024 14:30",
+        "Duration": "30",
+        "Comments": "Lunch break"
       },
       {
-        "Activity": "Shopping",
-        "StartTime": "Jun 7, 2024 19:00",
-        "EndTime": "Jun 7, 2024 20:00",
-        "Duration": "60",
-        "Comments": "Grocery shopping"
+        "Activity": "Programming",
+        "StartTime": "Jul 4, 2024 14:30",
+        "EndTime": "Jul 4, 2024 17:00",
+        "Duration": "150",
+        "Comments": "Worked on project"
       },
       {
-        "Activity": "Cooking",
-        "StartTime": "Jun 7, 2024 20:00",
-        "EndTime": "Jun 7, 2024 21:00",
+        "Activity": "Sports",
+        "StartTime": "Jul 4, 2024 17:00",
+        "EndTime": "Jul 4, 2024 18:00",
         "Duration": "60",
-        "Comments": "Prepare dinner"
-      },
-      {
-        "Activity": "Dinner",
-        "StartTime": "Jun 7, 2024 21:00",
-        "EndTime": "Jun 7, 2024 22:00",
-        "Duration": "60",
-        "Comments": "Dinner with family"
-      },
-      {
-        "Activity": "Reading",
-        "StartTime": "Jun 7, 2024 22:00",
-        "EndTime": "Jun 7, 2024 23:00",
-        "Duration": "60",
-        "Comments": "Read a novel"
-      },
-      {
-        "Activity": "TV",
-        "StartTime": "Jun 7, 2024 23:00",
-        "EndTime": "Jun 8, 2024 00:00",
-        "Duration": "60",
-        "Comments": "Watch documentary"
-      }
-    ]
-  },
-  "2024-06-08": {
-    "DailyReport": {
-      "Date": "2024-06-08",
-      "DidMeditate": false,
-      "MinutesOfSports": 10,
-      "MealsEaten": 2,
-      "WaterDrankLiters": 1,
-      "StepsMade": 4000,
-      "SleepScore": 60,
-      "HappinessRating": 5,
-      "ProductivityScore": 5,
-      "StressLevel": 8,
-      "SocialInteractions": 1,
-      "ScreenTimeHours": 7,
-      "WorkHours": 10,
-      "LeisureTimeHours": 1,
-      "AlcoholUnits": 1,
-      "CaffeineCups": 3,
-      "OutdoorTimeHours": 0.5
-    },
-    "Activities": [
-      {
-        "Activity": "Work",
-        "StartTime": "Jun 8, 2024 10:00",
-        "EndTime": "Jun 8, 2024 18:00",
-        "Duration": "480",
-        "Comments": "Team meeting"
-      },
-      {
-        "Activity": "Coffee",
-        "StartTime": "Jun 8, 2024 18:00",
-        "EndTime": "Jun 8, 2024 19:00",
-        "Duration": "60",
-        "Comments": "Coffee break"
-      },
-      {
-        "Activity": "Walk",
-        "StartTime": "Jun 8, 2024 19:00",
-        "EndTime": "Jun 8, 2024 20:00",
-        "Duration": "60",
-        "Comments": "Evening walk"
-      },
-      {
-        "Activity": "Cooking",
-        "StartTime": "Jun 8, 2024 20:00",
-        "EndTime": "Jun 8, 2024 21:00",
-        "Duration": "60",
-        "Comments": "Prepare dinner"
+        "Comments": "Gym workout"
       },
       {
         "Activity": "Dinner",
-        "StartTime": "Jun 8, 2024 21:00",
-        "EndTime": "Jun 8, 2024 22:00",
-        "Duration": "60",
-        "Comments": "Dinner with family"
+        "StartTime": "Jul 4, 2024 20:00",
+        "EndTime": "Jul 4, 2024 20:30",
+        "Duration": "30",
+        "Comments": "Dinner break"
       },
       {
-        "Activity": "Reading",
-        "StartTime": "Jun 8, 2024 22:00",
-        "EndTime": "Jun 8, 2024 23:00",
-        "Duration": "60",
-        "Comments": "Read articles"
-      },
-      {
-        "Activity": "TV",
-        "StartTime": "Jun 8, 2024 23:00",
-        "EndTime": "Jun 9, 2024 00:00",
-        "Duration": "60",
-        "Comments": "Watch news"
-      }
-    ]
-  },
-  "2024-06-09": {
-    "DailyReport": {
-      "Date": "2024-06-09",
-      "DidMeditate": true,
-      "MinutesOfSports": 30,
-      "MealsEaten": 3,
-      "WaterDrankLiters": 2,
-      "StepsMade": 8000,
-      "SleepScore": 80,
-      "HappinessRating": 8,
-      "ProductivityScore": 7,
-      "StressLevel": 4,
-      "SocialInteractions": 2,
-      "ScreenTimeHours": 5,
-      "WorkHours": 8,
-      "LeisureTimeHours": 3,
-      "AlcoholUnits": 0,
-      "CaffeineCups": 2,
-      "OutdoorTimeHours": 1
-    },
-    "Activities": [
-      {
-        "Activity": "Work",
-        "StartTime": "Jun 9, 2024 10:00",
-        "EndTime": "Jun 9, 2024 18:00",
-        "Duration": "480",
-        "Comments": "Project updates"
-      },
-      {
-        "Activity": "Nap",
-        "StartTime": "Jun 9, 2024 18:00",
-        "EndTime": "Jun 9, 2024 19:00",
-        "Duration": "60",
-        "Comments": "Afternoon nap"
-      },
-      {
-        "Activity": "Yoga",
-        "StartTime": "Jun 9, 2024 19:00",
-        "EndTime": "Jun 9, 2024 20:00",
-        "Duration": "60",
-        "Comments": "Yoga session"
-      },
-      {
-        "Activity": "Dinner",
-        "StartTime": "Jun 9, 2024 20:00",
-        "EndTime": "Jun 9, 2024 21:00",
-        "Duration": "60",
-        "Comments": "Healthy dinner"
-      },
-      {
-        "Activity": "Reading",
-        "StartTime": "Jun 9, 2024 21:00",
-        "EndTime": "Jun 9, 2024 22:00",
-        "Duration": "60",
-        "Comments": "Read a book"
-      },
-      {
-        "Activity": "TV",
-        "StartTime": "Jun 9, 2024 22:00",
-        "EndTime": "Jun 10, 2024 00:00",
+        "Activity": "Video Games",
+        "StartTime": "Jul 4, 2024 21:00",
+        "EndTime": "Jul 4, 2024 23:00",
         "Duration": "120",
-        "Comments": "Watch movie"
+        "Comments": "Played games with friends"
+      },
+      {
+        "Activity": "Sleep",
+        "StartTime": "Jul 5, 2024 00:00",
+        "EndTime": "Jul 4, 2024 06:00",
+        "Duration": "-1080",
+        "Comments": "Night sleep"
       }
     ]
   },
-  "2024-06-10": {
+  "2024-07-05": {
     "DailyReport": {
-      "Date": "2024-06-10",
-      "DidMeditate": true,
-      "MinutesOfSports": 13,
-      "MealsEaten": 3,
-      "WaterDrankLiters": 2,
-      "StepsMade": 4444,
-      "SleepScore": 80,
-      "HappinessRating": 7,
-      "ProductivityScore": 7,
-      "StressLevel": 7,
-      "SocialInteractions": 2,
-      "ScreenTimeHours": 2,
-      "WorkHours": 7,
-      "LeisureTimeHours": 7,
-      "AlcoholUnits": 7,
-      "CaffeineCups": 7,
-      "OutdoorTimeHours": 7
-    },
-    "Activities": [
-      {
-        "Activity": "Work",
-        "StartTime": "Jun 10, 2024 10:00",
-        "EndTime": "Jun 10, 2024 18:00",
-        "Duration": "480",
-        "Comments": "Team discussion"
-      },
-      {
-        "Activity": "Coffee",
-        "StartTime": "Jun 10, 2024 18:00",
-        "EndTime": "Jun 10, 2024 19:00",
-        "Duration": "60",
-        "Comments": "Coffee with friend"
-      },
-      {
-        "Activity": "Walk",
-        "StartTime": "Jun 10, 2024 19:00",
-        "EndTime": "Jun 10, 2024 20:00",
-        "Duration": "60",
-        "Comments": "Evening walk"
-      },
-      {
-        "Activity": "Cooking",
-        "StartTime": "Jun 10, 2024 20:00",
-        "EndTime": "Jun 10, 2024 21:00",
-        "Duration": "60",
-        "Comments": "Prepare dinner"
-      },
-      {
-        "Activity": "Dinner",
-        "StartTime": "Jun 10, 2024 21:00",
-        "EndTime": "Jun 10, 2024 22:00",
-        "Duration": "60",
-        "Comments": "Dinner with family"
-      },
-      {
-        "Activity": "Reading",
-        "StartTime": "Jun 10, 2024 22:00",
-        "EndTime": "Jun 10, 2024 23:00",
-        "Duration": "60",
-        "Comments": "Read articles"
-      },
-      {
-        "Activity": "TV",
-        "StartTime": "Jun 10, 2024 23:00",
-        "EndTime": "Jun 11, 2024 00:00",
-        "Duration": "60",
-        "Comments": "Watch news"
-      }
-    ]
-  },
-  "2024-06-11": {
-    "DailyReport": {
-      "Date": "2024-06-11",
+      "Date": "2024-07-05",
       "DidMeditate": false,
-      "MinutesOfSports": 30,
-      "MealsEaten": 2,
-      "WaterDrankLiters": 2,
-      "StepsMade": 7000,
-      "SleepScore": 75,
-      "HappinessRating": 6,
-      "ProductivityScore": 8,
-      "StressLevel": 6,
-      "SocialInteractions": 2,
-      "ScreenTimeHours": 6,
-      "WorkHours": 9,
-      "LeisureTimeHours": 2,
-      "AlcoholUnits": 1,
-      "CaffeineCups": 3,
-      "OutdoorTimeHours": 1
+      "MinutesOfSports": 0,
+      "MealsEaten": 0,
+      "WaterDrankLiters": 0,
+      "StepsMade": 0,
+      "SleepScore": 0,
+      "HappinessRating": 0,
+      "ProductivityScore": 0,
+      "StressLevel": 0,
+      "SocialInteractions": 0,
+      "ScreenTimeHours": 0,
+      "WorkHours": 0,
+      "LeisureTimeHours": 0,
+      "AlcoholUnits": 0,
+      "CaffeineCups": 0,
+      "OutdoorTimeHours": 0
     },
     "Activities": [
       {
+        "Activity": "Robie śniadanie",
+        "StartTime": "Jul 5, 2024 09:58",
+        "EndTime": "Jul 5, 2024 22:15",
+        "Duration": "737",
+        "Comments": ""
+      },
+      {
         "Activity": "Work",
-        "StartTime": "Jun 11, 2024 10:00",
-        "EndTime": "Jun 11, 2024 18:00",
+        "StartTime": "Jul 5, 2024 10:00",
+        "EndTime": "Jul 5, 2024 18:00",
         "Duration": "480",
         "Comments": "Client meeting"
       },
       {
         "Activity": "Shopping",
-        "StartTime": "Jun 11, 2024 18:00",
-        "EndTime": "Jun 11, 2024 19:00",
+        "StartTime": "Jul 5, 2024 18:00",
+        "EndTime": "Jul 5, 2024 19:00",
         "Duration": "60",
         "Comments": "Buy groceries"
       },
       {
         "Activity": "Cooking",
-        "StartTime": "Jun 11, 2024 19:00",
-        "EndTime": "Jun 11, 2024 21:00",
+        "StartTime": "Jul 5, 2024 19:00",
+        "EndTime": "Jul 5, 2024 21:00",
         "Duration": "120",
         "Comments": "Prepare dinner"
       },
       {
         "Activity": "Dinner",
-        "StartTime": "Jun 11, 2024 21:00",
-        "EndTime": "Jun 11, 2024 22:00",
+        "StartTime": "Jul 5, 2024 21:00",
+        "EndTime": "Jul 5, 2024 22:00",
         "Duration": "60",
         "Comments": "Dinner with family"
       },
       {
         "Activity": "Reading",
-        "StartTime": "Jun 11, 2024 22:00",
-        "EndTime": "Jun 11, 2024 23:00",
+        "StartTime": "Jul 5, 2024 22:00",
+        "EndTime": "Jul 5, 2024 23:00",
         "Duration": "60",
         "Comments": "Read articles"
       },
       {
         "Activity": "TV",
-        "StartTime": "Jun 11, 2024 23:00",
-        "EndTime": "Jun 12, 2024 00:00",
+        "StartTime": "Jul 5, 2024 23:00",
+        "EndTime": "Jul 6, 2024 00:00",
         "Duration": "60",
-        "Comments": "Watch documentary"
+        "Comments": "Watch news"
+      },
+      {
+        "Activity": "Work",
+        "StartTime": "Jul 5, 2024 11:00",
+        "EndTime": "Jul 5, 2024 14:00",
+        "Duration": "180",
+        "Comments": "Morning work session"
+      },
+      {
+        "Activity": "Lunch",
+        "StartTime": "Jul 5, 2024 14:00",
+        "EndTime": "Jul 5, 2024 14:30",
+        "Duration": "30",
+        "Comments": "Lunch break"
+      },
+      {
+        "Activity": "Programming",
+        "StartTime": "Jul 5, 2024 14:30",
+        "EndTime": "Jul 5, 2024 17:00",
+        "Duration": "150",
+        "Comments": "Worked on project"
+      },
+      {
+        "Activity": "Sports",
+        "StartTime": "Jul 5, 2024 17:00",
+        "EndTime": "Jul 5, 2024 18:00",
+        "Duration": "60",
+        "Comments": "Played soccer"
+      },
+      {
+        "Activity": "Dinner",
+        "StartTime": "Jul 5, 2024 20:00",
+        "EndTime": "Jul 5, 2024 20:30",
+        "Duration": "30",
+        "Comments": "Dinner break"
+      },
+      {
+        "Activity": "Video Games",
+        "StartTime": "Jul 5, 2024 21:00",
+        "EndTime": "Jul 5, 2024 23:00",
+        "Duration": "120",
+        "Comments": "Played games with friends"
+      },
+      {
+        "Activity": "Sleep",
+        "StartTime": "Jul 6, 2024 00:00",
+        "EndTime": "Jul 5, 2024 06:00",
+        "Duration": "-1080",
+        "Comments": "Night sleep"
       }
     ]
   }

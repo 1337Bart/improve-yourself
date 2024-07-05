@@ -9,7 +9,6 @@ import (
 )
 
 func SetRoutes(app *fiber.App, loginHandler *login.Handler, settingsHandler *settingsHandler.Handler, dataHandler *dataHandler.Handler, activityHandler *activityHandler.Handler) {
-	// do wywalenia?
 	app.Get("/", login.AuthMiddleware, dataHandler.Dashboard)
 
 	app.Post("/logout", loginHandler.Logout)
@@ -40,5 +39,4 @@ func SetRoutes(app *fiber.App, loginHandler *login.Handler, settingsHandler *set
 	app.Post("/daily-checkin", login.AuthMiddleware, activityHandler.LogDailyReportPost)
 
 	app.Get("/daily-checkin-for-day", login.AuthMiddleware, activityHandler.DailyCheckinForDayGet)
-	//app.Post("/daily-checkin-for-day", login.AuthMiddleware, activityHandler.DailyCheckinForDayPost)
 }
